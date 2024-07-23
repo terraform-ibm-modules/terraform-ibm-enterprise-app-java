@@ -1,5 +1,5 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
-# Terraform modules template project
+# IBM WebSphere Liberty as a Service
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-TODO: Replace this with a description of the modules in this repo.
+Use this module to provision and configure an IBM [Liberty as a Service](https://test.cloud.ibm.com/catalog/services/liberty-saas) instance.
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -28,7 +28,6 @@ TODO: Replace this with a description of the modules in this repo.
 ## Overview
 * [terraform-ibm-liberty-aas](#terraform-ibm-liberty-aas)
 * [Examples](./examples)
-    * [Advanced example](./examples/advanced)
     * [Basic example](./examples/basic)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->

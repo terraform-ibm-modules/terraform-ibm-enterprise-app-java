@@ -2,7 +2,7 @@
 # Outputs
 ########################################################################################################################
 
-#output "myoutput" {
-#  description = "Description of my output"
-#  value       = "value"
-#}
+output "liberty_aas_name" {
+  description = "Name of Liberty as a Service instance"
+  value       = ibm_resource_instance.liberty_aas_instance.id
+}

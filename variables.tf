@@ -9,18 +9,21 @@ variable "ibmcloud_api_key" {
 }
 
 variable "ibm_resource_group_id" {
+  type        = string
   description = "The ID of the resource group to use for the creation of the Open Liberty SaaS service instance (https://test.cloud.ibm.com/account/resource-groups)."
-  default = null
 }
 
 variable "liberty_aas_name" {
+  type        = string
   description = "The name for the newly provisioned Open Liberty SaaS service instance."
 }
 
 variable "source_repo_url" {
+  type        = string
   description = "The URL for the Open Liberty SaaS application source code."
 }
 
 variable "config_repo_url" {
+  type        = string
   description = "The URL for the Open Liberty SaaS application configuration code."
 }

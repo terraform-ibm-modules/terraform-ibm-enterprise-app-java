@@ -26,6 +26,7 @@ Use this module to provision and configure an IBM [Liberty as a Service](https:/
 <!-- The following content is automatically populated by the pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
+* [Prerequisites](#prerequisites)
 * [terraform-ibm-liberty-aas](#terraform-ibm-liberty-aas)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
@@ -40,6 +41,22 @@ See "Reference architecture" in the public documentation at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=reference-architecture
 -->
 <!-- ## Reference architectures -->
+
+## Prerequisites
+Must have these created prior to using this terraform code:
+1. GitHub Personal Access Token (https://github.com/settings/tokens)
+2. Source and Config Repos (for the Liberty aaS instance)
+3. IBM Cloud API Key (https://test.cloud.ibm.com/iam/apikeys)
+4. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups)
+
+**NOTE:** For examples source and config repositories that can be forked, see the below repositories:
+https://github.com/OpenLiberty/sample-getting-started
+
+https://github.com/jgawor/sample-getting-started-config
+
+The following GitHub application needs to be installed and configured to access your
+source and config repositories.
+https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new
 
 
 <!-- Replace this heading with the name of the root level module (the repo name) -->
@@ -128,6 +145,8 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="liberty_aas_name"></a> [liberty\_aas\_name](#liberty\_aas\_name) | Name of Liberty as a Service instance |
+| <a name="resource_group_name"></a> [liberty\_aas\_name](#resource\_group\_name) | Resource group name |
+| <a name="oresource_group_id"></a> [liberty\_aas\_name](#resource\_group\_id) | Resource group ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

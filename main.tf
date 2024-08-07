@@ -4,9 +4,5 @@ resource "ibm_resource_instance" "liberty_aas_instance" {
   service           = "appengine"
   plan              = "free"
   location          = "global"
-  parameters        = {
-    "sourceRepoURL": var.source_repo_url,
-    "configRepoURL": var.config_repo_url,
-    "skipBuild": "false"
-  }
+  tags              = var.tags
 }

@@ -26,7 +26,6 @@ Use this module to provision and configure an IBM [Liberty as a Service](https:/
 <!-- The following content is automatically populated by the pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
-* [Prerequisites](#prerequisites)
 * [terraform-ibm-liberty-aas](#terraform-ibm-liberty-aas)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
@@ -120,7 +119,7 @@ No permissions are needed to run this module.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.67.0 |
 
 ### Modules
@@ -129,24 +128,23 @@ No modules.
 
 ### Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [ibm_resource_instance.liberty_aas_instance](https://registry.terraform.io/providers/ibm-cloud/ibm/latest/docs/resources/resource_instance) | resource |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="ibmcloud_api_key"></a> [ibmcloud\_api\_key](#ibmcloud\_api\_key) | The IAM API Key for IBM Cloud access (https://test.cloud.ibm.com/iam/apikeys). | `string` | none | yes |
-| <a name="ibm_resource_group_id"></a> [ibm\_resource\_group\_id](#ibm\_resource\_group\_id) | The ID of the resource group to use for the creation of the Open Liberty SaaS service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | none | yes |
-| <a name="liberty_aas_name"></a> [liberty\_aas\_name](#liberty\_aas\_name) | The name for the newly provisioned Open Liberty SaaS service instance. | `string` | none | yes |
-| <a name="source_repo_url"></a> [source\_repo\_url](#source\_repo\_url) | The URL for the Open Liberty SaaS application source code. | `string` | none | yes |
-| <a name="config_repo_url"></a> [config\_repo\_url](#config\_repo\_url) | The URL for the Open Liberty SaaS application configuration code. | `string` | none | yes |
+| <a name="input_ibm_resource_group_id"></a> [ibm\_resource\_group\_id](#input\_ibm\_resource\_group\_id) | The ID of the resource group to use for the creation of the Open Liberty SaaS service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
+| <a name="input_liberty_aas_name"></a> [liberty\_aas\_name](#input\_liberty\_aas\_name) | The name for the newly provisioned Open Liberty SaaS service instance. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
+
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="liberty_aas_name"></a> [liberty\_aas\_name](#liberty\_aas\_name) | Name of Liberty as a Service instance |
-| <a name="resource_group_name"></a> [liberty\_aas\_name](#resource\_group\_name) | Resource group name |
-| <a name="oresource_group_id"></a> [liberty\_aas\_name](#resource\_group\_id) | Resource group ID |
+| <a name="output_liberty_aas_name"></a> [liberty\_aas\_name](#output\_liberty\_aas\_name) | Name of Liberty as a Service instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

@@ -16,9 +16,7 @@ module "resource_group" {
 
 module "liberty_aas" {
   source                = "../../"
-  liberty_aas_name      = "${var.prefix}-liberty-aas"
+  liberty_aas_name      = var.prefix
   ibm_resource_group_id = module.resource_group.resource_group_id
-  source_repo_url       = var.source_repo_url
-  config_repo_url       = var.config_repo_url
-  ibmcloud_api_key      = var.ibmcloud_api_key
+  tags                  = var.resource_tags
 }

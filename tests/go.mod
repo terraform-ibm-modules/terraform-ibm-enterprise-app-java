@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-ibm-liberty-aas
+module github.com/terraform-ibm-modules/terraform-ibm-ease
 
 go 1.21
 

@@ -2,7 +2,7 @@
 # Outputs
 ########################################################################################################################
 
-output "liberty_aas_name" {
-  description = "Name of Liberty as a Service instance"
-  value       = ibm_resource_instance.liberty_aas_instance.name
+output "ease_name" {
+  description = "Name of Enterprise Application Service instance"
+  value       = ibm_resource_instance.ease_instance.name
 }

@@ -1,8 +1,9 @@
-resource "ibm_resource_instance" "liberty_aas_instance" {
-  name              = var.liberty_aas_name
-  resource_group_id = var.ibm_resource_group_id
-  service           = "appengine"
+resource "ibm_resource_instance" "ease_instance" {
+  name              = var.ease_name
+  resource_group_id = var.resource_group_id
+  service           = "ease"
   plan              = "free"
-  location          = "global"
+  location          = "us-east"
   tags              = var.tags
+  parameters	    = var.parameters == null ? null : var.parameters
 }

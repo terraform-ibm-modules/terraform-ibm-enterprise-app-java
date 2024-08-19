@@ -2,7 +2,7 @@
 # Outputs
 ########################################################################################################################
 
-output "liberty_aas_name" {
-  description = "Name of Liberty as a Service instance"
-  value       = module.liberty_aas.liberty_aas_name
+output "ease_name" {
+  description = "Name of Enterprise Application Service instance"
+  value       = module.ease.ease_name
 }

@@ -1,5 +1,5 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
-# IBM WebSphere Liberty as a Service
+# IBM Enterprise Application Service for Java - EASeJava
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an IBM [Liberty as a Service](https://test.cloud.ibm.com/catalog/services/liberty-saas) instance.
+Use this module to provision and configure an IBM [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease) instance.
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -28,7 +28,7 @@ Use this module to provision and configure an IBM [Liberty as a Service](https:/
 ## Overview
 * [terraform-ibm-ease](#terraform-ibm-ease)
 * [Examples](./examples)
-    * [Basic example](./examples/basic)
+    * [Basic No Config example](./examples/basic-no-config)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -44,19 +44,15 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 ## Prerequisites
 Must have these created prior to using this terraform code:
 1. GitHub Personal Access Token (https://github.com/settings/tokens)
-2. Source and Config Repos (for the Liberty aaS instance)
+2. Source and Config Repos (for the EASeJava instance)
 3. IBM Cloud API Key (https://test.cloud.ibm.com/iam/apikeys)
 4. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups)
+5. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new)
 
 **NOTE:** For examples source and config repositories that can be forked, see the below repositories:
-https://github.com/OpenLiberty/sample-getting-started
+https://github.com/IBMAppFlowTest/sample-getting-started
 
-https://github.com/jgawor/sample-getting-started-config
-
-The following GitHub application needs to be installed and configured to access your
-source and config repositories.
-https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new
-
+https://github.com/IBMAppFlowTest/sample-getting-started-config
 
 <!-- Replace this heading with the name of the root level module (the repo name) -->
 ## terraform-ibm-ease
@@ -75,10 +71,10 @@ provider "ibm" {
   ibmcloud_api_key = "XXXXXXXXXX"
 }
 
-module "liberty_aas_module" {
-  source            = "terraform-ibm-modules/liberty-aas/ibm"
+module "ease_module" {
+  source            = "terraform-ibm-modules/ease/ibm"
   version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
-  name              = "liberty_aas_XXX"
+  name              = "ease_XXX"
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
 }
 ```
@@ -130,21 +126,21 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [ibm_resource_instance.liberty_aas_instance](https://registry.terraform.io/providers/ibm-cloud/ibm/latest/docs/resources/resource_instance) | resource |
+| [ibm_resource_instance.ease_instance](https://registry.terraform.io/providers/ibm-cloud/ibm/latest/docs/resources/resource_instance) | resource |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ibm_resource_group_id"></a> [ibm\_resource\_group\_id](#input\_ibm\_resource\_group\_id) | The ID of the resource group to use for the creation of the Open Liberty SaaS service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
-| <a name="input_liberty_aas_name"></a> [liberty\_aas\_name](#input\_liberty\_aas\_name) | The name for the newly provisioned Open Liberty SaaS service instance. | `string` | n/a | yes |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned EASeJava service instance. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_liberty_aas_name"></a> [liberty\_aas\_name](#output\_liberty\_aas\_name) | Name of Liberty as a Service instance |
+| <a name="output_ease_name"></a> [ease\_name](#output\_ease\_name) | Name of Enterprise Application Service instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

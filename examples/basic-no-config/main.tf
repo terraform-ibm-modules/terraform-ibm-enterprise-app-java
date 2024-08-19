@@ -11,12 +11,12 @@ module "resource_group" {
 }
 
 ########################################################################################################################
-# Liberty as a Service Instance
+# Enterprise Application Service Instance
 ########################################################################################################################
 
-module "liberty_aas" {
+module "ease" {
   source                = "../../"
-  liberty_aas_name      = var.prefix
-  ibm_resource_group_id = module.resource_group.resource_group_id
+  ease_name      	= var.prefix
+  resource_group_id     = module.resource_group.resource_group_id
   tags                  = var.resource_tags
 }

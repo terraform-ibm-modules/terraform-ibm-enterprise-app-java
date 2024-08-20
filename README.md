@@ -28,7 +28,7 @@ Use this module to provision and configure an IBM [Enterprise Application Servic
 ## Overview
 * [terraform-ibm-ease](#terraform-ibm-ease)
 * [Examples](./examples)
-    * [Basic No Config example](./examples/basic-no-config)
+    * [Basic example](./examples/basic-no-config)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -43,13 +43,17 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 
 ## Prerequisites
 Must have these created prior to using this terraform code:
-1. GitHub Personal Access Token (https://github.com/settings/tokens)
-2. Source and Config Repos (for the EASeJava instance)
-3. IBM Cloud API Key (https://test.cloud.ibm.com/iam/apikeys)
-4. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups)
-5. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new)
 
-**NOTE:** For examples source and config repositories that can be forked, see the below repositories:
+1. IBM Cloud API Key (https://test.cloud.ibm.com/iam/apikeys)
+2. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups)
+
+Optionally, the following are required if you want to configure the EASeJava instance:
+
+1. Source and Config Repos (for the EASeJava instance)
+2. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new)
+
+**NOTE:** For example source and config repositories that can be forked, see the below repositories:
+
 https://github.com/IBMAppFlowTest/sample-getting-started
 
 https://github.com/IBMAppFlowTest/sample-getting-started-config
@@ -76,8 +80,16 @@ module "ease_module" {
   version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
   name              = "ease_XXX"
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
+  tags              = []
+  parameters        = {
+    "sourceRepoURL": "http://xxxxx",
+    "configRepoURL": "http://xxxxx",
+    "skipBuild": "false"
+  }
 }
 ```
+
+
 
 ### Required IAM access policies
 
@@ -132,8 +144,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ibm_resource_group_id"></a> [ibm\_resource\_group\_id](#input\_ibm\_resource\_group\_id) | The ID of the resource group to use for the creation of the Open Liberty SaaS service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
-| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned EASeJava service instance. | `string` | n/a | yes |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | JSON formatted variables used to configure the Enterprise Application Service instance. Required fields include: sourceRepoURL, configRepoURL. | <pre>map(object({<br>    sourceRepoURL = string<br>    configRepoURL = string<br>  }))</pre> | `null` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Applicaiton Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
 
 ### Outputs

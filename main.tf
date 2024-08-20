@@ -5,5 +5,5 @@ resource "ibm_resource_instance" "ease_instance" {
   plan              = "free"
   location          = "us-east"
   tags              = var.tags
-  parameters	    = var.parameters == null ? null : var.parameters
+  parameters        = jsonencode(var.parameters)
 }

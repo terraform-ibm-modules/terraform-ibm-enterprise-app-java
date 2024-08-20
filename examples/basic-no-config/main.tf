@@ -15,8 +15,8 @@ module "resource_group" {
 ########################################################################################################################
 
 module "ease" {
-  source                = "../../"
-  ease_name      	= var.prefix
-  resource_group_id     = module.resource_group.resource_group_id
-  tags                  = var.resource_tags
+  source            = "../../"
+  ease_name         = var.prefix
+  resource_group_id = module.resource_group.resource_group_id
+  tags              = var.resource_tags
 }

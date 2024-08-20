@@ -5,5 +5,5 @@ resource "ibm_resource_instance" "ease_instance" {
   plan              = "free"
   location          = "us-east"
   tags              = var.tags
-  parameters        = jsonencode(var.parameters)
+  parameters        = var.parameters == {} ? null : { "sourceRepoURL" : var.parameters.sourceRepoURL, "configRepoURL" : var.parameters.configRepoURL }
 }

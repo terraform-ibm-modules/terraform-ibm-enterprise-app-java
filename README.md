@@ -145,7 +145,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
-| <a name="input_parameters"></a> [parameters](#input\_parameters) | JSON formatted variables used to configure the Enterprise Application Service instance. Required fields include: sourceRepoURL, configRepoURL. | <pre>map(object({<br>    sourceRepoURL = string<br>    configRepoURL = string<br>  }))</pre> | `null` | no |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | JSON formatted variables used to configure the Enterprise Application Service instance. Required fields include: sourceRepoURL, configRepoURL. | <pre>object({<br>    sourceRepoURL = optional(string)<br>    configRepoURL = optional(string)<br>  })</pre> | `{}` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Applicaiton Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
 

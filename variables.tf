@@ -19,10 +19,10 @@ variable "tags" {
 }
 
 variable "parameters" {
-  type = map(object({
-    sourceRepoURL = string
-    configRepoURL = string
-  }))
+  type = object({
+    sourceRepoURL = optional(string)
+    configRepoURL = optional(string)
+  })
   description = "JSON formatted variables used to configure the Enterprise Application Service instance. Required fields include: sourceRepoURL, configRepoURL."
-  default     = null
+  default     = {}
 }

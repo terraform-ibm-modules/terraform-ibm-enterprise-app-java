@@ -18,11 +18,14 @@ variable "tags" {
   default     = []
 }
 
-variable "parameters" {
-  type = object({
-    sourceRepoURL = optional(string)
-    configRepoURL = optional(string)
-  })
-  description = "JSON formatted variables used to configure the Enterprise Application Service instance. Required fields include: sourceRepoURL, configRepoURL."
-  default     = {}
+variable "source_repo" {
+  type        = string
+  description = "The URL for the Enterprise Application Service source code."
+  default     = null
+}
+
+variable "config_repo" {
+  type        = string
+  description = "The URL for the Enterprise Application Service configuration code."
+  default     = null
 }

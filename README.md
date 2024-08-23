@@ -1,5 +1,5 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
-# IBM Enterprise Application Service for Java - EASeJava
+# IBM Enterprise Application Service for Java (EASeJava)
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an IBM [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease) instance.
+Use this module to provision and configure an IBM [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease).
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -81,11 +81,10 @@ module "ease_module" {
   name              = "ease_XXX"
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
   tags              = []
-  parameters        = {
-    "sourceRepoURL": "http://xxxxx",
-    "configRepoURL": "http://xxxxx",
-    "skipBuild": "false"
-  }
+  plan              = "free"
+  region            = "us-east"
+  source_repo       = "http://xxxxx"
+  config_repo       = "http://xxxxx"
 }
 ```
 
@@ -127,7 +126,7 @@ No permissions are needed to run this module.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.67.0 |
 
 ### Modules
@@ -144,16 +143,19 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
-| <a name="input_parameters"></a> [parameters](#input\_parameters) | JSON formatted variables used to configure the Enterprise Application Service instance. Required fields include: sourceRepoURL, configRepoURL. | <pre>object({<br>    sourceRepoURL = optional(string)<br>    configRepoURL = optional(string)<br>  })</pre> | `{}` | no |
-| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Applicaiton Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | Name for the newly provisioned IBM Enterprise Application Service. | `string` | n/a | yes |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | ID of the resource group to use for the creation of IBM Enterprise Application Service (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels for IBM Enterprise Application Service, i.e. test. | `list(string)` | `[]` | no |
+| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | URL for IBM Enterprise Application Service source code. | `string` | `null` | no |
+| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | URL for IBM Enterprise Application Service configuration code. | `string` | `null` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | Desired pricing plan for IBM Enterprise Application Service. | `string` | `free` | yes |
+| <a name="input_region"></a> [region](#input\_region) | Desired region for IBM Enterprise Application Service. | `string` | `us-east` | yes |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ease_name"></a> [ease\_name](#output\_ease\_name) | Name of Enterprise Application Service instance |
+| <a name="output_ease_name"></a> [ease\_name](#output\_ease\_name) | Name for the newly provisioned IBM Enterprise Application Service. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

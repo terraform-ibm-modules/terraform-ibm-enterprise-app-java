@@ -8,11 +8,6 @@ variable "ibmcloud_api_key" {
   sensitive   = true
 }
 
-variable "region" {
-  type        = string
-  description = "Region where resources are created"
-}
-
 variable "resource_tags" {
   type        = list(string)
   description = "Optional list of tags to be added to created resources"
@@ -29,4 +24,16 @@ variable "resource_group" {
   type        = string
   description = "The name of an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable"
   default     = null
+}
+
+variable "plan" {
+  type        = string
+  description = "The desired pricing plan for IBM Enterprise Application Service instance."
+  default     = "free"
+}
+
+variable "region" {
+  type        = string
+  description = "The desired region for deploying IBM Enterprise Application Service instance."
+  default     = "us-east"
 }

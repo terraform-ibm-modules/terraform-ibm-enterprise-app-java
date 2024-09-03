@@ -29,6 +29,7 @@ Use this module to provision and configure an IBM [Enterprise Application Servic
 * [terraform-ibm-ease](#terraform-ibm-ease)
 * [Examples](./examples)
     * [Basic example](./examples/basic-no-config)
+    * [Complete example](./examples/complete)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -72,7 +73,7 @@ unless real values don't help users know what to change.
 
 ```hcl
 provider "ibm" {
-  ibmcloud_api_key = "XXXXXXXXXX"
+  ibmcloud_api_key = "XXXXXXXXXX" <!-- pragma: allowlist secret -->
 }
 
 module "ease_module" {
@@ -127,7 +128,7 @@ No permissions are needed to run this module.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.67.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.67.0, < 2.0.0 |
 
 ### Modules
 
@@ -143,19 +144,19 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | Name for the newly provisioned IBM Enterprise Application Service. | `string` | n/a | yes |
-| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | ID of the resource group to use for the creation of IBM Enterprise Application Service (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels for IBM Enterprise Application Service, i.e. test. | `list(string)` | `[]` | no |
-| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | URL for IBM Enterprise Application Service source code. | `string` | `null` | no |
-| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | URL for IBM Enterprise Application Service configuration code. | `string` | `null` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | Desired pricing plan for IBM Enterprise Application Service. | `string` | `free` | yes |
-| <a name="input_region"></a> [region](#input\_region) | Desired region for IBM Enterprise Application Service. | `string` | `us-east` | yes |
+| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
+| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for IBM Enterprise Application Service instance. | `string` | `"free"` | no |
+| <a name="input_region"></a> [region](#input\_region) | The desired region for deploying IBM Enterprise Application Service instance. | `string` | `"us-east"` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
+| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ease_name"></a> [ease\_name](#output\_ease\_name) | Name for the newly provisioned IBM Enterprise Application Service. |
+| <a name="output_ease_instance"></a> [ease\_instance](#output\_ease\_instance) | Enterprise Application Service instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

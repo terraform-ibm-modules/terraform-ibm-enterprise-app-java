@@ -1,0 +1,9 @@
+{
+  "ibmcloud_api_key": $VALIDATION_APIKEY,
+  "region": "us-east",
+  "resource_tags": $TAGS,
+  "prefix": $PREFIX,
+  "plan": "free",
+  "source_repo": "https://github.com/vb-test-appflow-org/wasease-sample-getting-started_v0.1",
+  "config_repo": "https://github.com/vb-test-appflow-org/wasease_sample-getting-started-config_v0.1"
+}

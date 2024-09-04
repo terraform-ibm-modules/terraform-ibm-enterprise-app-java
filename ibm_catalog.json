@@ -57,18 +57,18 @@
               "descriptions": "This architecture creates an instance of IBM Enterprise Application Service for Java.",
               "features": [
                 {
-                  "title": " Creates an instance of IBM Enterprise Application Service for Java",
+                  "title": "Creates an instance of IBM Enterprise Application Service for Java",
                   "description": "This architecture creates an instance of IBM Enterprise Application Service for Java."
                 }
               ],
               "diagrams": [
                 {
                   "diagram": {
-                    "caption": "TBD",
-                    "url": "",
+                    "caption": "Creates an instance of IBM Enterprise Application Service for Java",
+                    "url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/tree/draft_da/reference-architecture/deployable-architecture-ease.svg",
                     "type": "image/svg+xml"
                   },
-                  "description": "TBD."
+                  "description": "This architecture creates an instance of IBM Enterprise Application Service for Java."
                 }
               ]
             },

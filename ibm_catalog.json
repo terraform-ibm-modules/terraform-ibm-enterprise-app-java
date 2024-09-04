@@ -77,7 +77,7 @@
                   "key": "ibmcloud_api_key"
                 },
                 {
-                  "key": "resource_group_id"
+                  "key": "resource_group"
                 },
                 {
                   "key": "ease_name"
@@ -138,7 +138,7 @@
                   ]
                 },
                 {
-                  "key": "name"
+                  "key": "prefix"
                 },
                 {
                   "key": "plan",
@@ -150,7 +150,7 @@
                   ]
                 },
                 {
-                  "key": "tags"
+                  "key": "resource_tags"
                 },
                 {
                     "key": "source_repo"

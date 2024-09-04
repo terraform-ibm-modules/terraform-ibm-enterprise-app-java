@@ -1,5 +1,5 @@
 locals {
-  sleep_create = "60s"
+  sleep_create = "30s"
 }
 
 ########################################################################################################################
@@ -36,5 +36,6 @@ resource "time_sleep" "wait_deployment" {
 }
 
 data "ibm_resource_instance" "ease_resource" {
+  depends_on = [time_sleep.wait_deployment]
   identifier = module.ease.ease_instance.id
 }

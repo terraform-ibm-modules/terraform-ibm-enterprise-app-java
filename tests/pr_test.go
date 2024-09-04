@@ -34,7 +34,7 @@ func TestRunBasicExample(t *testing.T) {
 	t.Parallel()
 	t.Skip("Skipping test until available in production IBM Cloud.")
 
-	options := setupOptions(t, "ease", basicExampleDir, nil)
+	options := setupOptions(t, "ease-basic", basicExampleDir, nil)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -50,7 +50,7 @@ func TestRunCompleteExample(t *testing.T) {
 		"config_repo": appConfigRepo,
 	}
 
-	options := setupOptions(t, "ease", completeExampleDir, extTerraformVars)
+	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")

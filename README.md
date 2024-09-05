@@ -50,8 +50,9 @@ Must have these created prior to using this terraform code:
 
 Optionally, the following are required if you want to configure the EASeJava instance:
 
-1. Source and Config Repos (for the EASeJava instance)
-2. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new)
+1. Application source and application config repositories (for the EASeJava instance)
+2. GitHub token with read access to the Source and Config repositories, if private. It can be empty for public repositories
+3. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new)
 
 **NOTE:** For example source and config repositories that can be forked, see the below repositories:
 
@@ -86,6 +87,7 @@ module "ease_module" {
   region            = "us-east"
   source_repo       = "http://xxxxx"
   config_repo       = "http://xxxxx"
+  repo_git_token    = "XXXXXXXX" <!-- pragma: allowlist secret -->
 }
 ```
 
@@ -101,25 +103,20 @@ information in the console at
 Manage > Access (IAM) > Access groups > Access policies.
 -->
 
-<!--
 You need the following permissions to run this module:
 
 - IAM services
-    - **Sample IBM Cloud** service
+    - **enterprise-application-service** service
         - `Editor` platform access
-        - `Manager` platform access
-- Account management services
-    - **Sample account management** service
-        - `Editor` platform access
--->
 
 <!-- NO PERMISSIONS FOR MODULE
 If no permissions are required for the module, uncomment the following
 statement instead the previous block.
 -->
 
+<!--
 No permissions are needed to run this module.
-
+-->
 
 <!-- The following content is automatically populated by the pre-commit hook -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -148,6 +145,7 @@ No modules.
 | <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
 | <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for IBM Enterprise Application Service instance. | `string` | `"free"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The desired region for deploying IBM Enterprise Application Service instance. | `string` | `"us-east"` | no |
+| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repos. It is needed only for private repositories, for public ones leave to default null value. | `string` | `null` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
 | <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |

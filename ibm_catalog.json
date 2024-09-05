@@ -2,7 +2,7 @@
     "products": [
       {
         "name": "deploy-arch-ibm-ease",
-        "label": "IBM Enterprise Application Service for Java.",
+        "label": "IBM Enterprise Application Service for Java",
         "product_kind": "solution",
         "tags": [
           "ibm_created",
@@ -16,19 +16,19 @@
           "terraform",
           "solution"
         ],
-        "short_description": "Creates and configures an instance of IBM Enterprise Application Service for Java.",
-        "long_description": "This architecture supports creating and configuring an instance of  IBM Enterprise Application Service for Java to build and deploy applications on public clouds.",
+        "short_description": "Creates and configures an instance of IBM Enterprise Application Service for Java",
+        "long_description": "This architecture supports creating and configuring an instance of IBM Enterprise Application Service for Java to build and deploy applications on public clouds",
         "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
         "offering_icon_url": "",
         "provider_name": "IBM",
         "features": [
             {
-            "title": "Creates an instance of IBM Enterprise Application Service for Java.",
-            "description": "Creates and configures an instance of IBM Enterprise Application Service for Java."
+            "title": "Creates an instance of IBM Enterprise Application Service for Java",
+            "description": "Creates and configures an instance of IBM Enterprise Application Service for Java"
             },
             {
             "title": "Supports application build",
-            "description": "Supports application build and configuration using dedicated repositories."
+            "description": "Supports application build and configuration using dedicated repositories"
             }
         ],
         "flavors": [
@@ -54,11 +54,11 @@
               }
             ],
             "architecture": {
-              "descriptions": "This architecture creates an instance of IBM Enterprise Application Service for Java.",
+              "descriptions": "This architecture creates an instance of IBM Enterprise Application Service for Java",
               "features": [
                 {
                   "title": "Creates an instance of IBM Enterprise Application Service for Java",
-                  "description": "This architecture creates an instance of IBM Enterprise Application Service for Java."
+                  "description": "This architecture creates an instance of IBM Enterprise Application Service for Java"
                 }
               ],
               "diagrams": [
@@ -68,7 +68,7 @@
                     "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/draft_da/reference-architecture/deployable-architecture-ease.svg",
                     "type": "image/svg+xml"
                   },
-                  "description": "This architecture creates an instance of IBM Enterprise Application Service for Java."
+                  "description": "This architecture creates an instance of IBM Enterprise Application Service for Java"
                 }
               ]
             },
@@ -153,10 +153,13 @@
                   "key": "resource_tags"
                 },
                 {
-                    "key": "source_repo"
+                  "key": "source_repo"
                 },
                 {
-                    "key": "config_repo"
+                  "key": "config_repo"
+                },
+                {
+                  "key": "repos_git_token"
                 }
               ]
           }

@@ -27,6 +27,7 @@ module "ease" {
   region            = var.region
   config_repo       = var.config_repo
   source_repo       = var.source_repo
+  repos_git_token   = var.repos_git_token
 }
 
 # as the EASeJava app deployment expects some asynch tasks to be performed we wait for a configured interval before loading the resource instance details

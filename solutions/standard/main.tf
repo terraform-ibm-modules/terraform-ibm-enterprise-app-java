@@ -27,6 +27,7 @@ module "ease" {
   region            = var.region
   config_repo       = var.config_repo
   source_repo       = var.source_repo
+  repos_git_token   = var.repos_git_token
 }
 
 # wait for asynch tasks to be performed before loading the resource instance details to output

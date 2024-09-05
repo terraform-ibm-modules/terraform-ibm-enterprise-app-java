@@ -41,3 +41,10 @@ variable "config_repo" {
   description = "The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service."
   default     = null
 }
+
+variable "repos_git_token" {
+  type        = string
+  description = "The GitHub token to read from the application and configuration repos. It is needed only for private repositories, for public ones leave to default null value."
+  default     = null
+  sensitive   = true
+}

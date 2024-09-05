@@ -9,7 +9,10 @@ locals {
       ? local.validate_ease_repos_msg
   : ""))
 
-  parameters = var.source_repo == null && var.config_repo == null ? null : { "sourceRepoURL" : var.source_repo, "configRepoURL" : var.config_repo }
+  # source and config repos, and gitToken will be set as parameters input param to the service only if both source and config repos are filled
+  parameters = var.source_repo == null || var.config_repo == null ? null : { "sourceRepoURL" : var.source_repo, "configRepoURL" : var.config_repo }
+  # token parameter is added only if not null
+  parameters_final = var.source_repo == null && var.config_repo == null && var.repos_git_token != null ? merge(local.parameters, { "gitToken" : var.repos_git_token }) : local.parameters
 }
 
 resource "ibm_resource_instance" "ease_instance" {
@@ -19,5 +22,5 @@ resource "ibm_resource_instance" "ease_instance" {
   plan              = var.plan
   location          = var.region
   tags              = var.tags
-  parameters        = local.parameters
+  parameters        = local.parameters_final
 }

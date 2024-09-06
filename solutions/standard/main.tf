@@ -30,6 +30,11 @@ module "ease" {
   repos_git_token   = var.repos_git_token
 }
 
+locals {
+  # collecting the dashboard_url from the resource creation output as it is not returned when reading using the datasource
+  app_dashboard_url = module.ease.ease_instance.dashboard_url
+}
+
 # wait for asynch tasks to be performed before loading the resource instance details to output
 resource "time_sleep" "wait_deployment" {
   depends_on      = [module.ease]

@@ -30,6 +30,11 @@ module "ease" {
   repos_git_token   = var.repos_git_token
 }
 
+locals {
+  # collecting the dashboard_url from the resource creation output as it is not returned when reading using the datasource
+  app_dashboard_url = module.ease.ease_instance.dashboard_url
+}
+
 # as the EASeJava app deployment expects some asynch tasks to be performed we wait for a configured interval before loading the resource instance details
 resource "time_sleep" "wait_deployment" {
   depends_on      = [module.ease]

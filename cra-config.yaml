@@ -7,8 +7,6 @@ CRA_TARGETS:
     # SCC_INSTANCE_ID: "" # The SCC instance ID to use to download profile for CRA scan. If not provided, a default global value will be used.
     # SCC_REGION: "" # The IBM Cloud region that the SCC instance is in. If not provided, a default global value will be used.
     CRA_ENVIRONMENT_VARIABLES:  # An optional map of environment variables for CRA, where the key is the variable name and value is the value. Useful for providing TF_VARs.
-    #   TF_VAR_sample: "sample value"
-    #   TF_VAR_other:  "another value"
       TF_VAR_region: "us-east"
       TF_VAR_config_repo: "https://github.com/vb-test-appflow-org/wasease_sample-getting-started-config_v0.1"
       TF_VAR_source_repo: "https://github.com/vb-test-appflow-org/wasease-sample-getting-started_v0.1"

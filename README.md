@@ -26,7 +26,7 @@ TODO: Replace this with a description of the modules in this repo.
 <!-- The following content is automatically populated by the pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
-* [terraform-ibm-ease](#terraform-ibm-ease)
+* [terraform-ibm-enterprise-app-java](#terraform-ibm-enterprise-app-java)
 * [Examples](./examples)
     * [Advanced example](./examples/advanced)
     * [Basic example](./examples/basic)

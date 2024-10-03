@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-ibm-ease
+module github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java
 
 go 1.22.0
 

@@ -52,92 +52,92 @@ data "ibm_resource_instance" "ease_resource" {
 data "ibm_iam_account_settings" "provider_account" {}
 
 locals {
+
+  # validation of var.mq_s2s_policy_limit_source_resource_group_flag and var.mq_s2s_policy_limit_source_resource_group_flag that cannot be both true at the same time
+  validate_s2s_source_policy_flags_cnd = var.mq_s2s_policy_limit_source_resource_flag == true && var.mq_s2s_policy_limit_source_resource_group_flag == true
+  validate_s2s_source_policy_flags_msg = "Setting Service to Service policy source scope on resource instance or on resource group is mutually exclusive. So var.mq_s2s_policy_limit_source_resource_group_flag and var.mq_s2s_policy_limit_source_resource_group_flag cannot be both true."
+  # tflint-ignore: terraform_unused_declarations
+  validate_s2s_source_policy_flags_chk = regex(
+    "^${local.validate_s2s_source_policy_flags_msg}$",
+    (!local.validate_s2s_source_policy_flags_cnd
+      ? local.validate_s2s_source_policy_flags_msg
+  : ""))
+
   # if the source and target account ID for the S2S policy are not specified in input vars the account ID of the provider will be used
   mq_s2s_subject_account_id = var.mq_s2s_policy_source_account_id == null ? data.ibm_iam_account_settings.provider_account.account_id : var.mq_s2s_policy_source_account_id
-  # mq_s2s_target_account_id  = var.mq_s2s_policy_target_account_id == null ? data.ibm_iam_account_settings.provider_account.account_id : var.mq_s2s_policy_target_account_id
+  mq_s2s_target_account_id  = var.mq_s2s_policy_target_account_id == null ? data.ibm_iam_account_settings.provider_account.account_id : var.mq_s2s_policy_target_account_id
+
 }
 
 # creating S2S policy if enabled
 resource "ibm_iam_authorization_policy" "policy" {
-  count                       = var.mq_s2s_policy_enable == true ? 1 : 0
-  roles                       = var.mq_s2s_policy_roles
-  source_service_account      = local.mq_s2s_subject_account_id
-  source_service_name         = "enterprise-app-java"
-  source_resource_instance_id = var.mq_s2s_policy_limit_source_resource_flag == true ? module.ease.ease_instance.id : null
-  source_resource_group_id    = var.mq_s2s_policy_limit_source_resource_group_flag == true ? module.resource_group.resource_group_id : null
+  count = var.mq_s2s_policy_enable == true ? 1 : 0
+  roles = var.mq_s2s_policy_roles
 
-  target_service_name         = "mqcloud"
-  target_resource_instance_id = var.mq_s2s_policy_limit_target_resource_id != null ? var.mq_s2s_policy_limit_target_resource_id : null
-  target_resource_group_id    = var.mq_s2s_policy_limit_target_resource_group_id != null ? var.mq_s2s_policy_limit_target_resource_group_id : null
+  # limiting the source accountID of S2S policy to the input var.mq_s2s_policy_source_account_id. If it is null the provider account ID is used
+  subject_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.mq_s2s_subject_account_id
+  }
 
-  # # limiting the source accountID of S2S policy to the input var.mq_s2s_policy_source_account_id. If it is null the provider account ID is used
-  # subject_attributes {
-  #     name     = "accountId"
-  #     operator = "stringEquals"
-  #     value    = local.mq_s2s_subject_account_id
-  # }
+  subject_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "enterprise-app-java"
+  }
 
-  # subject_attributes {
-  #     name     = "serviceName"
-  #     operator = "stringEquals"
-  #     value    = "enterprise-app-java"
-  # }
+  # limiting the target serviceInstance of S2S policy to the Enterprise Application Service instance ID only if var.mq_s2s_policy_limit_source_resource_flag is true
+  dynamic "subject_attributes" {
+    for_each = var.mq_s2s_policy_limit_source_resource_flag == true ? [module.ease.ease_instance.guid] : []
+    content {
+      name     = "serviceInstance"
+      operator = "stringEquals"
+      value    = subject_attributes.value
+    }
+  }
 
-  # # limiting the target serviceInstance of S2S policy to the Enterprise Application Service instance ID only if var.mq_s2s_policy_limit_source_resource_flag is true
-  # dynamic "subject_attributes" {
-  #   for_each = var.mq_s2s_policy_limit_source_resource_flag == true ? [module.ease.ease_instance.id] : []
-  #   iterator = id
-  #   content {
-  #     name     = "serviceInstance"
-  #     operator = "stringEquals"
-  #     value    = "${id}"
-  #   }
-  # }
+  # limiting the source resourceGroupId of S2S policy to the resource group where the Enterprise Application Service instance ID is created only if var.mq_s2s_policy_limit_source_resource_group_flag is true
+  dynamic "subject_attributes" {
+    for_each = var.mq_s2s_policy_limit_source_resource_group_flag == true ? [module.resource_group.resource_group_id] : []
+    content {
+      name     = "resourceGroupId"
+      operator = "stringEquals"
+      value    = subject_attributes.value
+    }
+  }
 
-  # # limiting the source resourceGroupId of S2S policy to the resource group where the Enterprise Application Service instance ID is created only if var.mq_s2s_policy_limit_source_resource_group_flag is true
-  # dynamic "subject_attributes" {
-  #   for_each = var.mq_s2s_policy_limit_source_resource_group_flag == true ? [module.resource_group.resource_group_id] : []
-  #   iterator = id
-  #   content {
-  #     name     = "resourceGroupId"
-  #     operator = "stringEquals"
-  #     value    = id
-  #   }
-  # }
+  # limiting the target accountID of S2S policy to the input var.mq_s2s_policy_target_account_id. If it is null the provider account ID is used
+  resource_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.mq_s2s_target_account_id
+  }
 
-  # # limiting the target accountID of S2S policy to the input var.mq_s2s_policy_target_account_id. If it is null the provider account ID is used
-  # resource_attributes {
-  #     name  = "accountId"
-  #     operator = "stringEquals"
-  #     value = local.mq_s2s_target_account_id
-  # }
+  resource_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "mqcloud"
+  }
 
-  # resource_attributes {
-  #     name  = "serviceName"
-  #     operator = "stringEquals"
-  #     value = "mqcloud"
-  # }
+  # limiting the target serviceInstance of S2S policy to the MQ instance ID only if var.mq_s2s_policy_limit_target_resource_id is not null
+  dynamic "resource_attributes" {
+    for_each = var.mq_s2s_policy_limit_target_resource_id != null ? [var.mq_s2s_policy_limit_target_resource_id] : []
+    content {
+      name     = "serviceInstance"
+      operator = "stringEquals"
+      value    = resource_attributes.value
+    }
+  }
 
-  # # limiting the target serviceInstance of S2S policy to the MQ instance ID only if var.mq_s2s_policy_limit_target_resource_id is not null
-  # dynamic "resource_attributes" {
-  #   for_each = var.mq_s2s_policy_limit_target_resource_id != null ? [var.mq_s2s_policy_limit_target_resource_id] : []
-  #   iterator = id
-  #   content {
-  #     name     = "serviceInstance"
-  #     operator = "stringEquals"
-  #     value    = id
-  #   }
-  # }
-
-  # # limiting the target resourceGroupId of S2S policy to var.mq_s2s_policy_limit_target_resource_group_id only if not null
-  # dynamic "resource_attributes" {
-  #   for_each = var.mq_s2s_policy_limit_target_resource_group_id != null ? [var.mq_s2s_policy_limit_target_resource_group_id] : []
-  #   iterator = id
-  #   content {
-  #     name     = "resourceGroupId"
-  #     operator = "stringEquals"
-  #     value    = id
-  #   }
-  # }
+  # limiting the target resourceGroupId of S2S policy to var.mq_s2s_policy_limit_target_resource_group_id only if not null
+  dynamic "resource_attributes" {
+    for_each = var.mq_s2s_policy_limit_target_resource_group_id != null ? [var.mq_s2s_policy_limit_target_resource_group_id] : []
+    content {
+      name     = "resourceGroupId"
+      operator = "stringEquals"
+      value    = resource_attributes.value
+    }
+  }
 
 }

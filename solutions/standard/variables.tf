@@ -89,22 +89,22 @@ variable "mq_s2s_policy_source_account_id" {
   default     = null
 }
 
-# variable "mq_s2s_policy_target_account_id" {
-#   type        = string
-#   description = "Target accountID for the Service to Service policy from the Enterprise Application Service instance to MQ instance. If mq_s2s_policy_enable is true and this is left to null the accountID of the API key configured for the provider is used"
-#   default     = null
-# }
+variable "mq_s2s_policy_target_account_id" {
+  type        = string
+  description = "Target accountID for the Service to Service policy from the Enterprise Application Service instance to MQ instance. If mq_s2s_policy_enable is true and this is left to null the accountID of the API key configured for the provider is used"
+  default     = null
+}
 
 variable "mq_s2s_policy_limit_source_resource_flag" {
   type        = bool
-  description = "Flag to limit the source of the Service to Service policy to the created Enterprise Application Service resource instance ID. If false the Service to Service policy source scope is not limited to the resource instance ID"
+  description = "Flag to limit the source of the Service to Service policy to the created Enterprise Application Service resource instance ID. If false the Service to Service policy source scope is not limited to the resource instance ID. Configuring scope on the resource instance ID and on the resource group ID is mutually exclusive."
   default     = true
 }
 
 variable "mq_s2s_policy_limit_source_resource_group_flag" {
   type        = bool
-  description = "Flag to limit the source of the Service to Service policy to the created Resource Group ID. If false the Service to Service policy source scope is not limited to the resource group ID"
-  default     = true
+  description = "Flag to limit the source of the Service to Service policy to the created Resource Group ID. If false the Service to Service policy source scope is not limited to the resource group ID. Configuring scope on the resource instance ID and on the resource group ID is mutually exclusive."
+  default     = false
 }
 
 variable "mq_s2s_policy_limit_target_resource_id" {

@@ -10,9 +10,9 @@ locals {
   : ""))
 
   # source and config repos, and gitToken will be set as parameters input param to the service only if both source and config repos are filled
-  parameters = var.source_repo == null || var.config_repo == null ? null : { "sourceRepoURL" : var.source_repo, "configRepoURL" : var.config_repo }
+  parameters = var.source_repo == null || var.config_repo == null ? null : { "source_repo_url" : var.source_repo, "config_repo_url" : var.config_repo }
   # token parameter is added only if not null
-  parameters_final = var.source_repo != null && var.config_repo != null && var.repos_git_token != null ? merge(local.parameters, { "gitToken" : var.repos_git_token }) : local.parameters
+  parameters_final = var.source_repo != null && var.config_repo != null && var.repos_git_token != null ? merge(local.parameters, { "git_token" : var.repos_git_token }) : local.parameters
 }
 
 resource "ibm_resource_instance" "ease_instance" {

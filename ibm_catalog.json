@@ -144,7 +144,19 @@
                   "key": "plan",
                   "options": [
                     {
-                      "displayname": "free",
+                      "displayname": "Standard",
+                      "value": "standard"
+                    },
+                    {
+                      "displayname": "Trial",
+                      "value": "trial"
+                    },
+                    {
+                      "displayname": "Staging",
+                      "value": "staging"
+                    },
+                    {
+                      "displayname": "Free",
                       "value": "free"
                     }
                   ]

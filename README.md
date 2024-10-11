@@ -28,7 +28,7 @@ Use this module to provision and configure an IBM [Enterprise Application Servic
 ## Overview
 * [terraform-ibm-enterprise-app-java](#terraform-ibm-enterprise-app-java)
 * [Examples](./examples)
-    * [Basic example](./examples/basic-no-config)
+    * [Basic example](./examples/basic)
     * [Complete example](./examples/complete)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
@@ -52,9 +52,9 @@ Optionally, the following are required if you want to configure the EASeJava ins
 
 1. Application source and application config repositories (for the EASeJava instance)
 2. GitHub token with read access to the Source and Config repositories, if private. It can be empty for public repositories
-3. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new)
+3. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new) installed in the GitHub organization hosting source and application config repositories
 
-**NOTE:** For example source and config repositories that can be forked, see the below repositories:
+**NOTE:** For example source and config repositories that can be forked, check the below repositories:
 
 https://github.com/IBMAppFlowTest/sample-getting-started
 

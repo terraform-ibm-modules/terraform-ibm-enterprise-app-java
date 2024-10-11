@@ -74,7 +74,8 @@
             },
             "configuration": [
                 {
-                  "key": "ibmcloud_api_key"
+                  "key": "ibmcloud_api_key",
+                  "required": true
                 },
                 {
                   "key": "resource_group"
@@ -142,6 +143,7 @@
                 },
                 {
                   "key": "plan",
+                  "default_value": "free",
                   "options": [
                     {
                       "displayname": "Standard",
@@ -172,6 +174,30 @@
                 },
                 {
                   "key": "repos_git_token"
+                },
+                {
+                  "key": "mq_s2s_policy_enable"
+                },
+                {
+                  "key": "mq_s2s_policy_roles"
+                },
+                {
+                  "key": "mq_s2s_policy_source_account_id"
+                },
+                {
+                  "key": "mq_s2s_policy_target_account_id"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_source_resource_flag"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_source_resource_group_flag"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_target_resource_id"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_target_resource_group_id"
                 }
               ]
           }

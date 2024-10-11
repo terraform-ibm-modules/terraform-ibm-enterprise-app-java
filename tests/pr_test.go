@@ -12,6 +12,7 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/common"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
+	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
 )
 
 // Use existing resource group
@@ -19,6 +20,7 @@ const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 const completeExampleDir = "examples/complete"
 const region = "us-east"
+const standardSolutionTerraformDir = "solutions/standard"
 
 // test application source and config repositories
 const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
@@ -115,6 +117,40 @@ func TestRunUpgradeExample(t *testing.T) {
 		assert.Nil(t, err, "This should not have errored")
 		assert.NotNil(t, output, "Expected some output")
 	}
+}
+
+func TestRunStandardSolutionSchematics(t *testing.T) {
+	t.Parallel()
+	// TODO remove skip test
+	t.Skip("Skipping test until available in production IBM Cloud.")
+
+	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
+		Testing: t,
+		TarIncludePatterns: []string{
+			"*.tf",
+			"modules/*/*.tf",
+			standardSolutionTerraformDir + "/*.tf",
+		},
+		TemplateFolder:         standardSolutionTerraformDir,
+		Tags:                   []string{"test-schematic"},
+		Prefix:                 "ease-da",
+		ResourceGroup:          resourceGroup,
+		DeleteWorkspaceOnFail:  false,
+		WaitJobCompleteMinutes: 60,
+		Region:                 "us-east",
+	})
+
+	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
+		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
+		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
+		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
+		{Name: "region", Value: region, DataType: "string"},
+		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+	}
+
+	err := options.RunSchematicTest()
+	assert.Nil(t, err, "This should not have errored")
 }
 
 // checking the dashboard URL in the terraform output

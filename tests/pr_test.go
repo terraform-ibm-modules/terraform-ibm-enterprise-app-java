@@ -14,17 +14,13 @@ import (
 
 // Use existing resource group
 const resourceGroup = "geretain-test-resources"
-const basicExampleDir = "examples/basic-no-config"
+const basicExampleDir = "examples/basic"
 const completeExampleDir = "examples/complete"
 const region = "us-east"
 
 // test application source and config repositories
-// TODO change the following const with paramenters from permanentResources when moving to production
-const appSourceRepo = "https://github.com/vb-test-appflow-org/wasease-sample-getting-started_v0.1"
-const appConfigRepo = "https://github.com/vb-test-appflow-org/wasease_sample-getting-started-config_v0.1"
-
-// TODO to make it loaded from env / SM when using a valid token
-const gitTokenRepo = "XXX"
+const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
+const appConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
 
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
@@ -74,13 +70,33 @@ func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 	t.Skip("Skipping test until available in production IBM Cloud.")
 
+	// not setting github token as the sample repositories are public
 	extTerraformVars := map[string]interface{}{
-		"source_repo":     appSourceRepo,
-		"config_repo":     appConfigRepo,
-		"repos_git_token": gitTokenRepo,
+		"source_repo": appSourceRepo,
+		"config_repo": appConfigRepo,
 	}
 
 	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
+
+	options.SkipTestTearDown = true
+	defer func() {
+		options.TestTearDown()
+	}()
+
+	// // retrieving dashboard URL to perform curl to confirm the application is successfully deployed
+	// _, err := options.RunTestConsistency()
+	// if assert.Nil(t, err, "Consistency test should not have errored") {
+	// 	outputs := options.LastTestTerraformOutputs
+	// 	_, tfOutputsErr := testhelper.ValidateTerraformOutputs(outputs, "cluster_id")
+	// 	if assert.Nil(t, tfOutputsErr, tfOutputsErr) {
+
+	// 		// get cluster config
+	// 		cloudinfosvc, err := cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
+	// 		if assert.Nil(t, err, "Error creating cloud info service") {
+	// 			clusterConfigPath, err := cloudinfosvc.GetClusterConfigConfigPath(outputs["cluster_id"].(string))
+	// 		}
+	// 	}
+	// }
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")

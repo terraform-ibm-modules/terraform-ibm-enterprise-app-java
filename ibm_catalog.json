@@ -1,0 +1,203 @@
+{
+    "products": [
+      {
+        "name": "deploy-arch-ibm-ease",
+        "label": "Deployable architecture for Enterprise Application Service",
+        "product_kind": "solution",
+        "tags": [
+          "ibm_created",
+          "target_terraform",
+          "terraform",
+          "solution"
+        ],
+        "keywords": [
+          "IaC",
+          "infrastructure as code",
+          "terraform",
+          "solution"
+        ],
+        "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
+        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public clouds",
+        "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
+        "offering_icon_url": "",
+        "provider_name": "IBM",
+        "features": [
+            {
+            "title": "Creates an instance of Enterprise Application Service for Java",
+            "description": "Creates and configures an instance of Enterprise Application Service for Java"
+            },
+            {
+            "title": "Supports application build",
+            "description": "Supports application build and configuration using dedicated repositories"
+            }
+        ],
+        "flavors": [
+          {
+            "label": "Standard",
+            "name": "standard",
+            "install_type": "fullstack",
+            "working_directory": "solutions/standard",
+            "compliance": {
+              "authority": "scc-v3",
+              "profiles": []
+            },
+            "iam_permissions": [
+              {
+                "role_crns": [
+                  "crn:v1:bluemix:public:iam::::role:Editor"
+                ],
+                "service_name": "enterprise-application-service"
+              }
+            ],
+            "architecture": {
+              "descriptions": "This architecture creates an instance of Enterprise Application Service for Java",
+              "features": [
+                {
+                  "title": "Creates an instance of Enterprise Application Service for Java",
+                  "description": "This architecture creates an instance of Enterprise Application Service for Java"
+                }
+              ],
+              "diagrams": [
+                {
+                  "diagram": {
+                    "caption": "Creates an instance of Enterprise Application Service for Java",
+                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/draft_da/reference-architecture/deployable-architecture-ease.svg",
+                    "type": "image/svg+xml"
+                  },
+                  "description": "This architecture creates an instance of Enterprise Application Service for Java"
+                }
+              ]
+            },
+            "configuration": [
+                {
+                  "key": "ibmcloud_api_key",
+                  "required": true
+                },
+                {
+                  "key": "resource_group"
+                },
+                {
+                  "key": "region",
+                  "required": true,
+                  "default_value": "us-east",
+                  "options": [
+                    {
+                      "displayname": "Washington (us-east)",
+                      "value": "us-east"
+                    },
+                    {
+                      "displayname": "Chennai (che01)",
+                      "value": "che01"
+                    },
+                    {
+                      "displayname": "Dallas (us-south)",
+                      "value": "us-south"
+                    },
+                    {
+                      "displayname": "Frankfurt (eu-de)",
+                      "value": "eu-de"
+                    },
+                    {
+                      "displayname": "London (eu-gb)",
+                      "value": "eu-gb"
+                    },
+                    {
+                      "displayname": "Madrid (eu-es)",
+                      "value": "eu-es"
+                    },
+                    {
+                      "displayname": "Osaka (jp-osa)",
+                      "value": "jp-osa"
+                    },
+                    {
+                      "displayname": "Paris (par01)",
+                      "value": "par01"
+                    },
+                    {
+                      "displayname": "Sao Paulo (br-sao)",
+                      "value": "br-sao"
+                    },
+                    {
+                      "displayname": "Sydney (au-syd)",
+                      "value": "au-syd"
+                    },
+                    {
+                      "displayname": "Toronto (ca-tor)",
+                      "value": "ca-tor"
+                    },
+                    {
+                      "displayname": "Tokyo (jp-tok)",
+                      "value": "jp-tok"
+                    }
+                  ]
+                },
+                {
+                  "key": "prefix",
+                  "default_value": "ease-da",
+                  "required": true
+                },
+                {
+                  "key": "plan",
+                  "default_value": "free",
+                  "required": true,
+                  "options": [
+                    {
+                      "displayname": "Standard",
+                      "value": "standard"
+                    },
+                    {
+                      "displayname": "Trial",
+                      "value": "trial"
+                    },
+                    {
+                      "displayname": "Staging",
+                      "value": "staging"
+                    },
+                    {
+                      "displayname": "Free",
+                      "value": "free"
+                    }
+                  ]
+                },
+                {
+                  "key": "resource_tags"
+                },
+                {
+                  "key": "source_repo"
+                },
+                {
+                  "key": "config_repo"
+                },
+                {
+                  "key": "repos_git_token"
+                },
+                {
+                  "key": "mq_s2s_policy_enable"
+                },
+                {
+                  "key": "mq_s2s_policy_roles"
+                },
+                {
+                  "key": "mq_s2s_policy_source_account_id"
+                },
+                {
+                  "key": "mq_s2s_policy_target_account_id"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_source_resource_flag"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_source_resource_group_flag"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_target_resource_id"
+                },
+                {
+                  "key": "mq_s2s_policy_limit_target_resource_group_id"
+                }
+              ]
+          }
+        ]
+      }
+    ]
+  }

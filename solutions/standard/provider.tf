@@ -1,8 +1,8 @@
 ########################################################################################################################
-# Outputs
+# Provider config
 ########################################################################################################################
 
-output "ease_instance" {
-  description = "Enterprise Application Service instance"
-  value       = ibm_resource_instance.ease_instance
+provider "ibm" {
+  ibmcloud_api_key = var.ibmcloud_api_key
+  region           = var.region
 }

@@ -16,13 +16,13 @@ variable "resource_tags" {
 
 variable "prefix" {
   type        = string
-  description = "Prefix to append to all resources created by this example"
+  description = "Prefix to append to all resources created by this deployable architecture"
   default     = "ease-da"
 }
 
 variable "resource_group" {
   type        = string
-  description = "The name of an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable"
+  description = "The name of an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable value"
   default     = null
 }
 

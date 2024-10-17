@@ -1,7 +1,7 @@
 locals {
-  # repository parameters are optional. If one of them is present, both must be filled
-  validate_ease_repos_condition = (var.source_repo != null && var.config_repo == null) || (var.source_repo == null && var.config_repo != null)
-  validate_ease_repos_msg       = "If one of var.source_repo or var.config_repo input parameters is not null both of them must be assigned with a value. Please check your input."
+  # repository parameters are optional. If one of them is present, all (source and config repos and github token) must be filled
+  validate_ease_repos_condition = !((var.source_repo == null && var.config_repo == null && var.repos_git_token == null) || (var.source_repo != null && var.config_repo != null && var.repos_git_token != null))
+  validate_ease_repos_msg       = "If one of var.source_repo, var.config_repo and var.repos_git_token input parameters is not null all of them must be assigned with a value. Please check your input."
   # tflint-ignore: terraform_unused_declarations
   validate_ease_repos_chk = regex(
     "^${local.validate_ease_repos_msg}$",
@@ -9,10 +9,8 @@ locals {
       ? local.validate_ease_repos_msg
   : ""))
 
-  # source and config repos, and gitToken will be set as parameters input param to the service only if both source and config repos are filled
-  parameters = var.source_repo == null || var.config_repo == null ? null : { "source_repo_url" : var.source_repo, "config_repo_url" : var.config_repo }
-  # token parameter is added only if not null
-  parameters_final = var.source_repo != null && var.config_repo != null && var.repos_git_token != null ? merge(local.parameters, { "git_token" : var.repos_git_token }) : local.parameters
+  # source repo, config repo and gitToken will be set as input params to the service only if all of these parameters are set
+  parameters = var.source_repo == null || var.config_repo == null || var.repos_git_token == null ? null : { "source_repo_url" : var.source_repo, "config_repo_url" : var.config_repo, "git_token" : var.repos_git_token }
 }
 
 resource "ibm_resource_instance" "ease_instance" {
@@ -22,5 +20,5 @@ resource "ibm_resource_instance" "ease_instance" {
   plan              = var.plan
   location          = var.region
   tags              = var.tags
-  parameters        = local.parameters_final
+  parameters        = local.parameters
 }

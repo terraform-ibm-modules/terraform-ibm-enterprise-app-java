@@ -50,9 +50,20 @@ variable "config_repo" {
   default     = null
 }
 
-variable "repos_git_token" {
+variable "repos_git_token_existing_secrets_manager_id" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repos. It is needed only for private repositories, for public ones leave to default null value."
+  description = "The existing Secrets Manager instance to read for the GitHub token value."
   default     = null
-  sensitive   = true
+}
+
+variable "repos_git_token_existing_secrets_manager_region" {
+  type        = string
+  description = "The existing Secrets Manager instance region to read for the GitHub token value."
+  default     = "us-south"
+}
+
+variable "repos_git_token_secret_id" {
+  type        = string
+  description = "The secretID where the value for the GitHub token is stored in the existing Secrets Manager instance."
+  default     = null
 }

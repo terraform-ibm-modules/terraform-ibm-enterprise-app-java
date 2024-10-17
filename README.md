@@ -145,7 +145,7 @@ No modules.
 | <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
 | <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for IBM Enterprise Application Service instance. | `string` | `"staging"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The desired region for deploying IBM Enterprise Application Service instance. | `string` | `"us-east"` | no |
-| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repos. It is required if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
+| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repos. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
 | <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |

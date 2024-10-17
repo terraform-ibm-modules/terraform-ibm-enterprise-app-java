@@ -48,7 +48,7 @@ variable "config_repo" {
 
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repos. It is required if var.source_repo and var.config_repo are not null."
+  description = "The GitHub token to read from the application and configuration repos. It cannot be null if var.source_repo and var.config_repo are not null."
   default     = null
   sensitive   = true
 }

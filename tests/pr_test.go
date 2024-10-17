@@ -3,14 +3,12 @@ package test
 
 import (
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
-	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/common"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
 )
@@ -23,25 +21,65 @@ const region = "us-east"
 const standardSolutionTerraformDir = "solutions/standard"
 
 // test application source and config repositories
-const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
-const appConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
+// TO DO
+// to re-enable when service is in production and the secretID can be loaded for the token
+// const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
+// const appConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
 
 // Define a struct with fields that match the structure of the YAML data
-const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
+// TO DO
+// to re-enable when service is in production and the secretID can be loaded for the token
+// const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 
-var permanentResources map[string]interface{}
-
+// var permanentResources map[string]interface{}
 var sharedInfoSvc *cloudinfo.CloudInfoService
+
+// TO DO
+// to re-enable when service is in production and the secretID can be loaded for the token
+// type Config struct {
+// 	SmGuid          string `yaml:"secretsManagerGuid"`
+// 	SmRegion        string `yaml:"secretsManagerRegion"`
+// 	GhTokenSecretId string `yaml:"geretain-public-gh-token-dev-user"`
+// }
+
+// TO DO
+// to re-enable when service is in production and the secretID can be loaded for the token
+
+// var smGuid string
+// var smRegion string
+// var rgId string
+// var ghTokenSecretId string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
 	sharedInfoSvc, _ = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
 
-	var err error
-	permanentResources, err = common.LoadMapFromYaml(yamlLocation)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// var err error
+	// permanentResources, err = common.LoadMapFromYaml(yamlLocation)
+
+	// Read the YAML file contents
+	// TO DO
+	// to re-enable when service is in production and the secretID can be loaded for the token
+	// data, err := os.ReadFile(yamlLocation)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// Create a struct to hold the YAML data
+	// TO DO
+	// to re-enable when service is in production and the secretID can be loaded for the token
+	// var config Config
+	// Unmarshal the YAML data into the struct
+	// err = yaml.Unmarshal(data, &config)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// Parse the SM guid and region from data and setting all-combined test input values used in TestRunDefaultExample and TestRunUpgradeExample
+	// TO DO
+	// to re-enable when service is in production and the secretID can be loaded for the token
+	// smGuid = config.SmGuid
+	// smRegion = config.SmRegion
+	// ghTokenSecretId = config.GhTokenSecretId
 
 	os.Exit(m.Run())
 }
@@ -86,8 +124,13 @@ func TestRunCompleteExample(t *testing.T) {
 
 	// not setting github token as the sample repositories are public
 	extTerraformVars := map[string]interface{}{
-		"source_repo": appSourceRepo,
-		"config_repo": appConfigRepo,
+		// TO DO
+		// to re-enable when service is in production and the secretID can be loaded for the token
+		// "source_repo": appSourceRepo,
+		// "config_repo": appConfigRepo,
+		// "repos_git_token_existing_secrets_manager_id":     smGuid,
+		// "repos_git_token_existing_secrets_manager_region": smRegion,
+		// "repos_git_token_secret_id":                       ghTokenSecretId,
 	}
 
 	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
@@ -142,8 +185,10 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
-		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
-		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
+		// TO DO
+		// to re-enable when service is in production and the secretID can be loaded for the token
+		// {Name: "source_repo", Value: appSourceRepo, DataType: "string"},
+		// {Name: "config_repo", Value: appConfigRepo, DataType: "string"},
 		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},

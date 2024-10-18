@@ -15,6 +15,55 @@ module "resource_group" {
 }
 
 ########################################################################################################################
+# Identify the GitHub token to use
+# - if var.repos_git_token_existing_secrets_manager_id or var.repos_git_token_secret_id are set, then all var.repos_git_token_existing_secrets_manager_id var.repos_git_token_secret_id and var.repos_git_token_existing_secrets_manager_region must be set
+# - if var.repos_git_token_existing_secrets_manager_id is set, the token will be read from secrets manager
+# - if var.repos_git_token_existing_secrets_manager_id is null and var.repos_git_token is not null, var.repos_git_token will be used as github token
+# - if both var.repos_git_token_existing_secrets_manager_id and var.repos_git_token are null, the token is null
+########################################################################################################################
+
+locals {
+
+  # validating input parameters for existing secrets manager and the related secret id
+  # - if var.repos_git_token_existing_secrets_manager_id is not null then var.repos_git_token_existing_secrets_manager_region cannot be null
+  # - if one of var.repos_git_token_existing_secrets_manager_id and var.repos_git_token_secret_id is not null, the other one cannot be null
+
+  # validation for secrets manager region to be set for existing secrets manager instance
+  validate_sm_region_cnd = var.repos_git_token_existing_secrets_manager_id != null && var.repos_git_token_existing_secrets_manager_region == null
+  validate_sm_region_msg = "var.repos_git_token_existing_secrets_manager_region must also be set when var.repos_git_token_existing_secrets_manager_id is not null"
+  # tflint-ignore: terraform_unused_declarations
+  validate_sm_region_chk = regex(
+    "^${local.validate_sm_region_msg}$",
+    (!local.validate_sm_region_cnd
+      ? local.validate_sm_region_msg
+  : ""))
+
+  # validation for repos_git_token_existing_secrets_manager_id to be set for existing secrets manager instance if repos_git_token_secret_id is set, and viceversa
+  validate_sm_id_cnd = ((var.repos_git_token_secret_id != null && var.repos_git_token_existing_secrets_manager_id == null) || (var.repos_git_token_secret_id == null && var.repos_git_token_existing_secrets_manager_id != null))
+  validate_sm_id_msg = "var.repos_git_token_existing_secrets_manager_id and var.repos_git_token_secret_id must bet set both with a value if any of them is not null."
+  # tflint-ignore: terraform_unused_declarations
+  validate_sm_id_chk = regex(
+    "^${local.validate_sm_id_msg}$",
+    (!local.validate_sm_id_cnd
+      ? local.validate_sm_id_msg
+  : ""))
+
+}
+
+data "ibm_sm_arbitrary_secret" "sm_repo_github_token" {
+  count       = var.repos_git_token_existing_secrets_manager_id != null && var.repos_git_token_existing_secrets_manager_region != null ? 1 : 0
+  instance_id = var.repos_git_token_existing_secrets_manager_id
+  #checkov:skip=CKV_SECRET_6: does not require high entropy string as is static type
+  region    = var.repos_git_token_existing_secrets_manager_region
+  secret_id = var.repos_git_token_secret_id
+  provider  = ibm.ibm-sm
+}
+
+locals {
+  repos_git_token = var.repos_git_token_existing_secrets_manager_id != null && var.repos_git_token_existing_secrets_manager_region != null ? data.ibm_sm_arbitrary_secret.sm_repo_github_token[0].payload : (var.repos_git_token == null ? null : var.repos_git_token)
+}
+
+########################################################################################################################
 # Enterprise Application Service Instance deployment
 ########################################################################################################################
 
@@ -27,7 +76,7 @@ module "ease" {
   region            = var.region
   config_repo       = var.config_repo
   source_repo       = var.source_repo
-  repos_git_token   = var.repos_git_token
+  repos_git_token   = local.repos_git_token
 }
 
 locals {

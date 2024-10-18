@@ -54,9 +54,30 @@ variable "config_repo" {
   default     = null
 }
 
+# github token configuration - the token or the tuple secrets manager id, secrets manager region and secret id are alternative
+# if both are present the tuple for secrets manager has higher priority
+
+variable "repos_git_token_existing_secrets_manager_id" {
+  type        = string
+  description = "The existing Secrets Manager instance to retrieve the GitHub token value. If not null, var.repos_git_token value will be ignored."
+  default     = null
+}
+
+variable "repos_git_token_existing_secrets_manager_region" {
+  type        = string
+  description = "The existing Secrets Manager instance region to retrieve the GitHub token value."
+  default     = "us-south"
+}
+
+variable "repos_git_token_secret_id" {
+  type        = string
+  description = "The secretID where the value for the GitHub token is stored in the existing Secrets Manager instance."
+  default     = null
+}
+
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repos. It cannot be null if var.source_repo and var.config_repo are not null."
+  description = "The GitHub token to read from the application and configuration repos. If var.repos_git_token_existing_secrets_manager_id is not null, var.repos_git_token is not used."
   default     = null
   sensitive   = true
 }

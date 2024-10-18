@@ -17,19 +17,23 @@
           "solution"
         ],
         "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
-        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public clouds",
+        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public clouds.",
         "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
         "offering_icon_url": "",
         "provider_name": "IBM",
         "features": [
-            {
+          {
             "title": "Creates an instance of Enterprise Application Service for Java",
             "description": "Creates and configures an instance of Enterprise Application Service for Java"
-            },
-            {
+          },
+          {
             "title": "Supports application build",
             "description": "Supports application build and configuration using dedicated repositories"
-            }
+          },
+          {
+            "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+            "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
+          }
         ],
         "flavors": [
           {
@@ -50,21 +54,29 @@
               }
             ],
             "architecture": {
-              "descriptions": "This architecture creates an instance of Enterprise Application Service for Java",
+              "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
               "features": [
                 {
                   "title": "Creates an instance of Enterprise Application Service for Java",
-                  "description": "This architecture creates an instance of Enterprise Application Service for Java"
+                  "description": "Creates and configures an instance of Enterprise Application Service for Java"
+                },
+                {
+                  "title": "Supports application build",
+                  "description": "Supports application build and configuration using dedicated repositories"
+                },
+                {
+                  "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+                  "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
                 }
               ],
               "diagrams": [
                 {
                   "diagram": {
-                    "caption": "Creates an instance of Enterprise Application Service for Java",
+                    "caption": "Creates and configures an instance of Enterprise Application Service for Java",
                     "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/draft_da/reference-architecture/deployable-architecture-ease.svg",
                     "type": "image/svg+xml"
                   },
-                  "description": "This architecture creates an instance of Enterprise Application Service for Java"
+                  "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
                 }
               ]
             },
@@ -167,6 +179,15 @@
                 },
                 {
                   "key": "config_repo"
+                },
+                {
+                  "key": "repos_git_token_existing_secrets_manager_id"
+                },
+                {
+                  "key": "repos_git_token_existing_secrets_manager_region"
+                },
+                {
+                  "key": "repos_git_token_secret_id"
                 },
                 {
                   "key": "repos_git_token"

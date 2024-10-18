@@ -8,5 +8,8 @@ CRA_TARGETS:
     # SCC_REGION: "" # The IBM Cloud region that the SCC instance is in. If not provided, a default global value will be used.
     CRA_ENVIRONMENT_VARIABLES:  # An optional map of environment variables for CRA, where the key is the variable name and value is the value. Useful for providing TF_VARs.
       TF_VAR_region: "us-east"
-      TF_VAR_config_repo: "https://github.com/vb-test-appflow-org/wasease_sample-getting-started-config_v0.1"
-      TF_VAR_source_repo: "https://github.com/vb-test-appflow-org/wasease-sample-getting-started_v0.1"
+      TF_VAR_config_repo: "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
+      TF_VAR_source_repo: "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
+      TF_VAR_repos_git_token_secret_id: "825a3797-1bc8-f47a-611a-c9bd2b0ef846"
+      TF_VAR_repos_git_token_existing_secrets_manager_id: "79c6d411-c18f-4670-b009-b0044a238667"
+      TF_VAR_repos_git_token_existing_secrets_manager_region: "us-south"

@@ -2,7 +2,7 @@
 # Outputs
 ########################################################################################################################
 
-#output "myoutput" {
-#  description = "Description of my output"
-#  value       = "value"
-#}
+output "ease_instance" {
+  description = "Enterprise Application Service instance"
+  value       = ibm_resource_instance.ease_instance
+}

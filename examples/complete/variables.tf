@@ -17,7 +17,7 @@ variable "resource_tags" {
 variable "prefix" {
   type        = string
   description = "Prefix to append to all resources created by this example"
-  default     = "basic"
+  default     = "ease-complete"
 }
 
 variable "resource_group" {
@@ -29,11 +29,41 @@ variable "resource_group" {
 variable "plan" {
   type        = string
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
-  default     = "free"
+  default     = "staging"
 }
 
 variable "region" {
   type        = string
   description = "The desired region for deploying IBM Enterprise Application Service instance."
   default     = "us-east"
+}
+
+variable "source_repo" {
+  type        = string
+  description = "The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service."
+  default     = null
+}
+
+variable "config_repo" {
+  type        = string
+  description = "The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service."
+  default     = null
+}
+
+variable "repos_git_token_existing_secrets_manager_id" {
+  type        = string
+  description = "The existing Secrets Manager instance to read for the GitHub token value."
+  default     = null
+}
+
+variable "repos_git_token_existing_secrets_manager_region" {
+  type        = string
+  description = "The existing Secrets Manager instance region to read for the GitHub token value."
+  default     = "us-south"
+}
+
+variable "repos_git_token_secret_id" {
+  type        = string
+  description = "The secretID where the value for the GitHub token is stored in the existing Secrets Manager instance."
+  default     = null
 }

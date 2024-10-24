@@ -1,5 +1,5 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
-# Terraform modules template project
+# IBM Enterprise Application Service for Java (EASeJava)
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-TODO: Replace this with a description of the modules in this repo.
+Use this module to provision and configure an IBM [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease).
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -28,8 +28,8 @@ TODO: Replace this with a description of the modules in this repo.
 ## Overview
 * [terraform-ibm-enterprise-app-java](#terraform-ibm-enterprise-app-java)
 * [Examples](./examples)
-    * [Advanced example](./examples/advanced)
     * [Basic example](./examples/basic)
+    * [Complete example](./examples/complete)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -42,6 +42,23 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 -->
 <!-- ## Reference architectures -->
 
+## Prerequisites
+Must have these created prior to using this terraform code:
+
+1. IBM Cloud API Key (https://test.cloud.ibm.com/iam/apikeys)
+2. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups)
+
+Optionally, the following are required if you want to configure the EASeJava instance:
+
+1. Application source and application config repositories (for the EASeJava instance)
+2. GitHub token with read access to the Source and Config repositories, if private. It can be empty for public repositories
+3. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new) installed in the GitHub organization hosting source and application config repositories
+
+**NOTE:** For example source and config repositories that can be forked, check the below repositories:
+
+https://github.com/IBMAppFlowTest/sample-getting-started
+
+https://github.com/IBMAppFlowTest/sample-getting-started-config
 
 <!-- Replace this heading with the name of the root level module (the repo name) -->
 ## terraform-ibm-enterprise-app-java
@@ -56,8 +73,25 @@ unless real values don't help users know what to change.
 -->
 
 ```hcl
+provider "ibm" {
+  ibmcloud_api_key = "XXXXXXXXXX" <!-- pragma: allowlist secret -->
+}
 
+module "ease_module" {
+  source            = "terraform-ibm-modules/ease/ibm"
+  version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
+  name              = "ease_XXX"
+  resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
+  tags              = []
+  plan              = "free"
+  region            = "us-east"
+  source_repo       = "http://xxxxx"
+  config_repo       = "http://xxxxx"
+  repo_git_token    = "XXXXXXXX" <!-- pragma: allowlist secret -->
+}
 ```
+
+
 
 ### Required IAM access policies
 
@@ -69,25 +103,20 @@ information in the console at
 Manage > Access (IAM) > Access groups > Access policies.
 -->
 
-<!--
 You need the following permissions to run this module:
 
 - IAM services
-    - **Sample IBM Cloud** service
+    - **enterprise-application-service** service
         - `Editor` platform access
-        - `Manager` platform access
-- Account management services
-    - **Sample account management** service
-        - `Editor` platform access
--->
 
 <!-- NO PERMISSIONS FOR MODULE
 If no permissions are required for the module, uncomment the following
 statement instead the previous block.
 -->
 
-<!-- No permissions are needed to run this module.-->
-
+<!--
+No permissions are needed to run this module.
+-->
 
 <!-- The following content is automatically populated by the pre-commit hook -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -96,6 +125,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.67.0, < 2.0.0 |
 
 ### Modules
 
@@ -103,15 +133,28 @@ No modules.
 
 ### Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [ibm_resource_instance.ease_instance](https://registry.terraform.io/providers/ibm-cloud/ibm/latest/docs/resources/resource_instance) | resource |
 
 ### Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
+| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for IBM Enterprise Application Service instance. | `string` | `"staging"` | no |
+| <a name="input_region"></a> [region](#input\_region) | The desired region for deploying IBM Enterprise Application Service instance. | `string` | `"us-east"` | no |
+| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repos. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance (https://test.cloud.ibm.com/account/resource-groups). | `string` | n/a | yes |
+| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
 
 ### Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_ease_instance"></a> [ease\_instance](#output\_ease\_instance) | Enterprise Application Service instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

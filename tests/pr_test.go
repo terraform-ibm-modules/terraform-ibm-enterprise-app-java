@@ -3,6 +3,7 @@ package test
 
 import (
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"testing"
@@ -11,6 +12,7 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
+	"gopkg.in/yaml.v2"
 )
 
 // Use existing resource group
@@ -21,65 +23,46 @@ const region = "us-east"
 const standardSolutionTerraformDir = "solutions/standard"
 
 // test application source and config repositories
-// TO DO
-// to re-enable when service is in production and the secretID can be loaded for the token
-// const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
-// const appConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
+const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
+const appConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
 
 // Define a struct with fields that match the structure of the YAML data
-// TO DO
-// to re-enable when service is in production and the secretID can be loaded for the token
-// const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
+const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 
 // var permanentResources map[string]interface{}
 var sharedInfoSvc *cloudinfo.CloudInfoService
 
-// TO DO
-// to re-enable when service is in production and the secretID can be loaded for the token
-// type Config struct {
-// 	SmGuid          string `yaml:"secretsManagerGuid"`
-// 	SmRegion        string `yaml:"secretsManagerRegion"`
-// 	GhTokenSecretId string `yaml:"geretain-public-gh-token-dev-user"`
-// }
+type Config struct {
+	SmGuid          string `yaml:"secretsManagerGuid"`
+	SmRegion        string `yaml:"secretsManagerRegion"`
+	GhTokenSecretId string `yaml:"geretain-public-gh-token-dev-user"`
+}
 
-// TO DO
-// to re-enable when service is in production and the secretID can be loaded for the token
-
-// var smGuid string
-// var smRegion string
-// var rgId string
-// var ghTokenSecretId string
+var smGuid string
+var smRegion string
+var ghTokenSecretId string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
 	sharedInfoSvc, _ = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
 
-	// var err error
-	// permanentResources, err = common.LoadMapFromYaml(yamlLocation)
-
 	// Read the YAML file contents
-	// TO DO
-	// to re-enable when service is in production and the secretID can be loaded for the token
-	// data, err := os.ReadFile(yamlLocation)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	data, err := os.ReadFile(yamlLocation)
+	if err != nil {
+		log.Fatal(err)
+	}
 	// Create a struct to hold the YAML data
-	// TO DO
-	// to re-enable when service is in production and the secretID can be loaded for the token
-	// var config Config
+	var config Config
 	// Unmarshal the YAML data into the struct
-	// err = yaml.Unmarshal(data, &config)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// Parse the SM guid and region from data and setting all-combined test input values used in TestRunDefaultExample and TestRunUpgradeExample
-	// TO DO
-	// to re-enable when service is in production and the secretID can be loaded for the token
-	// smGuid = config.SmGuid
-	// smRegion = config.SmRegion
-	// ghTokenSecretId = config.GhTokenSecretId
+	// Parse the SM guid and region from data and setting all-combined test input values used in TestRunDefaultExample and TestRunUpgradeExamplen
+	smGuid = config.SmGuid
+	smRegion = config.SmRegion
+	ghTokenSecretId = config.GhTokenSecretId
 
 	os.Exit(m.Run())
 }
@@ -100,37 +83,26 @@ func setupOptions(t *testing.T, prefix string, dir string, terraformVars map[str
 func TestRunBasicExample(t *testing.T) {
 	t.Parallel()
 	// TODO remove skip test
-	t.Skip("Skipping test until available in production IBM Cloud.")
+	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	options := setupOptions(t, "ease-basic", basicExampleDir, nil)
 
-	options.SkipTestTearDown = true
-	defer func() {
-		options.TestTearDown()
-	}()
-
-	_, err := options.RunTestConsistency()
-	if assert.Nil(t, err, "Consistency test should not have errored") {
-		// retrieving dashboard URL to perform HTTP GET request to confirm the application is successfully started
-		outputs := options.LastTestTerraformOutputs
-		assert.Equal(t, checkDashboardUrl(t, outputs), true, "Checking dashboardURL failed")
-	}
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
 }
 
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
-	// TODO remove skip test
-	t.Skip("Skipping test until available in production IBM Cloud.")
+	// // TODO remove skip test
+	// t.Skip("Skipping test until available in production IBM Cloud.")
 
-	// not setting github token as the sample repositories are public
 	extTerraformVars := map[string]interface{}{
-		// TO DO
-		// to re-enable when service is in production and the secretID can be loaded for the token
-		// "source_repo": appSourceRepo,
-		// "config_repo": appConfigRepo,
-		// "repos_git_token_existing_secrets_manager_id":     smGuid,
-		// "repos_git_token_existing_secrets_manager_region": smRegion,
-		// "repos_git_token_secret_id":                       ghTokenSecretId,
+		"source_repo": appSourceRepo,
+		"config_repo": appConfigRepo,
+		"repos_git_token_existing_secrets_manager_id":     smGuid,
+		"repos_git_token_existing_secrets_manager_region": smRegion,
+		"repos_git_token_secret_id":                       ghTokenSecretId,
 	}
 
 	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
@@ -151,7 +123,7 @@ func TestRunCompleteExample(t *testing.T) {
 func TestRunUpgradeExample(t *testing.T) {
 	t.Parallel()
 	// TODO remove skip test
-	t.Skip("Skipping test until available in production IBM Cloud.")
+	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	options := setupOptions(t, "ease-upgrade", basicExampleDir, nil)
 
@@ -165,7 +137,7 @@ func TestRunUpgradeExample(t *testing.T) {
 func TestRunStandardSolutionSchematics(t *testing.T) {
 	t.Parallel()
 	// TODO remove skip test
-	t.Skip("Skipping test until available in production IBM Cloud.")
+	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing: t,

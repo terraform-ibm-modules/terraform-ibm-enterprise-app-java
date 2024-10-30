@@ -29,7 +29,7 @@ variable "resource_group" {
 variable "plan" {
   type        = string
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
-  default     = "staging"
+  default     = "free"
   validation {
     condition     = contains(["trial", "standard", "free", "staging"], var.plan)
     error_message = "The only values accepted for the plan field are free, standard, staging and trial."

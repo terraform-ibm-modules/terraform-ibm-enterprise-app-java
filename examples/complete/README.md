@@ -1,6 +1,8 @@
 # Complete example
 
-A simple example that shows how to provision a basic Enterprise Application Service instance passing application source and configuration repositories as input.
+A completed example that shows how to provision an Enterprise Application Service instance by passing application source and configuration repositories as input.
+In addiction to the two repositories, the example shows how to include the GitHub token with permission to access them.
+Note that the three parameters (repositories and token) are mandatory if any of them is not null.
 
 The following resources are provisioned by this example:
  - A new resource group, if an existing one is not passed in.

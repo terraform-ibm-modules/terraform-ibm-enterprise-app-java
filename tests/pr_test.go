@@ -82,8 +82,6 @@ func setupOptions(t *testing.T, prefix string, dir string, terraformVars map[str
 
 func TestRunBasicExample(t *testing.T) {
 	t.Parallel()
-	// TODO remove skip test
-	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	options := setupOptions(t, "ease-basic", basicExampleDir, nil)
 
@@ -94,8 +92,6 @@ func TestRunBasicExample(t *testing.T) {
 
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
-	// // TODO remove skip test
-	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	extTerraformVars := map[string]interface{}{
 		"source_repo": appSourceRepo,
@@ -122,8 +118,6 @@ func TestRunCompleteExample(t *testing.T) {
 
 func TestRunUpgradeExample(t *testing.T) {
 	t.Parallel()
-	// TODO remove skip test
-	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	options := setupOptions(t, "ease-upgrade", basicExampleDir, nil)
 
@@ -136,8 +130,6 @@ func TestRunUpgradeExample(t *testing.T) {
 
 func TestRunStandardSolutionSchematics(t *testing.T) {
 	t.Parallel()
-	// TODO remove skip test
-	// t.Skip("Skipping test until available in production IBM Cloud.")
 
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing: t,
@@ -149,7 +141,6 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		TemplateFolder:         standardSolutionTerraformDir,
 		Tags:                   []string{"test-schematic"},
 		Prefix:                 "ease-da",
-		ResourceGroup:          resourceGroup,
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
 		Region:                 "us-east",

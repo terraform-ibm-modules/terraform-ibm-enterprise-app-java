@@ -2,7 +2,7 @@
     "products": [
       {
         "name": "deploy-arch-ibm-ease",
-        "label": "Deployable architecture for Enterprise Application Service",
+        "label": "Cloud automation for Enterprise Application Service",
         "product_kind": "solution",
         "tags": [
           "ibm_created",
@@ -17,7 +17,7 @@
           "solution"
         ],
         "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
-        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public clouds.",
+        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public cloud.",
         "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
         "offering_icon_url": "",
         "provider_name": "IBM",
@@ -156,14 +156,6 @@
                     {
                       "displayname": "Standard",
                       "value": "standard"
-                    },
-                    {
-                      "displayname": "Trial",
-                      "value": "trial"
-                    },
-                    {
-                      "displayname": "Staging",
-                      "value": "staging"
                     },
                     {
                       "displayname": "Free",

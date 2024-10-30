@@ -78,16 +78,16 @@ provider "ibm" {
 }
 
 module "ease_module" {
-  source            = "terraform-ibm-modules/ease/ibm"
-  version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
-  name              = "ease_XXX"
-  resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
-  tags              = []
-  plan              = "free"
-  region            = "us-east"
-  source_repo       = "http://xxxxx"
-  config_repo       = "http://xxxxx"
-  repo_git_token    = "XXXXXXXX" <!-- pragma: allowlist secret -->
+  # Replace "master" with a GIT release version to lock into a specific release
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java.git?ref=master"
+  ease_name         = "your-ease-app-name"
+  resource_group_id = module.resource_group.resource_group_id
+  tags              = var.resource_tags
+  plan              = var.plan
+  region            = var.region
+  config_repo       = var.config_repo
+  source_repo       = var.source_repo
+  repos_git_token   = var.repos_git_token <!-- pragma: allowlist secret -->
 }
 ```
 

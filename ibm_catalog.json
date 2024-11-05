@@ -5,10 +5,7 @@
         "label": "Cloud automation for Enterprise Application Service",
         "product_kind": "solution",
         "tags": [
-          "ibm_created",
-          "target_terraform",
-          "terraform",
-          "solution"
+          "enterprise_app"
         ],
         "keywords": [
           "IaC",
@@ -19,7 +16,7 @@
         "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
         "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public cloud.",
         "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
-        "offering_icon_url": "",
+        "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
         "provider_name": "IBM",
         "features": [
           {
@@ -96,56 +93,12 @@
                     {
                       "displayname": "Washington (us-east)",
                       "value": "us-east"
-                    },
-                    {
-                      "displayname": "Chennai (che01)",
-                      "value": "che01"
-                    },
-                    {
-                      "displayname": "Dallas (us-south)",
-                      "value": "us-south"
-                    },
-                    {
-                      "displayname": "Frankfurt (eu-de)",
-                      "value": "eu-de"
-                    },
-                    {
-                      "displayname": "London (eu-gb)",
-                      "value": "eu-gb"
-                    },
-                    {
-                      "displayname": "Madrid (eu-es)",
-                      "value": "eu-es"
-                    },
-                    {
-                      "displayname": "Osaka (jp-osa)",
-                      "value": "jp-osa"
-                    },
-                    {
-                      "displayname": "Paris (par01)",
-                      "value": "par01"
-                    },
-                    {
-                      "displayname": "Sao Paulo (br-sao)",
-                      "value": "br-sao"
-                    },
-                    {
-                      "displayname": "Sydney (au-syd)",
-                      "value": "au-syd"
-                    },
-                    {
-                      "displayname": "Toronto (ca-tor)",
-                      "value": "ca-tor"
-                    },
-                    {
-                      "displayname": "Tokyo (jp-tok)",
-                      "value": "jp-tok"
                     }
                   ]
                 },
                 {
                   "key": "prefix",
-                  "default_value": "ease-da",
+                  "default_value": "",
                   "required": true
                 },
                 {

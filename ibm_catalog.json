@@ -70,7 +70,7 @@
                 {
                   "diagram": {
                     "caption": "Creates and configures an instance of Enterprise Application Service for Java",
-                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/draft_da/reference-architecture/deployable-architecture-ease.svg",
+                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
                     "type": "image/svg+xml"
                   },
                   "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"

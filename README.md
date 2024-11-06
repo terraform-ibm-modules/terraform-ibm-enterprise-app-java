@@ -1,5 +1,5 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
-# IBM Enterprise Application Service for Java (EASeJava)
+# Enterprise Application Service for Java (also know as EASeJava)
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an IBM [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease).
+Use this module to provision and configure an [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease) instance on IBM Cloud.
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -43,22 +43,38 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 <!-- ## Reference architectures -->
 
 ## Prerequisites
-Must have these created prior to using this terraform code:
 
-1. IBM Cloud API Key (https://test.cloud.ibm.com/iam/apikeys)
-2. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups)
+This module has the following prerequisites as mandatory input parameters:
 
-Optionally, the following are required if you want to configure the EASeJava instance:
+1. The IBM Cloud API Key (https://cloud.ibm.com/iam/apikeys) for the account where to deploy the Enterprise Application Service instance
+1. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
 
-1. Application source and application config repositories (for the EASeJava instance)
-2. GitHub token with read access to the Source and Config repositories, if private. It can be empty for public repositories
-3. GitHub Application currently called IBM Appflow Dev (https://github.com/apps/ibm-appflow-dev-ibm-cloud/installations/new) installed in the GitHub organization hosting source and application config repositories
+Optionally, the following optional input parameters are required in order to pre-configure the Enterprise Application Service instance:
 
-**NOTE:** For example source and config repositories that can be forked, check the below repositories:
+1. URL of the repository storing the Java liberty application source code to build in the Enterprise Application Service instance
+1. URL of the repository storing the Java liberty application configuration to build in the Enterprise Application Service instance
+1. GitHub token with read access to the source code and to the configuration repositories.
 
-https://github.com/IBMAppFlowTest/sample-getting-started
+**Note:** all these parameters are mandatory in the case any of them is different than their default null value, with the GitHub token mandatory also if the source code and the configuration repositories are both public.
 
-https://github.com/IBMAppFlowTest/sample-getting-started-config
+In the case the source code and the configuration repositories are not set at Enterprise Application Service instance deployment time, it will be possible to configure them through the Enterprise Application Service dashboard url that will be included in the `ease_instance` output details of this module.
+
+In both the cases (pre-configure the Enterprise Application Service instance at deployment time or configure it through its dashboard when the instance deployment is complete), the repositories must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
+
+#### IBM AppFlow GitHub application prerequisite
+
+In order to configure the Enterprise Application Service instance to build the Java liberty application using the source code and the configuration repositories, the GitHub application **IBM AppFlow** must installed in the GitHub organization(s) hosting the repositories and enable to access both of them.
+
+To install and configure the **IBM AppFlow** GitHub application refer to https://github.com/apps/ibm-enterprise-application-service
+
+**Note:** in the case you need to configure an Enterprise Application Service instance in an environment different from IBM Cloud public platform, you need to install and configure a specific version of the **IBM AppFlow** GitHub application.
+
+### Java liberty sample application
+For an example of source code and configuration repositories to build in an Enterprise Application Service instance you can fork the repositories below:
+
+- source code repository: https://github.com/IBMAppFlowTest/sample-getting-started
+
+- configuration repository: https://github.com/IBMAppFlowTest/sample-getting-started-config
 
 <!-- Replace this heading with the name of the root level module (the repo name) -->
 ## terraform-ibm-enterprise-app-java
@@ -154,7 +170,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ease_instance"></a> [ease\_instance](#output\_ease\_instance) | Enterprise Application Service instance |
+| <a name="output_ease_instance"></a> [ease\_instance](#output\_ease\_instance) | Enterprise Application Service instance details |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

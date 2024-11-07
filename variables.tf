@@ -4,7 +4,7 @@
 
 variable "resource_group_id" {
   type        = string
-  description = "The ID of the resource group to use for the creation of the Enterprise Application Service instance (https://test.cloud.ibm.com/account/resource-groups)."
+  description = "The ID of the resource group to use for the creation of the Enterprise Application Service instance."
 }
 
 variable "ease_name" {
@@ -51,4 +51,8 @@ variable "repos_git_token" {
   description = "The GitHub token to read from the application and configuration repos. It cannot be null if var.source_repo and var.config_repo are not null."
   default     = null
   sensitive   = true
+  validation {
+    condition     = var.repos_git_token != null ? (var.source_repo != null && var.config_repo != null) : (var.source_repo == null && var.config_repo == null)
+    error_message = "If at least one of var.source_repo, var.config_repo, var.repos_git_token input parameters is not null all of them must be assigned with a value, but var.repos_git_token is null."
+  }
 }

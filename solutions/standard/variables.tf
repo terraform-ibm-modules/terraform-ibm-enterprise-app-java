@@ -54,30 +54,18 @@ variable "config_repo" {
   default     = null
 }
 
-# github token configuration - the token or the tuple secrets manager id, secrets manager region and secret id are alternative
-# if both are present the tuple for secrets manager has higher priority
+# github token configuration - the token or the CRN of the existing secret on a Secrets Manager instance
+# if both are present the secret from Secrets Manager has higher priority
 
-variable "repos_git_token_existing_secrets_manager_id" {
+variable "repos_git_token_secret_crn" {
   type        = string
-  description = "The existing Secrets Manager instance to retrieve the GitHub token value. If not null, var.repos_git_token value will be ignored."
-  default     = null
-}
-
-variable "repos_git_token_existing_secrets_manager_region" {
-  type        = string
-  description = "The existing Secrets Manager instance region to retrieve the GitHub token value."
-  default     = "us-south"
-}
-
-variable "repos_git_token_secret_id" {
-  type        = string
-  description = "The secretID where the value for the GitHub token is stored in the existing Secrets Manager instance."
+  description = "The CRN of the existing secret stored on Secrets Manager."
   default     = null
 }
 
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repos. If var.repos_git_token_existing_secrets_manager_id is not null, var.repos_git_token is not used."
+  description = "The GitHub token to read from the application and configuration repos. If var.repos_git_token_secret_crn is not null, var.repos_git_token is not used."
   default     = null
   sensitive   = true
 }
@@ -88,7 +76,7 @@ variable "repos_git_token" {
 
 variable "mq_s2s_policy_enable" {
   type        = bool
-  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach MQ instance. Default to false"
+  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach MQ instance. Default to false."
   default     = false
 }
 
@@ -104,38 +92,12 @@ variable "mq_s2s_policy_roles" {
   }
 }
 
-variable "mq_s2s_policy_source_account_id" {
+variable "mq_s2s_policy_target_resource_id" {
   type        = string
-  description = "Source accountID for the Service to Service policy from the Enterprise Application Service instance to MQ instance. If mq_s2s_policy_enable is true and this is left to null the accountID of the API key configured for the provider is used"
+  description = "MQ resource instance ID to set as target for the Service to Service policy. Default to null."
   default     = null
-}
-
-variable "mq_s2s_policy_target_account_id" {
-  type        = string
-  description = "Target accountID for the Service to Service policy from the Enterprise Application Service instance to MQ instance. If mq_s2s_policy_enable is true and this is left to null the accountID of the API key configured for the provider is used"
-  default     = null
-}
-
-variable "mq_s2s_policy_limit_source_resource_flag" {
-  type        = bool
-  description = "Flag to limit the source of the Service to Service policy to the created Enterprise Application Service resource instance ID. If false the Service to Service policy source scope is not limited to the resource instance ID. Configuring scope on the resource instance ID and on the resource group ID is mutually exclusive."
-  default     = true
-}
-
-variable "mq_s2s_policy_limit_source_resource_group_flag" {
-  type        = bool
-  description = "Flag to limit the source of the Service to Service policy to the created Resource Group ID. If false the Service to Service policy source scope is not limited to the resource group ID. Configuring scope on the resource instance ID and on the resource group ID is mutually exclusive."
-  default     = false
-}
-
-variable "mq_s2s_policy_limit_target_resource_id" {
-  type        = string
-  description = "Flag to limit the target of the Service to Service policy to a specific MQ resource instance ID. If null the Service to Service policy target scope is not limited to the resource instance ID"
-  default     = null
-}
-
-variable "mq_s2s_policy_limit_target_resource_group_id" {
-  type        = string
-  description = "Flag to limit the target of the Service to Service policy to a specific resource group ID. If null the Service to Service policy target scope is not limited to the resource group ID"
-  default     = null
+  validation {
+    condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_resource_id != null : true
+    error_message = "If var.mq_s2s_policy_enable is true the MQ instance ID to set as target of Service to Service policy cannot be null."
+  }
 }

@@ -13,11 +13,9 @@ The EASe4J service allows to build and run an application by setting the GitHub 
 - source_repo: the application source code repository
 - config_repo: the application environment configuration repository
 - repos_git_token: the GitHub token to access the above repositories (mandatory also if the repositories are public)
+- repos_git_token_secret_crn: the CRN of the secret storing the value of the same GitHub token above on IBM Cloud Secrets Manager instance (the Secrets Manager instance, its region and the secret ID needed to pull the token value are extracted from the CRN)
 
-As alternative to providing the GitHub token as input parameter, the architecture provides an option to pass in an the ID of existing IBM Secrets Manager instance, the Cloud region where this instance is provisioned and the ID of the secret on the Secrets Manager instance where the value of the token is stored. In the case this option is adopter, the value of repos_git_token will be ignored. The following input parameters are available:
-- repos_git_token_existing_secrets_manager_id: the ID of existing Secrets Manager instance
-- repos_git_token_existing_secrets_manager_region: the region where the existing Secrets Manager instance is deployed
-- repos_git_token_secret_id: the ID of the secret on the existing Secrets Manager instance
+The input variables `repos_git_token` and `repos_git_token_secret_crn` are mutually exclusive: if both are provided with a value the second one is used.
 
 <!-- ![Enterprise Application Service for Java architecture](../../reference-architecture/deployable-architecture-ease.svg) -->
 

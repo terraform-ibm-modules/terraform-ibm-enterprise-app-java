@@ -1,7 +1,7 @@
 # Complete example
 
 A completed example that shows how to provision an Enterprise Application Service instance by passing application source and configuration repositories as input.
-In addiction to the two repositories, the example shows how to include the GitHub token with permission to access them.
+In addiction to the two repositories, the example shows how to include the GitHub token with permission to access them: in the example the token is pulled from an IBM Cloud secrets manager instance where it is stored, by passing the secret CRN which is used to extract the Secrets Manager instance, its region and the secretID to pull the secret value
 Note that the three parameters (repositories and token) are mandatory if any of them is not null.
 
 The following resources are provisioned by this example:

@@ -5,7 +5,11 @@
         "label": "Cloud automation for Enterprise Application Service",
         "product_kind": "solution",
         "tags": [
-          "enterprise_app"
+          "enterprise_app",
+          "ibm_created",
+          "target_terraform",
+          "terraform",
+          "solution"
         ],
         "keywords": [
           "IaC",

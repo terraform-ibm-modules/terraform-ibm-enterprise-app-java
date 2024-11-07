@@ -2,10 +2,12 @@
 package test
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -33,14 +35,13 @@ const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-res
 var sharedInfoSvc *cloudinfo.CloudInfoService
 
 type Config struct {
-	SmGuid          string `yaml:"secretsManagerGuid"`
-	SmRegion        string `yaml:"secretsManagerRegion"`
+	SmCRN           string `yaml:"secretsManagerCRN"`
 	GhTokenSecretId string `yaml:"geretain-public-gh-token-dev-user"`
 }
 
-var smGuid string
-var smRegion string
+var smCRN string
 var ghTokenSecretId string
+var ghTokenSecretCRN string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
@@ -59,10 +60,12 @@ func TestMain(m *testing.M) {
 		log.Fatal(err)
 	}
 
-	// Parse the SM guid and region from data and setting all-combined test input values used in TestRunDefaultExample and TestRunUpgradeExamplen
-	smGuid = config.SmGuid
-	smRegion = config.SmRegion
-	ghTokenSecretId = config.GhTokenSecretId
+	// Parse the SM CRN from data and setting ombined test input values used in TestRunDefaultExample and TestRunUpgradeExamplen
+	smCRN = config.SmCRN
+	ghTokenSecretId = config.GhTokenSecretId // pragma: allowlist secret
+	// generating secret CRN from SM CRN and secret ID
+	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId) // pragma: allowlist secret
+	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                           // pragma: allowlist secret
 
 	os.Exit(m.Run())
 }
@@ -94,11 +97,9 @@ func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 
 	extTerraformVars := map[string]interface{}{
-		"source_repo": appSourceRepo,
-		"config_repo": appConfigRepo,
-		"repos_git_token_existing_secrets_manager_id":     smGuid,
-		"repos_git_token_existing_secrets_manager_region": smRegion,
-		"repos_git_token_secret_id":                       ghTokenSecretId,
+		"source_repo":                appSourceRepo,
+		"config_repo":                appConfigRepo,
+		"repos_git_token_secret_crn": ghTokenSecretCRN,
 	}
 
 	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
@@ -148,10 +149,9 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
-		// TO DO
-		// to re-enable when service is in production and the secretID can be loaded for the token
-		// {Name: "source_repo", Value: appSourceRepo, DataType: "string"},
-		// {Name: "config_repo", Value: appConfigRepo, DataType: "string"},
+		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
+		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
+		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
 		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},

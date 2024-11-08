@@ -11,14 +11,14 @@ module "resource_group" {
 }
 
 ########################################################################################################################
-# COS instance
+# Enterprise Application Service Instance
 ########################################################################################################################
 
-resource "ibm_resource_instance" "cos_instance" {
-  name              = "${var.prefix}-cos"
+module "ease" {
+  source            = "../../"
+  ease_name         = var.prefix
   resource_group_id = module.resource_group.resource_group_id
-  service           = "cloud-object-storage"
-  plan              = "standard"
-  location          = "global"
   tags              = var.resource_tags
+  plan              = var.plan
+  region            = var.region
 }

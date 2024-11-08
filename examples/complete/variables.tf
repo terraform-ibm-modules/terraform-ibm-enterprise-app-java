@@ -17,7 +17,7 @@ variable "resource_tags" {
 variable "prefix" {
   type        = string
   description = "Prefix to append to all resources created by this example"
-  default     = "basic"
+  default     = "ease-complete"
 }
 
 variable "resource_group" {
@@ -36,4 +36,22 @@ variable "region" {
   type        = string
   description = "The desired region for deploying IBM Enterprise Application Service instance."
   default     = "us-east"
+}
+
+variable "source_repo" {
+  type        = string
+  description = "The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service."
+  default     = null
+}
+
+variable "config_repo" {
+  type        = string
+  description = "The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service."
+  default     = null
+}
+
+variable "repos_git_token_secret_crn" {
+  type        = string
+  description = "The CRN of the existing secret stored on Secrets Manager."
+  default     = null
 }

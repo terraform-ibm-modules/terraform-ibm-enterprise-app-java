@@ -1,0 +1,152 @@
+{
+    "products": [
+      {
+        "name": "deploy-arch-ibm-ease",
+        "label": "Cloud automation for Enterprise Application Service",
+        "product_kind": "solution",
+        "tags": [
+          "enterprise_app",
+          "ibm_created",
+          "target_terraform",
+          "terraform",
+          "solution"
+        ],
+        "keywords": [
+          "IaC",
+          "infrastructure as code",
+          "terraform",
+          "solution"
+        ],
+        "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
+        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public cloud.",
+        "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
+        "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
+        "provider_name": "IBM",
+        "features": [
+          {
+            "title": "Creates an instance of Enterprise Application Service for Java",
+            "description": "Creates and configures an instance of Enterprise Application Service for Java"
+          },
+          {
+            "title": "Supports application build",
+            "description": "Supports application build and configuration using dedicated repositories"
+          },
+          {
+            "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+            "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
+          }
+        ],
+        "flavors": [
+          {
+            "label": "Standard",
+            "name": "standard",
+            "install_type": "fullstack",
+            "working_directory": "solutions/standard",
+            "compliance": {
+              "authority": "scc-v3",
+              "profiles": []
+            },
+            "iam_permissions": [
+              {
+                "role_crns": [
+                  "crn:v1:bluemix:public:iam::::role:Editor"
+                ],
+                "service_name": "enterprise-application-service"
+              }
+            ],
+            "architecture": {
+              "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
+              "features": [
+                {
+                  "title": "Creates an instance of Enterprise Application Service for Java",
+                  "description": "Creates and configures an instance of Enterprise Application Service for Java"
+                },
+                {
+                  "title": "Supports application build",
+                  "description": "Supports application build and configuration using dedicated repositories"
+                },
+                {
+                  "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+                  "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
+                }
+              ],
+              "diagrams": [
+                {
+                  "diagram": {
+                    "caption": "Creates and configures an instance of Enterprise Application Service for Java",
+                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
+                    "type": "image/svg+xml"
+                  },
+                  "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
+                }
+              ]
+            },
+            "configuration": [
+                {
+                  "key": "ibmcloud_api_key",
+                  "required": true
+                },
+                {
+                  "key": "resource_group"
+                },
+                {
+                  "key": "region",
+                  "required": true,
+                  "default_value": "us-east",
+                  "options": [
+                    {
+                      "displayname": "Washington (us-east)",
+                      "value": "us-east"
+                    }
+                  ]
+                },
+                {
+                  "key": "prefix",
+                  "default_value": "",
+                  "required": true
+                },
+                {
+                  "key": "plan",
+                  "default_value": "free",
+                  "required": true,
+                  "options": [
+                    {
+                      "displayname": "Standard",
+                      "value": "standard"
+                    },
+                    {
+                      "displayname": "Free",
+                      "value": "free"
+                    }
+                  ]
+                },
+                {
+                  "key": "resource_tags"
+                },
+                {
+                  "key": "source_repo"
+                },
+                {
+                  "key": "config_repo"
+                },
+                {
+                  "key": "repos_git_token_secret_crn"
+                },
+                {
+                  "key": "repos_git_token"
+                },
+                {
+                  "key": "mq_s2s_policy_enable"
+                },
+                {
+                  "key": "mq_s2s_policy_roles"
+                },
+                {
+                  "key": "mq_s2s_policy_target_resource_id"
+                }
+              ]
+          }
+        ]
+      }
+    ]
+  }

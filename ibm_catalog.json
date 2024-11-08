@@ -130,13 +130,7 @@
                   "key": "config_repo"
                 },
                 {
-                  "key": "repos_git_token_existing_secrets_manager_id"
-                },
-                {
-                  "key": "repos_git_token_existing_secrets_manager_region"
-                },
-                {
-                  "key": "repos_git_token_secret_id"
+                  "key": "repos_git_token_secret_crn"
                 },
                 {
                   "key": "repos_git_token"
@@ -148,22 +142,7 @@
                   "key": "mq_s2s_policy_roles"
                 },
                 {
-                  "key": "mq_s2s_policy_source_account_id"
-                },
-                {
-                  "key": "mq_s2s_policy_target_account_id"
-                },
-                {
-                  "key": "mq_s2s_policy_limit_source_resource_flag"
-                },
-                {
-                  "key": "mq_s2s_policy_limit_source_resource_group_flag"
-                },
-                {
-                  "key": "mq_s2s_policy_limit_target_resource_id"
-                },
-                {
-                  "key": "mq_s2s_policy_limit_target_resource_group_id"
+                  "key": "mq_s2s_policy_target_resource_id"
                 }
               ]
           }

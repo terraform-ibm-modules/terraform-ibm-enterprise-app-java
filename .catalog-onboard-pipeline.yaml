@@ -4,7 +4,7 @@ offerings:
   - name: deploy-arch-ibm-ease
     kind: solution
     catalog_id: 7df1e4ca-d54c-4fd0-82ce-3d13247308cd
-    offering_id:
+    offering_id: 487a6321-68c3-4e77-a13b-6ebd01fd984e
     variations:
       - name: standard
         mark_ready: true

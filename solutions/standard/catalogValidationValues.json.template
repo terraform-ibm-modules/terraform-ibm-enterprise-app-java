@@ -3,8 +3,5 @@
   "region": "us-east",
   "resource_tags": $TAGS,
   "prefix": $PREFIX,
-  "plan": "free",
-  "config_repo": "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config",
-  "source_repo": "https://github.com/tim-openliberty-appflow-test/sample-getting-started",
-  "repos_git_token_secret_crn": "crn:v1:bluemix:public:secrets-manager:us-south:a/abac0df06b644a9cabc6e44f55b3880e:79c6d411-c18f-4670-b009-b0044a238667:secret:825a3797-1bc8-f47a-611a-c9bd2b0ef846"
+  "plan": "free"
 }

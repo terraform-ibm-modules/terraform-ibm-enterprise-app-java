@@ -19,30 +19,51 @@ module "resource_group" {
 ########################################################################################################################
 
 # parsing secret crn to collect the secrets manager ID, the region and the secret ID
-module "crn_parser" {
+module "crn_parser_token" {
   count   = var.repos_git_token_secret_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
   version = "1.1.0"
   crn     = var.repos_git_token_secret_crn
 }
 
-# setting the region for the provider on the secrets manager region
-# if null it is left to empty string
-locals {
-  sm_region = var.repos_git_token_secret_crn != null ? module.crn_parser[0].region : ""
-}
-
 data "ibm_sm_arbitrary_secret" "sm_repo_github_token" {
   count       = var.repos_git_token_secret_crn != null ? 1 : 0
-  instance_id = module.crn_parser[0].service_instance
+  instance_id = module.crn_parser_token[0].service_instance
   #checkov:skip=CKV_SECRET_6: does not require high entropy string as is static type
-  region    = module.crn_parser[0].region
-  secret_id = module.crn_parser[0].resource
+  region    = module.crn_parser_token[0].region
+  secret_id = module.crn_parser_token[0].resource
   provider  = ibm.ibm-sm
 }
 
 locals {
   repos_git_token = var.repos_git_token_secret_crn != null ? data.ibm_sm_arbitrary_secret.sm_repo_github_token[0].payload : null
+}
+
+########################################################################################################################
+# Reading the subscriptionID value from the existing Secrets Manager instance
+########################################################################################################################
+
+# parsing secret crn to collect the secrets manager ID, the region and the secret ID
+module "crn_parser_subid" {
+  count   = var.subscription_id_secret_crn != null ? 1 : 0
+  source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
+  version = "1.1.0"
+  crn     = var.subscription_id_secret_crn
+}
+
+# setting the region for the provider on the secrets manager region
+# if null it is left to empty string
+locals {
+  sm_region = var.subscription_id_secret_crn != null ? module.crn_parser_subid[0].region : (var.repos_git_token_secret_crn != null ? module.crn_parser_token[0].region : "")
+}
+
+data "ibm_sm_arbitrary_secret" "sm_subscription_id" {
+  count       = var.subscription_id_secret_crn != null ? 1 : 0
+  instance_id = module.crn_parser_subid[0].service_instance
+  #checkov:skip=CKV_SECRET_6: does not require high entropy string as is static type
+  region    = module.crn_parser_subid[0].region
+  secret_id = module.crn_parser_subid[0].resource
+  provider  = ibm.ibm-sm
 }
 
 ########################################################################################################################
@@ -59,6 +80,7 @@ module "ease" {
   config_repo       = var.config_repo
   source_repo       = var.source_repo
   repos_git_token   = local.repos_git_token
+  subscription_id   = data.ibm_sm_arbitrary_secret.sm_subscription_id[0].payload
 }
 
 locals {

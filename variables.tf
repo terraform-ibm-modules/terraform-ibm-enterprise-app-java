@@ -61,4 +61,5 @@ variable "subscription_id" {
   type        = string
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
   nullable    = false
+  sensitive   = true
 }

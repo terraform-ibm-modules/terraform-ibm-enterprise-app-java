@@ -25,4 +25,4 @@ repository:
   description: "Provisions and configures a Liberty as a Service instance into an IBM Cloud account."
 
   # Use a comma-separated list of topics to set on the repo (ensure not to use any caps in the topic string).
-  topics: terraform, ibm-cloud, terraform-module
+  topics: terraform, ibm-cloud, terraform-module, core-team, deployable-architecture, enterprise-app-java

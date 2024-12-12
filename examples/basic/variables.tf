@@ -41,6 +41,6 @@ variable "region" {
 variable "subscription_id_secret_crn" {
   type        = string
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
-  default     = null
   sensitive   = true
+  nullable    = false
 }

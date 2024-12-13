@@ -107,20 +107,12 @@
                 },
                 {
                   "key": "plan",
-                  "default_value": "free",
+                  "default_value": "standard",
                   "required": true,
                   "options": [
                     {
                       "displayname": "Standard",
                       "value": "standard"
-                    },
-                    {
-                      "displayname": "Free",
-                      "value": "free"
-                    },
-                    {
-                      "displayname": "Trial (only available in test.cloud.ibm.com)",
-                      "value": "trial"
                     }
                   ]
                 },

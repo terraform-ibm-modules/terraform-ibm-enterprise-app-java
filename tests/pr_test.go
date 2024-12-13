@@ -91,6 +91,7 @@ func setupOptions(t *testing.T, prefix string, dir string, terraformVars map[str
 
 func TestRunBasicExample(t *testing.T) {
 	t.Parallel()
+	t.Skip("Skipping test while waiting for SubscriptionID and related plan.")
 
 	extTerraformVars := map[string]interface{}{
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
@@ -105,6 +106,7 @@ func TestRunBasicExample(t *testing.T) {
 
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
+	t.Skip("Skipping test while waiting for SubscriptionID and related plan.")
 
 	extTerraformVars := map[string]interface{}{
 		"source_repo":                appSourceRepo,
@@ -130,6 +132,7 @@ func TestRunCompleteExample(t *testing.T) {
 
 func TestRunUpgradeExample(t *testing.T) {
 	t.Parallel()
+	t.Skip("Skipping test while waiting for SubscriptionID and related plan.")
 
 	options := setupOptions(t, "ease-upgrade", basicExampleDir, nil)
 
@@ -142,6 +145,7 @@ func TestRunUpgradeExample(t *testing.T) {
 
 func TestRunStandardSolutionSchematics(t *testing.T) {
 	t.Parallel()
+	t.Skip("Skipping test while waiting for SubscriptionID and related plan.")
 
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing: t,

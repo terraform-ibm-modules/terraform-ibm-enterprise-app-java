@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease) instance on IBM Cloud.
+Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/ease) instance on IBM Cloud.
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -47,7 +47,7 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 This module has the following prerequisites as mandatory input parameters:
 
 1. The IBM Cloud API Key (https://cloud.ibm.com/iam/apikeys) for the account where to deploy the Enterprise Application Service instance
-1. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
+1. Resource Group ID (https://cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
 
 Optionally, the following optional input parameters are required in order to pre-configure the Enterprise Application Service instance:
 

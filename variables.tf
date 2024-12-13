@@ -20,7 +20,7 @@ variable "tags" {
 
 variable "plan" {
   type        = string
-  description = "The desired pricing plan for IBM Enterprise Application Service instance."
+  description = "The desired pricing plan for Enterprise Application Service instance."
   default     = "free"
   validation {
     condition     = contains(["trial", "standard", "free", "staging"], var.plan)
@@ -30,7 +30,7 @@ variable "plan" {
 
 variable "region" {
   type        = string
-  description = "The desired region for deploying IBM Enterprise Application Service instance."
+  description = "The desired region for deploying Enterprise Application Service instance."
   default     = "us-east"
 }
 
@@ -55,4 +55,11 @@ variable "repos_git_token" {
     condition     = var.repos_git_token != null ? (var.source_repo != null && var.config_repo != null) : (var.source_repo == null && var.config_repo == null)
     error_message = "If at least one of var.source_repo, var.config_repo, var.repos_git_token input parameters is not null all of them must be assigned with a value, but var.repos_git_token is null."
   }
+}
+
+variable "subscription_id" {
+  type        = string
+  description = "ID of the subscription to use to create the Enterprise Application Service instance."
+  nullable    = false
+  sensitive   = true
 }

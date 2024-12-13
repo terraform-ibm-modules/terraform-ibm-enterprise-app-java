@@ -137,6 +137,9 @@
                   "key": "repos_git_token_secret_crn"
                 },
                 {
+                  "key": "subscription_id_secret_crn"
+                },
+                {
                   "key": "repos_git_token"
                 },
                 {

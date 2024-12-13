@@ -35,13 +35,16 @@ const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-res
 var sharedInfoSvc *cloudinfo.CloudInfoService
 
 type Config struct {
-	SmCRN           string `yaml:"secretsManagerCRN"`
-	GhTokenSecretId string `yaml:"geretain-public-gh-token-dev-user"`
+	SmCRN                  string `yaml:"secretsManagerCRN"`
+	GhTokenSecretId        string `yaml:"geretain-public-gh-token-dev-user"`
+	SubscriptionIdSecretId string `yaml:"geretain-appmod-ease4j-subscription-id"`
 }
 
 var smCRN string
 var ghTokenSecretId string
 var ghTokenSecretCRN string
+var subscriptionIdSecretId string
+var subscriptionIdSecretCRN string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
@@ -60,12 +63,15 @@ func TestMain(m *testing.M) {
 		log.Fatal(err)
 	}
 
-	// Parse the SM CRN from data and setting ombined test input values used in TestRunDefaultExample and TestRunUpgradeExamplen
+	// Parse the SM CRN from data and setting combined test input values used in TestRunDefaultExample and TestRunUpgradeExamplen
 	smCRN = config.SmCRN
-	ghTokenSecretId = config.GhTokenSecretId // pragma: allowlist secret
+	ghTokenSecretId = config.GhTokenSecretId               // pragma: allowlist secret
+	subscriptionIdSecretId = config.SubscriptionIdSecretId // pragma: allowlist secret
 	// generating secret CRN from SM CRN and secret ID
-	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId) // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                           // pragma: allowlist secret
+	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
+	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
+	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                                         // pragma: allowlist secret
+	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)                                       // pragma: allowlist secret
 
 	os.Exit(m.Run())
 }
@@ -86,7 +92,11 @@ func setupOptions(t *testing.T, prefix string, dir string, terraformVars map[str
 func TestRunBasicExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "ease-basic", basicExampleDir, nil)
+	extTerraformVars := map[string]interface{}{
+		"subscription_id_secret_crn": subscriptionIdSecretCRN,
+	}
+
+	options := setupOptions(t, "ease-basic", basicExampleDir, extTerraformVars)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -100,6 +110,7 @@ func TestRunCompleteExample(t *testing.T) {
 		"source_repo":                appSourceRepo,
 		"config_repo":                appConfigRepo,
 		"repos_git_token_secret_crn": ghTokenSecretCRN,
+		"subscription_id_secret_crn": subscriptionIdSecretCRN,
 	}
 
 	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
@@ -152,6 +163,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
 		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
+		{Name: "subscription_id_secret_crn", Value: subscriptionIdSecretCRN, DataType: "string"},
 		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},

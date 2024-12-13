@@ -59,15 +59,35 @@ variable "config_repo" {
 
 variable "repos_git_token_secret_crn" {
   type        = string
-  description = "The CRN of the existing secret stored on Secrets Manager."
+  description = "The CRN of the existing secret storing on Secrets Manager the GitHub token to read from the application and configuration repositories."
   default     = null
 }
 
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repos. If var.repos_git_token_secret_crn is not null, var.repos_git_token is not used."
+  description = "The GitHub token to read from the application and configuration repositories. If `repos_git_token_secret_crn` is not null, `repos_git_token` is not used."
   default     = null
   sensitive   = true
+}
+
+# subscriptionID to create the Enterprise Application Service instance
+# it is possible to set directly the subscription_id value or the CRN of the existing secret on a Secrets Manager instance
+# if both are present the secret from Secrets Manager has higher priority
+
+variable "subscription_id" {
+  type        = string
+  description = "ID of the subscription to use to create the Enterprise Application Service instance."
+  default     = null
+}
+
+variable "subscription_id_secret_crn" {
+  type        = string
+  description = "The CRN of the existing secret storing on Secrets Manager the subscriptionID to use to create the Enterprise Application Service instance."
+  default     = null
+  validation {
+    condition     = var.subscription_id_secret_crn == null ? var.subscription_id != null : true
+    error_message = "Input parameters subscription_id_secret_crn and subscription_id cannot be both null."
+  }
 }
 
 ###################################################

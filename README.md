@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/ease) instance on IBM Cloud.
+Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/enterprise-application-service) instance on IBM Cloud.
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->

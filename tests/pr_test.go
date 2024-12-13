@@ -21,12 +21,19 @@ import (
 const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 const completeExampleDir = "examples/complete"
+const mavenCompleteExampleDir = "examples/maven_complete"
 const region = "us-east"
 const standardSolutionTerraformDir = "solutions/standard"
 
 // test application source and config repositories
 const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
 const appConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
+
+// test application source and config repositories
+const mavenAppSourceRepo = "https://repo.maven.apache.org/maven2"
+const mavenAppConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
+const mavenAppUsername = "username"
+const mavenAppPassword = "password" // pragma: allowlist secret
 
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
@@ -90,7 +97,8 @@ func setupOptions(t *testing.T, prefix string, dir string, terraformVars map[str
 }
 
 func TestRunBasicExample(t *testing.T) {
-	t.Parallel()
+	// disabling parallel tests while waiting for valid values for maven repository to avoid failure of test when reusing the same repos
+	// t.Parallel()
 
 	extTerraformVars := map[string]interface{}{
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
@@ -104,7 +112,8 @@ func TestRunBasicExample(t *testing.T) {
 }
 
 func TestRunCompleteExample(t *testing.T) {
-	t.Parallel()
+	// disabling parallel tests while waiting for valid values for maven repository to avoid failure of test when reusing the same repos
+	// t.Parallel()
 
 	extTerraformVars := map[string]interface{}{
 		"source_repo":                appSourceRepo,
@@ -114,6 +123,34 @@ func TestRunCompleteExample(t *testing.T) {
 	}
 
 	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
+
+	options.SkipTestTearDown = true
+	defer func() {
+		options.TestTearDown()
+	}()
+
+	_, err := options.RunTestConsistency()
+	if assert.Nil(t, err, "Consistency test should not have errored") {
+		// retrieving dashboard URL to perform HTTP GET request to confirm the application is successfully started
+		outputs := options.LastTestTerraformOutputs
+		assert.Equal(t, checkDashboardUrl(t, outputs), true, "Checking dashboardURL failed")
+	}
+}
+
+func TestRunMavenCompleteExample(t *testing.T) {
+	// disabling parallel tests while waiting for valid values for maven repository to avoid failure of test when reusing the same repos
+	// t.Parallel()
+
+	extTerraformVars := map[string]interface{}{
+		"source_repo":                mavenAppSourceRepo,
+		"config_repo":                mavenAppConfigRepo,
+		"repos_git_token_secret_crn": ghTokenSecretCRN,
+		"subscription_id_secret_crn": subscriptionIdSecretCRN,
+		"maven_repository_username":  mavenAppUsername,
+		"maven_repository_password":  mavenAppPassword, // pragma: allowlist secret
+	}
+
+	options := setupOptions(t, "ease-maven-complete", mavenCompleteExampleDir, extTerraformVars)
 
 	options.SkipTestTearDown = true
 	defer func() {

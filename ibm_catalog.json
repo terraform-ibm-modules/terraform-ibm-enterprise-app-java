@@ -107,7 +107,6 @@
                 },
                 {
                   "key": "plan",
-                  "default_value": "standard",
                   "required": true,
                   "options": [
                     {

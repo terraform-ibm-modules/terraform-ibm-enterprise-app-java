@@ -20,7 +20,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an [Enterprise Application Service](https://test.cloud.ibm.com/catalog/services/ease) instance on IBM Cloud.
+Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/enterprise-application-service) instance on IBM Cloud.
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -47,7 +47,7 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 This module has the following prerequisites as mandatory input parameters:
 
 1. The IBM Cloud API Key (https://cloud.ibm.com/iam/apikeys) for the account where to deploy the Enterprise Application Service instance
-1. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
+1. Resource Group ID (https://cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
 
 Optionally, the following optional input parameters are required in order to pre-configure the Enterprise Application Service instance:
 
@@ -159,7 +159,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
 | <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
-| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"free"` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The desired region for deploying Enterprise Application Service instance. | `string` | `"us-east"` | no |
 | <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repos. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance. | `string` | n/a | yes |

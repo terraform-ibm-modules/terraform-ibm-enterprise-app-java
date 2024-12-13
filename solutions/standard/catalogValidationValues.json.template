@@ -3,6 +3,6 @@
   "region": "us-east",
   "resource_tags": $TAGS,
   "prefix": $PREFIX,
-  "plan": "free",
+  "plan": "standard",
   "subscription_id": "testvalue"
 }

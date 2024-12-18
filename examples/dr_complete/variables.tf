@@ -17,7 +17,7 @@ variable "resource_tags" {
 variable "prefix" {
   type        = string
   description = "Prefix to append to all resources created by this example"
-  default     = "ease-complete"
+  default     = "dr-complete"
 }
 
 variable "resource_group" {
@@ -29,7 +29,7 @@ variable "resource_group" {
 variable "plan" {
   type        = string
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
-  default     = "standard"
+  default     = "free"
 }
 
 variable "region" {
@@ -61,4 +61,17 @@ variable "subscription_id_secret_crn" {
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
   sensitive   = true
   nullable    = false
+}
+
+variable "maven_repository_username" {
+  type        = string
+  default     = null
+  description = "Maven repository authentication username if needed. Default to null."
+}
+
+variable "maven_repository_password" {
+  type        = string
+  sensitive   = true
+  default     = null
+  description = "Maven repository authentication password if needed. Default to null."
 }

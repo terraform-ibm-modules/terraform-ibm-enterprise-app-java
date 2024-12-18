@@ -122,3 +122,32 @@ variable "mq_s2s_policy_target_resource_id" {
     error_message = "If var.mq_s2s_policy_enable is true the MQ instance ID to set as target of Service to Service policy cannot be null."
   }
 }
+
+###################################################
+# Deploy and Run use-case specific parameters
+###################################################
+
+# repository input variables validation
+variable "source_repo_type" {
+  type        = string
+  description = "Type of the source code repository. For GitHub source repository (Build Deploy and Run use-case) use `git` as value. For Deploy and Run use-case through a maven repository use value `maven`. Default value set to git."
+  default     = "git"
+  nullable    = false
+  validation {
+    condition     = var.source_repo_type == "maven" || var.source_repo_type == "git"
+    error_message = "maven or git are the only allowed values for var.source_repo_type"
+  }
+}
+
+variable "maven_repository_username" {
+  type        = string
+  default     = null
+  description = "Maven repository authentication username if needed. Default to null."
+}
+
+variable "maven_repository_password" {
+  type        = string
+  sensitive   = true
+  default     = null
+  description = "Maven repository authentication password if needed. Default to null."
+}

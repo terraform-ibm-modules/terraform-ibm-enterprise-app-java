@@ -29,8 +29,8 @@ Use this module to provision and configure an [Enterprise Application Service](h
 * [terraform-ibm-enterprise-app-java](#terraform-ibm-enterprise-app-java)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
-    * [Complete example](./examples/complete)
-    * [Complete example](./examples/maven_complete)
+    * [Build Deploy and Run complete example](./examples/bdr_complete)
+    * [Build and Run complete example](./examples/dr_complete)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 

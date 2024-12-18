@@ -73,7 +73,7 @@ module "ease" {
   source_repo       = var.source_repo
   repos_git_token   = local.repos_git_token
   subscription_id   = data.ibm_sm_arbitrary_secret.sm_subscription_id.payload
-  # maven repository specific inputs
+  # deploy and run use-case specific inputs
   source_repo_type          = "maven"
   maven_repository_username = var.maven_repository_username
   maven_repository_password = var.maven_repository_password

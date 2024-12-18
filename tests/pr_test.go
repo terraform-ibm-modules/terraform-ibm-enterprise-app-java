@@ -20,8 +20,8 @@ import (
 // Use existing resource group
 const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
-const completeExampleDir = "examples/complete"
-const mavenCompleteExampleDir = "examples/maven_complete"
+const bdrCompleteExampleDir = "examples/bdr_complete"
+const drCompleteExampleDir = "examples/dr_complete"
 const region = "us-east"
 const standardSolutionTerraformDir = "solutions/standard"
 
@@ -111,7 +111,7 @@ func TestRunBasicExample(t *testing.T) {
 	assert.NotNil(t, output, "Expected some output")
 }
 
-func TestRunCompleteExample(t *testing.T) {
+func TestRunBdrCompleteExample(t *testing.T) {
 	// disabling parallel tests while waiting for valid values for maven repository to avoid failure of test when reusing the same repos
 	// t.Parallel()
 
@@ -122,7 +122,7 @@ func TestRunCompleteExample(t *testing.T) {
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
 	}
 
-	options := setupOptions(t, "ease-complete", completeExampleDir, extTerraformVars)
+	options := setupOptions(t, "bdr-complete", bdrCompleteExampleDir, extTerraformVars)
 
 	options.SkipTestTearDown = true
 	defer func() {
@@ -137,7 +137,7 @@ func TestRunCompleteExample(t *testing.T) {
 	}
 }
 
-func TestRunMavenCompleteExample(t *testing.T) {
+func TestRunDrCompleteExample(t *testing.T) {
 	// disabling parallel tests while waiting for valid values for maven repository to avoid failure of test when reusing the same repos
 	// t.Parallel()
 
@@ -150,7 +150,7 @@ func TestRunMavenCompleteExample(t *testing.T) {
 		"maven_repository_password":  mavenAppPassword, // pragma: allowlist secret
 	}
 
-	options := setupOptions(t, "ease-maven-complete", mavenCompleteExampleDir, extTerraformVars)
+	options := setupOptions(t, "dr-complete", drCompleteExampleDir, extTerraformVars)
 
 	options.SkipTestTearDown = true
 	defer func() {

@@ -91,6 +91,10 @@ module "ease" {
   source_repo       = var.source_repo
   repos_git_token   = local.repos_git_token
   subscription_id   = local.subscription_id
+  # Deploy and Run specific use-case inputs
+  source_repo_type          = var.source_repo_type
+  maven_repository_username = var.maven_repository_username
+  maven_repository_password = var.maven_repository_password
 }
 
 locals {

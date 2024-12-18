@@ -56,7 +56,7 @@ For the input parameters of the two use cases refer to the sections below.
 1. The IBM Cloud API Key (https://cloud.ibm.com/iam/apikeys) for the account where to deploy the Enterprise Application Service instance
 1. Resource Group ID (https://test.cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
 
-### BDR use case input parameters
+### Build Deploy and Run use case input parameters
 
 The following optional input parameters are required in order to pre-configure the Enterprise Application Service instance for the BDR use case:
 
@@ -76,7 +76,7 @@ To install and configure the **IBM AppFlow** GitHub application refer to https:/
 
 **Note:** in the case you need to configure an Enterprise Application Service instance in an environment different from IBM Cloud public platform, you need to install and configure a specific version of the **IBM AppFlow** GitHub application.
 
-## DR use case input parameters
+## Deploy and Run use case input parameters
 
 The following optional input parameters are required in order to pre-configure the Enterprise Application Service instance for the DR use case:
 
@@ -92,7 +92,7 @@ The GitHub configuration repository must satisfy a further prerequisite as descr
 
 This module (and the Enterprise Application Service) allows to create an instance of the Enterprise Application Service without setting any source and configuration repository: in the case the source code (GitHub or Maven) and the configuration repositories are not set at Enterprise Application Service instance deployment time, and it will be possible to configure them through the Enterprise Application Service dashboard url that will be included in the `ease_instance` output details of this module.
 
-Also for this option, if using a source and configuration GitHub repositories for a BDR use-case, the repositories must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
+Also for this option, if using source and configuration GitHub repositories for the BDR use-case or only a configuration GitHub repository for the DR use-case, the repositories must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
 
 ### Java liberty sample application
 For an example of source code and configuration repositories to build in an Enterprise Application Service instance you can fork the repositories below:

@@ -23,8 +23,9 @@ variable "plan" {
   description = "The desired pricing plan for Enterprise Application Service instance."
   default     = "standard"
   validation {
-    condition     = contains(["standard"], var.plan)
-    error_message = "The only values accepted for the plan field is standard."
+    # trial plan is added only to allow test/validation execution
+    condition     = contains(["standard", "trial"], var.plan)
+    error_message = "The only values accepted for the plan field are standard and trial."
   }
 }
 

@@ -35,6 +35,9 @@ const mavenAppConfigRepo = "https://github.com/tim-openliberty-appflow-test/samp
 const mavenAppUsername = "username"
 const mavenAppPassword = "password" // pragma: allowlist secret
 
+// plan to use for tests
+const testPlan = "trial"
+
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 
@@ -102,6 +105,7 @@ func TestRunBasicExample(t *testing.T) {
 
 	extTerraformVars := map[string]interface{}{
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
+		"plan":                       testPlan,
 	}
 
 	options := setupOptions(t, "ease-basic", basicExampleDir, extTerraformVars)
@@ -120,6 +124,7 @@ func TestRunBdrCompleteExample(t *testing.T) {
 		"config_repo":                appConfigRepo,
 		"repos_git_token_secret_crn": ghTokenSecretCRN,
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
+		"plan":                       testPlan,
 	}
 
 	options := setupOptions(t, "bdr-complete", bdrCompleteExampleDir, extTerraformVars)
@@ -146,6 +151,7 @@ func TestRunDrCompleteExample(t *testing.T) {
 		"config_repo":                mavenAppConfigRepo,
 		"repos_git_token_secret_crn": ghTokenSecretCRN,
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
+		"plan":                       testPlan,
 		"maven_repository_username":  mavenAppUsername,
 		"maven_repository_password":  mavenAppPassword, // pragma: allowlist secret
 	}
@@ -201,6 +207,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
 		{Name: "subscription_id_secret_crn", Value: subscriptionIdSecretCRN, DataType: "string"},
+		{Name: "plan", Value: testPlan, DataType: "string"},
 		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},

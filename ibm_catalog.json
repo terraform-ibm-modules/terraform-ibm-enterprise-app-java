@@ -82,67 +82,88 @@
               ]
             },
             "configuration": [
-                {
-                  "key": "ibmcloud_api_key",
-                  "required": true
-                },
-                {
-                  "key": "resource_group"
-                },
-                {
-                  "key": "region",
-                  "required": true,
-                  "default_value": "us-east",
-                  "options": [
-                    {
-                      "displayname": "Washington (us-east)",
-                      "value": "us-east"
-                    }
-                  ]
-                },
-                {
-                  "key": "prefix",
-                  "default_value": "",
-                  "required": true
-                },
-                {
-                  "key": "plan",
-                  "required": true,
-                  "options": [
-                    {
-                      "displayname": "Standard",
-                      "value": "standard"
-                    }
-                  ]
-                },
-                {
-                  "key": "resource_tags"
-                },
-                {
-                  "key": "source_repo"
-                },
-                {
-                  "key": "config_repo"
-                },
-                {
-                  "key": "repos_git_token_secret_crn"
-                },
-                {
-                  "key": "subscription_id_secret_crn"
-                },
-                {
-                  "key": "repos_git_token"
-                },
-                {
-                  "key": "mq_s2s_policy_enable"
-                },
-                {
-                  "key": "mq_s2s_policy_roles"
-                },
-                {
-                  "key": "mq_s2s_policy_target_resource_id"
-                }
-              ]
+              {
+                "key": "ibmcloud_api_key",
+                "required": true
+              },
+              {
+                "key": "resource_group"
+              },
+              {
+                "key": "region",
+                "required": true,
+                "default_value": "us-east",
+                "options": [
+                  {
+                    "displayname": "Washington (us-east)",
+                    "value": "us-east"
+                  }
+                ]
+              },
+              {
+                "key": "prefix",
+                "default_value": "",
+                "required": true
+              },
+              {
+                "key": "plan",
+                "required": true,
+                "options": [
+                  {
+                    "displayname": "Standard",
+                    "value": "standard"
+                  }
+                ]
+              },
+              {
+                "key": "resource_tags"
+              },
+              {
+                "key": "source_repo"
+              },
+              {
+                "key": "config_repo"
+              },
+              {
+                "key": "repos_git_token_secret_crn"
+              },
+              {
+                "key": "subscription_id_secret_crn"
+              },
+              {
+                "key": "repos_git_token"
+              },
+              {
+                "key": "mq_s2s_policy_enable"
+              },
+              {
+                "key": "mq_s2s_policy_roles"
+              },
+              {
+                "key": "mq_s2s_policy_target_resource_id"
+              },
+              {
+                "key": "source_repo_type",
+                "required": true,
+                "default_value": "git",
+                "options": [
+                  {
+                    "displayname": "GitHub",
+                    "value": "git"
+                  },
+                  {
+                    "displayname": "Maven",
+                    "value": "maven"
+                  }
+                ]
+              },
+              {
+                "key": "maven_repository_username"
+              },
+              {
+                "key": "maven_repository_password"
+              }
+            ]
           }
         ]
       }

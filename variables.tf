@@ -23,8 +23,9 @@ variable "plan" {
   description = "The desired pricing plan for Enterprise Application Service instance."
   default     = "standard"
   validation {
-    condition     = contains(["standard"], var.plan)
-    error_message = "The only values accepted for the plan field is standard."
+    # trial plan is added only to allow test/validation execution
+    condition     = contains(["standard", "trial"], var.plan)
+    error_message = "The only values accepted for the plan field are standard and trial."
   }
 }
 
@@ -62,4 +63,31 @@ variable "subscription_id" {
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
   nullable    = false
   sensitive   = true
+}
+
+# maven repository specific input parameters
+
+# maven repository input variables validation
+variable "source_repo_type" {
+  type        = string
+  description = "Type of the source code repository. For maven source repository type, use value `maven`. Git for GitHub repository. Default value set to git."
+  default     = "git"
+  nullable    = false
+  validation {
+    condition     = var.source_repo_type == "maven" || var.source_repo_type == "git"
+    error_message = "maven or git are the only allowed values for var.source_repo_type"
+  }
+}
+
+variable "maven_repository_username" {
+  type        = string
+  default     = null
+  description = "Maven repository authentication username if needed. Default to null."
+}
+
+variable "maven_repository_password" {
+  type        = string
+  sensitive   = true
+  default     = null
+  description = "Maven repository authentication password if needed. Default to null."
 }

@@ -31,9 +31,9 @@ variable "plan" {
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
   default     = "standard"
   validation {
-    # trial plan is added only to allow test/validation execution
-    condition     = contains(["standard", "trial"], var.plan)
-    error_message = "The only values accepted for the plan field are standard and trial."
+    # free plan is added only to allow test/validation execution (its catalog name is Trial)
+    condition     = contains(["standard", "free"], var.plan)
+    error_message = "The only values accepted for the plan field are standard and free."
   }
 }
 

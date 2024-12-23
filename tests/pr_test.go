@@ -36,7 +36,7 @@ const mavenAppUsername = "username"
 const mavenAppPassword = "password" // pragma: allowlist secret
 
 // plan to use for tests
-const testPlan = "trial"
+const testPlan = "free" // free plan is used for testing but its catalog name is "Trial"
 
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"

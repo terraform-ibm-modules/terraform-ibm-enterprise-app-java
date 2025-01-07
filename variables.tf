@@ -37,19 +37,19 @@ variable "region" {
 
 variable "source_repo" {
   type        = string
-  description = "The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service."
+  description = "The URL for the repository storing the source code of the application or the URL of the Maven artifact repository storing the existing prebuilt archive (WAR or EAR) to deploy and run through Enterprise Application Service on IBM Cloud."
   default     = null
 }
 
 variable "config_repo" {
   type        = string
-  description = "The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service."
+  description = "The URL for the repository storing the configuration to use for the application to run through Enterprise Application Service on IBM Cloud."
   default     = null
 }
 
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repos. It cannot be null if var.source_repo and var.config_repo are not null."
+  description = "The GitHub token to read from the application and configuration repositories. It cannot be null if var.source_repo and var.config_repo are not null."
   default     = null
   sensitive   = true
   validation {

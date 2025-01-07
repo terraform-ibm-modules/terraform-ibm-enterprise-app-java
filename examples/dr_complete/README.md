@@ -1,6 +1,6 @@
-# Build and Run complete example
+# Deploy and run complete example
 
-A Deploy and Run use-case example to show how to provision an Enterprise Application Service instance by passing an already built maven application through its maven repository URL as source repository and the application configuration through the config repository as input parameters.
+A Deploy and run use-case example to show how to provision an Enterprise Application Service instance by passing an already built maven application through its maven repository URL as source repository and the application configuration through the config repository as input parameters.
 The example sets also the var.source_repo_type input variable to "maven" and the "username" and "password" values to a set of fake values for testing purposes
 In addiction to the configuration repository, the example shows how to
 - include the GitHub token with the right permissions to access it: in the example the token is pulled from an IBM Cloud secrets manager instance where it is stored, by passing the secret CRN which is used to extract the Secrets Manager instance, its region and the secretID to pull the secret value.

@@ -51,11 +51,11 @@ This module supports both the use cases provided by the Enterprise Application S
 - **Deploy and Run your application** use case: you can provide your existing prebuilt enterprise archive (EAR) or web archive (WAR) file in a Maven artifact repository, the service will allow to deploy and to run it.
 - **Build, deploy and run your application** use case: you can provide your application source code through its GitHub repository URL, the service will allow to build, deploy and then run it.
 
-For more details about these two use-cases refer to the Enterprise Application Service product documentation section available [here](https://www.ibm.com/docs/en/ease?topic=overview#ovr-main__title__3)
-
-For the input parameters of the two use cases refer to the sections below.
+For more details about the two different use-cases and the input parameters to use please refer to the sections below.
 
 ### Mandatory input parameters for both the use cases
+
+Both the use-cases supported by this module need you to specify the following parameters as mandatory inputs.
 
 1. The IBM Cloud API Key (https://cloud.ibm.com/iam/apikeys) for the account where to deploy the Enterprise Application Service instance
 1. Resource Group ID (https://cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
@@ -73,6 +73,8 @@ The following optional input parameters are required in order to pre-configure t
 
 The GitHub configuration repository must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
 
+For more details about this use-case please refer to the Enterprise Application Service product documentation section available [here](https://www.ibm.com/docs/en/ease?topic=deploy-run-your-application-option)
+
 ### Build, Deploy and Run use case input parameters
 
 The following optional input parameters are required in order to pre-configure the Enterprise Application Service instance for the Build, deploy and run use case:
@@ -84,6 +86,8 @@ The following optional input parameters are required in order to pre-configure t
 **Note:** all these parameters are mandatory in the case any of them is different than their default null value (the GitHub token is mandatory also if both the repositories are public). When all of them are left to the default null value it will be possible to configure the instance with their values once the instance is successfully created, as describe [here](#create-an-enterprise-application-service-instance-without-setting-any-repository)
 
 Both the repositories must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
+
+For more details about this use-case please refer to the Enterprise Application Service product documentation section available [here](https://www.ibm.com/docs/en/ease?topic=build-deploy-run-your-application-option)
 
 #### IBM AppFlow GitHub application prerequisite
 

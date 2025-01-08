@@ -31,8 +31,9 @@ variable "plan" {
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
   default     = "standard"
   validation {
-    condition     = contains(["standard"], var.plan)
-    error_message = "The only values accepted for the plan field is standard."
+    # free plan is added only to allow test/validation execution (its catalog name is Trial)
+    condition     = contains(["standard", "free"], var.plan)
+    error_message = "The only values accepted for the plan field are standard and free."
   }
 }
 
@@ -78,6 +79,7 @@ variable "subscription_id" {
   type        = string
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
   default     = null
+  sensitive   = true
 }
 
 variable "subscription_id_secret_crn" {
@@ -120,4 +122,33 @@ variable "mq_s2s_policy_target_resource_id" {
     condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_resource_id != null : true
     error_message = "If var.mq_s2s_policy_enable is true the MQ instance ID to set as target of Service to Service policy cannot be null."
   }
+}
+
+###################################################
+# Deploy and Run use-case specific parameters
+###################################################
+
+# repository input variables validation
+variable "source_repo_type" {
+  type        = string
+  description = "Type of the source code repository. For GitHub source repository (Build Deploy and Run use-case) use `git` as value. For Deploy and Run use-case through a maven repository use value `maven`. Default value set to git."
+  default     = "git"
+  nullable    = false
+  validation {
+    condition     = var.source_repo_type == "maven" || var.source_repo_type == "git"
+    error_message = "maven or git are the only allowed values for var.source_repo_type"
+  }
+}
+
+variable "maven_repository_username" {
+  type        = string
+  default     = null
+  description = "Maven repository authentication username if needed. Default to null."
+}
+
+variable "maven_repository_password" {
+  type        = string
+  sensitive   = true
+  default     = null
+  description = "Maven repository authentication password if needed. Default to null."
 }

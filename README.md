@@ -1,5 +1,5 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
-# Enterprise Application Service for Java (also know as EASeJava)
+# Enterprise Application Service for Java
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +20,9 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/enterprise-application-service) instance on IBM Cloud.
+Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/enterprise-application-service) (also shorthened to EASeJava or simply to `ease`) instance on IBM Cloud.
+
+For more information about the Enterprice Application Service product you can refer to the [product documentation](https://www.ibm.com/docs/en/ease?topic=overview)
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -29,7 +31,8 @@ Use this module to provision and configure an [Enterprise Application Service](h
 * [terraform-ibm-enterprise-app-java](#terraform-ibm-enterprise-app-java)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
-    * [Complete example](./examples/complete)
+    * [Build, deploy and run complete example](./examples/bdr_complete)
+    * [Deploy and run complete example](./examples/dr_complete)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -42,24 +45,49 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 -->
 <!-- ## Reference architectures -->
 
-## Prerequisites
+## Enterprise Application Service use cases support
 
-This module has the following prerequisites as mandatory input parameters:
+This module supports both the use cases provided by the Enterprise Application Service:
+- **Deploy and Run your application** use case: you can provide your existing prebuilt enterprise archive (EAR) or web archive (WAR) file in a Maven artifact repository, the service will allow to deploy and to run it.
+- **Build, deploy and run your application** use case: you can provide your application source code through its GitHub repository URL, the service will allow to build, deploy and then run it.
+
+For more details about the two different use-cases and the input parameters to use please refer to the sections below.
+
+### Mandatory input parameters for both the use cases
+
+Both the use-cases supported by this module need you to specify the following parameters as mandatory inputs.
 
 1. The IBM Cloud API Key (https://cloud.ibm.com/iam/apikeys) for the account where to deploy the Enterprise Application Service instance
 1. Resource Group ID (https://cloud.ibm.com/account/resource-groups) containing the Enterprise Application Service instance
 
-Optionally, the following optional input parameters are required in order to pre-configure the Enterprise Application Service instance:
+## Deploy and Run use case input parameters
 
-1. URL of the repository storing the Java liberty application source code to build in the Enterprise Application Service instance
-1. URL of the repository storing the Java liberty application configuration to build in the Enterprise Application Service instance
-1. GitHub token with read access to the source code and to the configuration repositories.
+The following optional input parameters are required in order to pre-configure the Enterprise Application Service instance for the Deploy and Run use case:
 
-**Note:** all these parameters are mandatory in the case any of them is different than their default null value, with the GitHub token mandatory also if the source code and the configuration repositories are both public.
+1. URL of the Maven artifact repository storing the existing prebuilt enterprise archive (EAR) or web archive (WAR) file to run in the Enterprise Application Service instance
+   1. If your Maven artifact repository needs basic authentication, you can specify the username and password using the related input variables. If the repository doesn't need authentication, you can leave them to their default values.
+2. URL of the GitHub repository storing the application deployment configuration to run in the Enterprise Application Service instance
+3. GitHub token with read access to the configuration repository.
 
-In the case the source code and the configuration repositories are not set at Enterprise Application Service instance deployment time, it will be possible to configure them through the Enterprise Application Service dashboard url that will be included in the `ease_instance` output details of this module.
+**Note:** all these parameters (excluding the Maven repository username and password) are mandatory in the case any of them is different than their default null value (the GitHub token is mandatory also if the configuration repository is public). When all of them are left to the default null value it will be possible to configure the instance with their values once the instance is successfully created, as describe [here](#create-an-enterprise-application-service-instance-without-setting-any-repository)
 
-In both the cases (pre-configure the Enterprise Application Service instance at deployment time or configure it through its dashboard when the instance deployment is complete), the repositories must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
+The GitHub configuration repository must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
+
+For more details about this use-case please refer to the Enterprise Application Service product documentation section available [here](https://www.ibm.com/docs/en/ease?topic=deploy-run-your-application-option)
+
+### Build, Deploy and Run use case input parameters
+
+The following optional input parameters are required in order to pre-configure the Enterprise Application Service instance for the Build, deploy and run use case:
+
+1. URL of the GitHub repository storing your application source code to Build, deploy and run in the Enterprise Application Service instance
+1. URL of the GitHub repository storing your application configuration to Build, deploy and run in the Enterprise Application Service instance
+1. GitHub token with read access the source code and configuration repositories.
+
+**Note:** all these parameters are mandatory in the case any of them is different than their default null value (the GitHub token is mandatory also if both the repositories are public). When all of them are left to the default null value it will be possible to configure the instance with their values once the instance is successfully created, as describe [here](#create-an-enterprise-application-service-instance-without-setting-any-repository)
+
+Both the repositories must satisfy a further prerequisite as described [here](#ibm-appflow-github-application-prerequisite)
+
+For more details about this use-case please refer to the Enterprise Application Service product documentation section available [here](https://www.ibm.com/docs/en/ease?topic=build-deploy-run-your-application-option)
 
 #### IBM AppFlow GitHub application prerequisite
 
@@ -69,8 +97,13 @@ To install and configure the **IBM AppFlow** GitHub application refer to https:/
 
 **Note:** in the case you need to configure an Enterprise Application Service instance in an environment different from IBM Cloud public platform, you need to install and configure a specific version of the **IBM AppFlow** GitHub application.
 
+### Create an Enterprise Application Service instance without setting any repository
+
+This module also supports to create an instance of the Enterprise Application Service without setting any source (GitHub or Maven) and configuration repository: in this case it will be possible to configure them through the Enterprise Application Service dashboard accessible through the dashboard URL returned in the `ease_instance` output details of this module.
+
 ### Java liberty sample application
-For an example of source code and configuration repositories to build in an Enterprise Application Service instance you can fork the repositories below:
+
+For an example of source code and configuration repositories to Build, deploy and run in an Enterprise Application Service instance you can fork the repositories below:
 
 - source code repository: https://github.com/IBMAppFlowTest/sample-getting-started
 
@@ -106,8 +139,6 @@ module "ease_module" {
   repos_git_token   = var.repos_git_token <!-- pragma: allowlist secret -->
 }
 ```
-
-
 
 ### Required IAM access policies
 
@@ -157,13 +188,16 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
+| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
 | <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
+| <a name="input_maven_repository_password"></a> [maven\_repository\_password](#input\_maven\_repository\_password) | Maven repository authentication password if needed. Default to null. | `string` | `null` | no |
+| <a name="input_maven_repository_username"></a> [maven\_repository\_username](#input\_maven\_repository\_username) | Maven repository authentication username if needed. Default to null. | `string` | `null` | no |
 | <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The desired region for deploying Enterprise Application Service instance. | `string` | `"us-east"` | no |
-| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repos. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
+| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repositories. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance. | `string` | n/a | yes |
-| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application to deploy through IBM Cloud Enterprise Application Service. | `string` | `null` | no |
+| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application or the URL of the Maven artifact repository storing the existing prebuilt archive (WAR or EAR) to deploy and run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
+| <a name="input_source_repo_type"></a> [source\_repo\_type](#input\_source\_repo\_type) | Type of the source code repository. For maven source repository type, use value `maven`. Git for GitHub repository. Default value set to git. | `string` | `"git"` | no |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | ID of the subscription to use to create the Enterprise Application Service instance. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
 

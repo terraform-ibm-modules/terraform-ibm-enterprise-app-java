@@ -112,6 +112,10 @@
                   {
                     "displayname": "Standard",
                     "value": "standard"
+                  },
+                  {
+                    "displayname": "Trial",
+                    "value": "free"
                   }
                 ]
               },

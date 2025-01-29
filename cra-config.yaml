@@ -10,3 +10,4 @@ CRA_TARGETS:
       TF_VAR_source_repo: "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
       TF_VAR_repos_git_token_secret_crn: "crn:v1:bluemix:public:secrets-manager:us-south:a/abac0df06b644a9cabc6e44f55b3880e:79c6d411-c18f-4670-b009-b0044a238667:secret:825a3797-1bc8-f47a-611a-c9bd2b0ef846" # pragma: allowlist secret
       TF_VAR_subscription_id_secret_crn: "crn:v1:bluemix:public:secrets-manager:us-south:a/abac0df06b644a9cabc6e44f55b3880e:79c6d411-c18f-4670-b009-b0044a238667:secret:71363d27-db8d-dd07-c72b-59ecb3884a8f" # pragma: allowlist secret
+      TF_VAR_resource_group_name: "Default"

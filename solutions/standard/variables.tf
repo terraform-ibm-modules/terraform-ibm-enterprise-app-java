@@ -77,7 +77,7 @@ variable "repos_git_token" {
   type        = string
   description = "The GitHub token to read from the application and configuration repositories. If `repos_git_token_secret_crn` is not null, `repos_git_token` is not used."
   default     = null
-  sensitive   = false
+  sensitive   = true
 }
 
 # subscriptionID to create the Enterprise Application Service instance
@@ -88,7 +88,7 @@ variable "subscription_id" {
   type        = string
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
   default     = null
-  sensitive   = true
+  sensitive   = false
 }
 
 variable "subscription_id_secret_crn" {

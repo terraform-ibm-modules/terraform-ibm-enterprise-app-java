@@ -87,7 +87,13 @@
                 "required": true
               },
               {
-                "key": "resource_group"
+                "key": "use_existing_resource_group"
+              },
+              {
+                "key": "resource_group_name"
+              },
+              {
+                "key": "ease_name"
               },
               {
                 "key": "region",
@@ -103,7 +109,8 @@
               {
                 "key": "prefix",
                 "default_value": "",
-                "required": true
+                "required": true,
+                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
               },
               {
                 "key": "plan",

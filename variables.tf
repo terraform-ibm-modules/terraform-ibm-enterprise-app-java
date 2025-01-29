@@ -10,6 +10,7 @@ variable "resource_group_id" {
 variable "ease_name" {
   type        = string
   description = "The name for the newly provisioned Enterprise Application Service instance."
+  default     = "instance"
 }
 
 variable "tags" {
@@ -61,7 +62,7 @@ variable "repos_git_token" {
 variable "subscription_id" {
   type        = string
   description = "ID of the subscription to use to create the Enterprise Application Service instance."
-  nullable    = false
+  nullable    = true
   sensitive   = true
 }
 

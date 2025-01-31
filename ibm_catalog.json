@@ -280,6 +280,9 @@
                 "key": "repos_git_token"
               },
               {
+                "key": "subscription_id"
+              },
+              {
                 "key": "mq_s2s_policy_enable"
               },
               {

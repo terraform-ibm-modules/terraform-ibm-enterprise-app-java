@@ -164,6 +164,148 @@
                 "key": "maven_repository_password"
               }
             ]
+          },
+          {
+            "label": "Addons test",
+            "name": "addons-test",
+            "install_type": "fullstack",
+            "working_directory": "solutions/standard",
+            "compliance": {
+              "authority": "scc-v3",
+              "profiles": []
+            },
+            "iam_permissions": [
+              {
+                "role_crns": [
+                  "crn:v1:bluemix:public:iam::::role:Editor"
+                ],
+                "service_name": "enterprise-application-service"
+              }
+            ],
+            "architecture": {
+              "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
+              "features": [
+                {
+                  "title": "Creates an instance of Enterprise Application Service for Java",
+                  "description": "Creates and configures an instance of Enterprise Application Service for Java"
+                },
+                {
+                  "title": "Supports application build",
+                  "description": "Supports application build and configuration using dedicated repositories"
+                },
+                {
+                  "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+                  "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
+                }
+              ],
+              "diagrams": [
+                {
+                  "diagram": {
+                    "caption": "Creates and configures an instance of Enterprise Application Service for Java",
+                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
+                    "type": "image/svg+xml"
+                  },
+                  "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
+                }
+              ]
+            },
+            "dependencies": [
+              {
+                "name": "deploy-arch-ibm-core-security-svcs",
+                "id": "0294f96e-7314-48d1-a710-c08a541b2119-global",
+                "flavors": [
+                  "standard"
+                ],
+                "catalog_id": "1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc",
+                "input_mapping": [],
+                "optional": true,
+                "version": ">=1.0.1",
+                "on_by_default": true
+              }
+            ],
+            "configuration": [
+              {
+                "key": "ibmcloud_api_key",
+                "required": true
+              },
+              {
+                "key": "resource_group"
+              },
+              {
+                "key": "region",
+                "required": true,
+                "default_value": "us-east",
+                "options": [
+                  {
+                    "displayname": "Washington (us-east)",
+                    "value": "us-east"
+                  }
+                ]
+              },
+              {
+                "key": "prefix",
+                "default_value": "",
+                "required": true
+              },
+              {
+                "key": "plan",
+                "required": true,
+                "options": [
+                  {
+                    "displayname": "Standard",
+                    "value": "standard"
+                  }
+                ]
+              },
+              {
+                "key": "resource_tags"
+              },
+              {
+                "key": "source_repo"
+              },
+              {
+                "key": "config_repo"
+              },
+              {
+                "key": "repos_git_token_secret_crn"
+              },
+              {
+                "key": "subscription_id_secret_crn"
+              },
+              {
+                "key": "repos_git_token"
+              },
+              {
+                "key": "mq_s2s_policy_enable"
+              },
+              {
+                "key": "mq_s2s_policy_roles"
+              },
+              {
+                "key": "mq_s2s_policy_target_resource_id"
+              },
+              {
+                "key": "source_repo_type",
+                "required": true,
+                "default_value": "git",
+                "options": [
+                  {
+                    "displayname": "GitHub",
+                    "value": "git"
+                  },
+                  {
+                    "displayname": "Maven",
+                    "value": "maven"
+                  }
+                ]
+              },
+              {
+                "key": "maven_repository_username"
+              },
+              {
+                "key": "maven_repository_password"
+              }
+            ]
           }
         ]
       }

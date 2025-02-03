@@ -189,7 +189,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
-| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | n/a | yes |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. | `string` | `"instance"` | no |
 | <a name="input_maven_repository_password"></a> [maven\_repository\_password](#input\_maven\_repository\_password) | Maven repository authentication password if needed. Default to null. | `string` | `null` | no |
 | <a name="input_maven_repository_username"></a> [maven\_repository\_username](#input\_maven\_repository\_username) | Maven repository authentication username if needed. Default to null. | `string` | `null` | no |
 | <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"standard"` | no |

@@ -174,7 +174,12 @@ func TestRunDrCompleteExample(t *testing.T) {
 func TestRunUpgradeExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "ease-upgrade", basicExampleDir, nil)
+	extTerraformVars := map[string]interface{}{
+		"subscription_id_secret_crn": subscriptionIdSecretCRN,
+		"plan":                       testPlan,
+	}
+
+	options := setupOptions(t, "ease-upgrade", basicExampleDir, extTerraformVars)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {

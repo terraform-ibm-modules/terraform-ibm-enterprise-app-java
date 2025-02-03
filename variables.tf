@@ -10,6 +10,7 @@ variable "resource_group_id" {
 variable "ease_name" {
   type        = string
   description = "The name for the newly provisioned Enterprise Application Service instance."
+  default     = "instance"
 }
 
 variable "tags" {

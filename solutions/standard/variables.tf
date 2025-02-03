@@ -30,11 +30,13 @@ variable "resource_group_name" {
   type        = string
   description = "The name of a new or an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable value"
 }
+
 variable "ease_name" {
   type        = string
   description = "The name for the newly provisioned Enterprise Application Service instance."
   default     = "instance"
 }
+
 variable "plan" {
   type        = string
   description = "The desired pricing plan for IBM Enterprise Application Service instance."

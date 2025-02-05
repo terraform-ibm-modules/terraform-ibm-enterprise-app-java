@@ -28,12 +28,12 @@ variable "use_existing_resource_group" {
 
 variable "resource_group_name" {
   type        = string
-  description = "The name of a new or an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable value"
+  description = "The name of a new or an existing resource group to provision resources in to. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format. If not set a new resource group will be created using the prefix variable value."
 }
 
 variable "ease_name" {
   type        = string
-  description = "The name for the newly provisioned Enterprise Application Service instance."
+  description = "The name for the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
   default     = "instance"
 }
 

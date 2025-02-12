@@ -387,7 +387,6 @@
                         "version_input": "ibmcloud_api_key"
                     },
                     {
-                        "dependency_output": "resource_group_name",
                         "dependency_input": "resource_group_name",
                         "version_input": "resource_group_name"
                     }
@@ -410,7 +409,6 @@
                           "version_input": "ibmcloud_api_key"
                       },
                       {
-                          "dependency_output": "resource_group_name",
                           "dependency_input": "resource_group_name",
                           "version_input": "resource_group_name"
                       }

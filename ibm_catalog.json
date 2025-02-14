@@ -83,11 +83,11 @@
             },
             "configuration": [
               {
-                "key": "ibmcloud_api_key",
-                "required": true
+                "key": "ibmcloud_api_key"
               },
               {
-                "key": "use_existing_resource_group"
+                "key": "use_existing_resource_group",
+                "required": true
               },
               {
                 "key": "resource_group_name"
@@ -98,7 +98,6 @@
               {
                 "key": "region",
                 "required": true,
-                "default_value": "us-east",
                 "options": [
                   {
                     "displayname": "Washington (us-east)",
@@ -140,6 +139,9 @@
                 "key": "repos_git_token"
               },
               {
+                "key": "subscription_id"
+              },
+              {
                 "key": "mq_s2s_policy_enable"
               },
               {
@@ -150,8 +152,6 @@
               },
               {
                 "key": "source_repo_type",
-                "required": true,
-                "default_value": "git",
                 "options": [
                   {
                     "displayname": "GitHub",

@@ -153,6 +153,10 @@
                 "type": "password"
               },
               {
+                "key": "subscription_id",
+                "type": "password"
+              },
+              {
                 "key": "mq_s2s_policy_enable",
                 "type": "boolean"
               },

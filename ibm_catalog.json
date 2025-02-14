@@ -84,26 +84,21 @@
             "configuration": [
               {
                 "key": "ibmcloud_api_key",
-                "type": "password",
                 "required": true
               },
               {
                 "key": "use_existing_resource_group",
-                "type": "boolean",
                 "required": true
               },
               {
                 "key": "resource_group_name",
-                "type": "string",
                 "required": true
               },
               {
-                "key": "ease_name",
-                "type": "string"
+                "key": "ease_name"
               },
               {
                 "key": "region",
-                "type": "string",
                 "required": true,
                 "options": [
                   {
@@ -113,13 +108,11 @@
                 ]
               },
               {
-                "key": "prefix",
-                "type": "string"
+                "key": "prefix"
               },
               {
                 "key": "plan",
                 "required": true,
-                "type": "string",
                 "default_value": "standard",
                 "options": [
                   {
@@ -129,48 +122,37 @@
                 ]
               },
               {
-                "key": "resource_tags",
-                "type": "array"
+                "key": "resource_tags"
               },
               {
-                "key": "source_repo",
-                "type": "string"
+                "key": "source_repo"
               },
               {
-                "key": "config_repo",
-                "type": "string"
+                "key": "config_repo"
               },
               {
-                "key": "repos_git_token_secret_crn",
-                "type": "string"
+                "key": "repos_git_token_secret_crn"
               },
               {
-                "key": "subscription_id_secret_crn",
-                "type": "string"
+                "key": "subscription_id_secret_crn"
               },
               {
-                "key": "repos_git_token",
-                "type": "password"
+                "key": "repos_git_token"
               },
               {
-                "key": "subscription_id",
-                "type": "password"
+                "key": "subscription_id"
               },
               {
-                "key": "mq_s2s_policy_enable",
-                "type": "boolean"
+                "key": "mq_s2s_policy_enable"
               },
               {
-                "key": "mq_s2s_policy_roles",
-                "type": "array"
+                "key": "mq_s2s_policy_roles"
               },
               {
-                "key": "mq_s2s_policy_target_resource_id",
-                "type": "string"
+                "key": "mq_s2s_policy_target_resource_id"
               },
               {
                 "key": "source_repo_type",
-                "type": "string",
                 "options": [
                   {
                     "displayname": "GitHub",
@@ -183,12 +165,10 @@
                 ]
               },
               {
-                "key": "maven_repository_username",
-                "type": "string"
+                "key": "maven_repository_username"
               },
               {
-                "key": "maven_repository_password",
-                "type": "password"
+                "key": "maven_repository_password"
               }
             ]
           }

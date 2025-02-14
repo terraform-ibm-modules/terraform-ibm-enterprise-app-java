@@ -108,12 +108,12 @@
                 ]
               },
               {
-                "key": "prefix"
+                "key": "prefix",
+                "required": true
               },
               {
                 "key": "plan",
                 "required": true,
-                "default_value": "standard",
                 "options": [
                   {
                     "displayname": "Standard",

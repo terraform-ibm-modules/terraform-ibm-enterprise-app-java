@@ -90,8 +90,7 @@
                 "required": true
               },
               {
-                "key": "resource_group_name",
-                "required": true
+                "key": "resource_group_name"
               },
               {
                 "key": "ease_name"

@@ -7,7 +7,7 @@ toolchain go1.24.0
 require (
 	github.com/stretchr/testify v1.10.0
 	github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper v1.46.1
-	gopkg.in/yaml.v2 v2.4.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -97,5 +97,5 @@ require (
 	golang.org/x/text v0.22.0 // indirect
 	golang.org/x/tools v0.22.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

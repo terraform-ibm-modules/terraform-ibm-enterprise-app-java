@@ -16,14 +16,25 @@ variable "resource_tags" {
 
 variable "prefix" {
   type        = string
-  description = "Prefix to append to all resources created by this deployable architecture"
-  default     = "ease-da"
+  description = "Prefix to add to all resources created by this deployable architecture . To not use any prefix value, you can set this value to `null` or an empty string."
+  default     = "dev"
 }
 
-variable "resource_group" {
+variable "use_existing_resource_group" {
+  type        = bool
+  description = "Whether to use an existing resource group."
+  default     = false
+}
+
+variable "resource_group_name" {
   type        = string
-  description = "The name of an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable value"
-  default     = null
+  description = "The name of a new or an existing resource group to provision resources in to. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format. If not set a new resource group will be created using the prefix variable value."
+}
+
+variable "ease_name" {
+  type        = string
+  description = "The name for the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
+  default     = "instance"
 }
 
 variable "plan" {

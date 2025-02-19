@@ -172,8 +172,8 @@
             ]
           },
           {
-            "label": "Addons test",
-            "name": "addons-test",
+            "label": "svcs addon only",
+            "name": "svcs-addons-only",
             "install_type": "fullstack",
             "working_directory": "solutions/standard",
             "compliance": {
@@ -327,8 +327,8 @@
             ]
           },
           {
-            "label": "Single addons test",
-            "name": "single-addons-test",
+            "label": "Addons variation",
+            "name": "addons-variation",
             "install_type": "fullstack",
             "working_directory": "solutions/standard",
             "compliance": {

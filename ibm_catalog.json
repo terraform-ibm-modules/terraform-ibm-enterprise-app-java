@@ -172,161 +172,6 @@
             ]
           },
           {
-            "label": "svcs addon only",
-            "name": "svcs-addons-only",
-            "install_type": "fullstack",
-            "working_directory": "solutions/standard",
-            "compliance": {
-              "authority": "scc-v3",
-              "profiles": []
-            },
-            "iam_permissions": [
-              {
-                "role_crns": [
-                  "crn:v1:bluemix:public:iam::::role:Editor"
-                ],
-                "service_name": "enterprise-application-service"
-              }
-            ],
-            "architecture": {
-              "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
-              "features": [
-                {
-                  "title": "Creates an instance of Enterprise Application Service for Java",
-                  "description": "Creates and configures an instance of Enterprise Application Service for Java"
-                },
-                {
-                  "title": "Supports application build",
-                  "description": "Supports application build and configuration using dedicated repositories"
-                },
-                {
-                  "title": "Supports Service To Service authorisation policy creation to a MQ instance",
-                  "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
-                }
-              ],
-              "diagrams": [
-                {
-                  "diagram": {
-                    "caption": "Creates and configures an instance of Enterprise Application Service for Java",
-                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
-                    "type": "image/svg+xml"
-                  },
-                  "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
-                }
-              ]
-            },
-            "dependencies": [
-              {
-                "name": "deploy-arch-ibm-core-security-svcs",
-                "id": "0294f96e-7314-48d1-a710-c08a541b2119-global",
-                "flavors": [
-                  "standard"
-                ],
-                "catalog_id": "1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc",
-                "input_mapping": [],
-                "optional": true,
-                "version": ">=v1.3.1",
-                "on_by_default": true
-              }
-            ],
-            "configuration": [
-              {
-                "key": "ibmcloud_api_key",
-                "required": true
-              },
-              {
-                "key": "use_existing_resource_group"
-              },
-              {
-                "key": "resource_group_name"
-              },
-              {
-                "key": "ease_name"
-              },
-              {
-                "key": "region",
-                "required": true,
-                "default_value": "us-east",
-                "options": [
-                  {
-                    "displayname": "Washington (us-east)",
-                    "value": "us-east"
-                  }
-                ]
-              },
-              {
-                "key": "prefix",
-                "required": true,
-                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
-              },
-              {
-                "key": "plan",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Standard",
-                    "value": "standard"
-                  },
-                  {
-                    "displayname": "Trial",
-                    "value": "free"
-                  }
-                ]
-              },
-              {
-                "key": "resource_tags"
-              },
-              {
-                "key": "source_repo"
-              },
-              {
-                "key": "config_repo"
-              },
-              {
-                "key": "repos_git_token_secret_crn"
-              },
-              {
-                "key": "subscription_id_secret_crn"
-              },
-              {
-                "key": "repos_git_token"
-              },
-              {
-                "key": "subscription_id"
-              },
-              {
-                "key": "mq_s2s_policy_enable"
-              },
-              {
-                "key": "mq_s2s_policy_roles"
-              },
-              {
-                "key": "mq_s2s_policy_target_resource_id"
-              },
-              {
-                "key": "source_repo_type",
-                "required": true,
-                "default_value": "git",
-                "options": [
-                  {
-                    "displayname": "GitHub",
-                    "value": "git"
-                  },
-                  {
-                    "displayname": "Maven",
-                    "value": "maven"
-                  }
-                ]
-              },
-              {
-                "key": "maven_repository_username"
-              },
-              {
-                "key": "maven_repository_password"
-              }
-            ]
-          },
-          {
             "label": "Addons variation",
             "name": "addons-variation",
             "install_type": "fullstack",
@@ -382,16 +227,16 @@
                   "on_by_default": false,
                   "default_flavor": "standard",
                   "input_mapping": [
-                    {
-                        "dependency_input": "ibmcloud_api_key",
-                        "version_input": "ibmcloud_api_key"
-                    },
-                    {
-                        "dependency_input": "resource_group_name",
-                        "version_input": "resource_group_name"
-                    }
+                      {
+                          "dependency_input": "ibmcloud_api_key",
+                          "version_input": "ibmcloud_api_key"
+                      },
+                      {
+                          "dependency_input": "resource_group_name",
+                          "version_input": "resource_group_name"
+                      }
                   ],
-                  "ignore_auto_referencing": null
+                  "ignore_auto_referencing": ["*"]
               },
               {
                   "name": "testing-deploy-arch-ibm-observability",
@@ -413,7 +258,23 @@
                           "version_input": "resource_group_name"
                       }
                   ],
-                  "ignore_auto_referencing": null
+                  "ignore_auto_referencing": ["*"]
+              },
+              {
+                  "name": "deploy-arch-ibm-account-infra-base",
+                  "id": "63641cec-6093-4b4f-b7b0-98d2f4185cd6-global",
+                  "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
+                  "optional": true,
+                  "on_by_default": false,
+                  "default_flavor": "standard",
+                  "input_mapping": [
+                      {
+                          "dependency_output": "workload_resource_group_name",
+                          "dependency_input": "workload_resource_group_name",
+                          "version_input": "resource_group_name"
+                      }
+                  ],
+                  "ignore_auto_referencing": ["*"]
               }
             ],
             "dependency_version_2": true,

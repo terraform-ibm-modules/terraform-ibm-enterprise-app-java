@@ -1,468 +1,476 @@
 {
-    "products": [
-      {
-        "name": "deploy-arch-ibm-ease",
-        "label": "Cloud automation for Enterprise Application Service",
-        "product_kind": "solution",
-        "tags": [
-          "enterprise_app",
-          "ibm_created",
-          "target_terraform",
-          "terraform",
-          "solution",
-          "application_modernization"
-        ],
-        "keywords": [
-          "IaC",
-          "infrastructure as code",
-          "terraform",
-          "solution",
-          "application_modernization",
-          "liberty",
-          "websphere",
-          "Jakarta",
-          "microprofile"
-        ],
-        "short_description": "Cloud architecture including instance of Enterprise Application Service for Java with essential security and observability cloud services",
-        "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services",
-        "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
-        "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
-        "provider_name": "IBM",
-        "features": [
-          {
-            "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
-            "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud"
+  "products": [
+    {
+      "name": "deploy-arch-ibm-ease",
+      "label": "Cloud automation for Enterprise Application Service",
+      "product_kind": "solution",
+      "tags": [
+        "enterprise_app",
+        "ibm_created",
+        "target_terraform",
+        "terraform",
+        "solution",
+        "application_modernization"
+      ],
+      "keywords": [
+        "IaC",
+        "infrastructure as code",
+        "terraform",
+        "solution",
+        "application_modernization",
+        "liberty",
+        "websphere",
+        "Jakarta",
+        "microprofile"
+      ],
+      "short_description": "Cloud architecture including instance of Enterprise Application Service for Java with essential security and observability cloud services",
+      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services",
+      "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
+      "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
+          "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud"
+        },
+        {
+          "title": "Supports deploying of optional essential security and observability cloud services",
+          "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
+        },
+        {
+          "title": "Supports creating Service To Service authorisation policy towards a MQ instance",
+          "description": "Supports creating Service To Service authorisation policy towards a MQ instance to allow the Java application running in Enterprise Application Service for Java instance to connect to this"
+        }
+      ],
+      "flavors": [
+        {
+          "label": "Standard",
+          "name": "standard",
+          "install_type": "fullstack",
+          "working_directory": "solutions/standard",
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": []
           },
-          {
-            "title": "Supports deploying of optional essential security and observability cloud services",
-            "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
-          },
-          {
-            "title": "Supports creating Service To Service authorisation policy towards a MQ instance",
-            "description": "Supports creating Service To Service authorisation policy towards a MQ instance to allow the Java application running in Enterprise Application Service for Java instance to connect to this"
-          }
-        ],
-        "flavors": [
-          {
-            "label": "Standard",
-            "name": "standard",
-            "install_type": "fullstack",
-            "working_directory": "solutions/standard",
-            "compliance": {
-              "authority": "scc-v3",
-              "profiles": []
-            },
-            "iam_permissions": [
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "enterprise-application-service"
+            }
+          ],
+          "architecture": {
+            "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
+            "features": [
               {
-                "role_crns": [
-                  "crn:v1:bluemix:public:iam::::role:Editor"
-                ],
-                "service_name": "enterprise-application-service"
+                "title": "Creates an instance of Enterprise Application Service for Java",
+                "description": "Creates and configures an instance of Enterprise Application Service for Java"
+              },
+              {
+                "title": "Supports application build",
+                "description": "Supports application build and configuration using dedicated repositories"
+              },
+              {
+                "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+                "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
               }
             ],
-            "architecture": {
-              "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
-              "features": [
-                {
-                  "title": "Creates an instance of Enterprise Application Service for Java",
-                  "description": "Creates and configures an instance of Enterprise Application Service for Java"
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "Creates and configures an instance of Enterprise Application Service for Java",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
+                  "type": "image/svg+xml"
                 },
-                {
-                  "title": "Supports application build",
-                  "description": "Supports application build and configuration using dedicated repositories"
-                },
-                {
-                  "title": "Supports Service To Service authorisation policy creation to a MQ instance",
-                  "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
-                }
-              ],
-              "diagrams": [
-                {
-                  "diagram": {
-                    "caption": "Creates and configures an instance of Enterprise Application Service for Java",
-                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
-                    "type": "image/svg+xml"
-                  },
-                  "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
-                }
-              ]
-            },
-            "configuration": [
-              {
-                "key": "ibmcloud_api_key"
-              },
-              {
-                "key": "use_existing_resource_group",
-                "required": true
-              },
-              {
-                "key": "resource_group_name"
-              },
-              {
-                "key": "ease_name"
-              },
-              {
-                "key": "region",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Washington (us-east)",
-                    "value": "us-east"
-                  }
-                ]
-              },
-              {
-                "key": "prefix",
-                "required": true,
-                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
-              },
-              {
-                "key": "plan",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Standard",
-                    "value": "standard"
-                  }
-                ]
-              },
-              {
-                "key": "resource_tags"
-              },
-              {
-                "key": "source_repo"
-              },
-              {
-                "key": "config_repo"
-              },
-              {
-                "key": "repos_git_token_secret_crn"
-              },
-              {
-                "key": "subscription_id_secret_crn"
-              },
-              {
-                "key": "repos_git_token"
-              },
-              {
-                "key": "subscription_id"
-              },
-              {
-                "key": "mq_s2s_policy_enable"
-              },
-              {
-                "key": "mq_s2s_policy_roles"
-              },
-              {
-                "key": "mq_s2s_policy_target_resource_id"
-              },
-              {
-                "key": "source_repo_type",
-                "options": [
-                  {
-                    "displayname": "GitHub",
-                    "value": "git"
-                  },
-                  {
-                    "displayname": "Maven",
-                    "value": "maven"
-                  }
-                ]
-              },
-              {
-                "key": "maven_repository_username"
-              },
-              {
-                "key": "maven_repository_password"
+                "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
               }
             ]
           },
-          {
-            "label": "Addons variation",
-            "name": "addons-variation",
-            "install_type": "fullstack",
-            "working_directory": "solutions/standard",
-            "compliance": {
-              "authority": "scc-v3",
-              "profiles": []
+          "configuration": [
+            {
+              "key": "ibmcloud_api_key"
             },
-            "iam_permissions": [
-              {
-                "role_crns": [
-                  "crn:v1:bluemix:public:iam::::role:Editor"
-                ],
-                "service_name": "enterprise-application-service"
-              }
-            ],
-            "architecture": {
-              "descriptions": "This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services",
-              "features": [
+            {
+              "key": "use_existing_resource_group",
+              "required": true
+            },
+            {
+              "key": "resource_group_name"
+            },
+            {
+              "key": "ease_name"
+            },
+            {
+              "key": "region",
+              "required": true,
+              "options": [
                 {
-                  "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
-                  "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud"
-                },
-                {
-                  "title": "Supports deploying of optional essential security and observability cloud services",
-                  "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
-                },
-                {
-                  "title": "Supports creating Service To Service authorisation policy towards a MQ instance",
-                  "description": "Supports creating Service To Service authorisation policy towards a MQ instance to allow the Java application running in Enterprise Application Service for Java instance to connect to this"
-                }
-              ],
-              "diagrams": [
-                {
-                  "diagram": {
-                    "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability cloud services",
-                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
-                    "type": "image/svg+xml"
-                  },
-                  "description": "This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
+                  "displayname": "Washington (us-east)",
+                  "value": "us-east"
                 }
               ]
             },
-            "dependencies": [
+            {
+              "key": "prefix",
+              "required": true,
+              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
+            },
+            {
+              "key": "plan",
+              "required": true,
+              "options": [
                 {
-                  "name": "testing-deploy-arch-ibm-secrets-manager",
-                  "id": "5f149ae6-d781-460a-977d-c8c4171ad0fa-global",
-                  "flavors": [
-                      "standard"
-                  ],
-                  "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-                  "optional": true,
-                  "on_by_default": false,
-                  "default_flavor": "standard",
-                  "input_mapping": [
-                      {
-                          "dependency_input": "ibmcloud_api_key",
-                          "version_input": "ibmcloud_api_key"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "resource_group_name",
-                        "version_input": "resource_group_name"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "use_existing_resource_group",
-                        "version_input": "use_existing_resource_group"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "region",
-                        "version_input": "region"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "prefix",
-                        "version_input": "prefix"
-                      }
-                  ],
-                  "ignore_auto_referencing": ["*"]
+                  "displayname": "Standard",
+                  "value": "standard"
+                }
+              ]
+            },
+            {
+              "key": "resource_tags"
+            },
+            {
+              "key": "source_repo"
+            },
+            {
+              "key": "config_repo"
+            },
+            {
+              "key": "repos_git_token_secret_crn"
+            },
+            {
+              "key": "subscription_id_secret_crn"
+            },
+            {
+              "key": "repos_git_token"
+            },
+            {
+              "key": "subscription_id"
+            },
+            {
+              "key": "mq_s2s_policy_enable"
+            },
+            {
+              "key": "mq_s2s_policy_roles"
+            },
+            {
+              "key": "mq_s2s_policy_target_resource_id"
+            },
+            {
+              "key": "source_repo_type",
+              "options": [
+                {
+                  "displayname": "GitHub",
+                  "value": "git"
+                },
+                {
+                  "displayname": "Maven",
+                  "value": "maven"
+                }
+              ]
+            },
+            {
+              "key": "maven_repository_username"
+            },
+            {
+              "key": "maven_repository_password"
+            }
+          ]
+        },
+        {
+          "label": "Addons variation",
+          "name": "addons-variation",
+          "install_type": "fullstack",
+          "working_directory": "solutions/standard",
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": []
+          },
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "enterprise-application-service"
+            }
+          ],
+          "architecture": {
+            "descriptions": "This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services",
+            "features": [
+              {
+                "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
+                "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud"
               },
               {
-                  "name": "testing-deploy-arch-ibm-observability",
-                  "id": "daf2cf91-2384-4205-b7f4-621299a4896d",
-                  "flavors": [
-                      "standard"
-                  ],
-                  "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
-                  "optional": true,
-                  "on_by_default": false,
-                  "default_flavor": "standard",
-                  "input_mapping": [
-                      {
-                          "dependency_input": "ibmcloud_api_key",
-                          "version_input": "ibmcloud_api_key"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "resource_group_name",
-                        "version_input": "resource_group_name"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "use_existing_resource_group",
-                        "version_input": "use_existing_resource_group"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "region",
-                        "version_input": "region"
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "prefix",
-                        "version_input": "prefix"
-                      }
-                  ],
-                  "ignore_auto_referencing": ["*"]
+                "title": "Supports deploying of optional essential security and observability cloud services",
+                "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
               },
               {
-                  "name": "deploy-arch-ibm-account-infra-base",
-                  "id": "63641cec-6093-4b4f-b7b0-98d2f4185cd6-global",
-                  "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-                  "optional": true,
-                  "on_by_default": false,
-                  "default_flavor": "standard",
-                  "input_mapping": [
-                      {
-                          "dependency_input": "workload_resource_group_name",
-                          "version_input": "resource_group_name",
-                          "reference_version": true
-                      },
-                      {
-                        "reference_version": true,
-                        "dependency_input": "prefix",
-                        "version_input": "prefix"
-                      },
-                      {
-                        "dependency_input": "skip_iam_account_settings",
-                        "default_value": true
-                      }
-
-                  ],
-                  "ignore_auto_referencing": ["*"]
+                "title": "Supports creating Service To Service authorisation policy towards a MQ instance",
+                "description": "Supports creating Service To Service authorisation policy towards a MQ instance to allow the Java application running in Enterprise Application Service for Java instance to connect to this"
               }
             ],
-            "dependency_version_2": true,
-            "configuration": [
+            "diagrams": [
               {
-                "key": "ibmcloud_api_key",
-                "required": true,
-                "display_name": "IBM Cloud API Key",
-                "description": "IBM Cloud API Key to use for provisioning resources"
-              },
-              {
-                "key": "use_existing_resource_group",
-                "required": true,
-                "display_name": "Existing resource group",
-                "description": "Set to true if using an existing resource group"
-              },
-              {
-                "key": "resource_group_name",
-                "display_name": "Resource group",
-                "description": "The name of a new or an existing resource group in which to provision resources to. If existing resource group is set to true, then the resource group must exist at deployment time. If prefix is specified and existing resource group is set to false a new resource group is created concatenating the prefix to this value."
-              },
-              {
-                "key": "ease_name",
-                "display_name": "Instance name",
-                "description": "The name for the newly provisioned Enterprise Application Service instance. If a prefix input is specified, the prefix is added to the name"
-              },
-              {
-                "key": "region",
-                "required": true,
-                "default_value": "us-east",
-                "display_name": "Cloud region",
-                "description": "The cloud region where the resources will be created",
-                "options": [
-                  {
-                    "displayname": "Washington (us-east)",
-                    "value": "us-east"
-                  }
-                ]
-              },
-              {
-                "key": "prefix",
-                "required": true,
-                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
-              },
-              {
-                "key": "plan",
-                "display_name": "Pricing plan",
-                "description": "The desired pricing plan for Enterprise Application Service instance",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Standard",
-                    "value": "standard"
-                  },
-                  {
-                    "displayname": "Trial",
-                    "value": "free"
-                  }
-                ]
-              },
-              {
-                "key": "resource_tags",
-                "display_name": "Resource tags",
-                "description": "Metadata labels to be applied to the resources"
-              },
-              {
-                "key": "source_repo",
-                "display_name": "Source code or maven artifact repository",
-                "description": "The URL for the repository storing the source code of the application to build or the URL of the Maven artifact repository storing the existing prebuilt archive to run"
-              },
-              {
-                "key": "config_repo",
-                "display_name": "Configuration repository",
-                "description": "The URL for the repository storing the configuration to use for the application to run in Enterprise Application Service on IBM Cloud"
-              },
-              {
-                "key": "repos_git_token_secret_crn",
-                "display_name": "Git token secret CRN",
-                "description": "The CRN of the existing secret storing on Secrets Manager the GitHub token to read from the application and configuration repositories"
-              },
-              {
-                "key": "subscription_id_secret_crn",
-                "display_name": "SubscriptionID secret CRN",
-                "description": "The CRN of the existing secret storing on Secrets Manager the subscriptionID to use to create the Enterprise Application Service instance"
-              },
-              {
-                "key": "repos_git_token",
-                "display_name": "Git token",
-                "description": "The GitHub token to read from the application and configuration repositories"
-              },
-              {
-                "key": "subscription_id",
-                "display_name": "SubscriptionID",
-                "description": "The subscriptionID to use to create the Enterprise Application Service instance"
-              },
-              {
-                "key": "mq_s2s_policy_enable",
-                "display_name": "Enable Service to Service policy to MQ",
-                "description": "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach MQ instance"
-              },
-              {
-                "key": "mq_s2s_policy_roles",
-                "display_name": "Service to Service policy to MQ list of roles",
-                "description": "List of roles to be configured for the Service to Service policy"
-              },
-              {
-                "key": "mq_s2s_policy_target_resource_id",
-                "display_name": "MQ instance target for the Service to Service policy",
-                "description": "MQ resource instance ID to set as target for the Service to Service policy"
-              },
-              {
-                "key": "source_repo_type",
-                "required": true,
-                "default_value": "git",
-                "options": [
-                  {
-                    "displayname": "GitHub",
-                    "value": "git"
-                  },
-                  {
-                    "displayname": "Maven",
-                    "value": "maven"
-                  }
-                ],
-                "display_name": "Source repository type",
-                "description": "Type of the source code repository to use for the application, git for source code from github and maven for prebuilt archive from maven repository"
-              },
-              {
-                "key": "maven_repository_username",
-                "display_name": "Maven repository username",
-                "description": "Maven repository authentication username if needed"
-              },
-              {
-                "key": "maven_repository_password",
-                "display_name": "Maven repository username",
-                "description": "Maven repository authentication password if needed"
+                "diagram": {
+                  "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability cloud services",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
               }
             ]
-          }
-        ]
-      }
-    ]
-  }
+          },
+          "dependencies": [
+            {
+              "name": "testing-deploy-arch-ibm-secrets-manager",
+              "id": "5f149ae6-d781-460a-977d-c8c4171ad0fa",
+              "flavors": [
+                "standard"
+              ],
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "version": "^1.2.8",
+              "optional": true,
+              "on_by_default": false,
+              "default_flavor": "standard",
+              "input_mapping": [
+                {
+                  "reference_version": true,
+                  "dependency_input": "resource_group_name",
+                  "version_input": "resource_group_name"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "use_existing_resource_group",
+                  "version_input": "use_existing_resource_group"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "region",
+                  "version_input": "region"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "prefix",
+                  "version_input": "prefix"
+                }
+              ],
+              "ignore_auto_referencing": [
+                "*"
+              ]
+            },
+            {
+              "name": "testing-deploy-arch-ibm-observability",
+              "id": "daf2cf91-2384-4205-b7f4-621299a4896d",
+              "flavors": [
+                "standard"
+              ],
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "optional": true,
+              "version": "^1.3.0",
+              "on_by_default": false,
+              "default_flavor": "standard",
+              "input_mapping": [
+                {
+                  "dependency_input": "ibmcloud_api_key",
+                  "version_input": "ibmcloud_api_key"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "resource_group_name",
+                  "version_input": "resource_group_name"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "use_existing_resource_group",
+                  "version_input": "use_existing_resource_group"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "region",
+                  "version_input": "region"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "prefix",
+                  "version_input": "prefix"
+                }
+              ],
+              "ignore_auto_referencing": [
+                "*"
+              ]
+            },
+            {
+              "name": "deploy-arch-ibm-account-infra-base",
+              "id": "63641cec-6093-4b4f-b7b0-98d2f4185cd6-global",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
+              "optional": true,
+              "on_by_default": false,
+              "default_flavor": "standard",
+              "version": "^v1.18.3",
+              "input_mapping": [
+                {
+                  "dependency_input": "workload_resource_group_name",
+                  "version_input": "resource_group_name",
+                  "reference_version": true
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "prefix",
+                  "version_input": "prefix"
+                },
+                {
+                  "dependency_input": "skip_iam_account_settings",
+                  "value": true
+                },
+                {
+                  "value": true,
+                  "version_input": "use_existing_resource_group"
+                }
+              ],
+              "ignore_auto_referencing": [
+                "*"
+              ]
+            }
+          ],
+          "dependency_version_2": true,
+          "configuration": [
+            {
+              "key": "ibmcloud_api_key",
+              "required": true,
+              "display_name": "IBM Cloud API Key",
+              "description": "IBM Cloud API Key to use for provisioning resources"
+            },
+            {
+              "key": "use_existing_resource_group",
+              "required": true,
+              "display_name": "Existing resource group",
+              "description": "Set to true if using an existing resource group"
+            },
+            {
+              "key": "resource_group_name",
+              "display_name": "Resource group",
+              "description": "The name of a new or an existing resource group in which to provision resources to. If existing resource group is set to true, then the resource group must exist at deployment time. If prefix is specified and existing resource group is set to false a new resource group is created concatenating the prefix to this value."
+            },
+            {
+              "key": "ease_name",
+              "display_name": "Instance name",
+              "description": "The name for the newly provisioned Enterprise Application Service instance. If a prefix input is specified, the prefix is added to the name"
+            },
+            {
+              "key": "region",
+              "required": true,
+              "default_value": "us-east",
+              "display_name": "Cloud region",
+              "description": "The cloud region where the resources will be created",
+              "options": [
+                {
+                  "displayname": "Washington (us-east)",
+                  "value": "us-east"
+                }
+              ]
+            },
+            {
+              "key": "prefix",
+              "required": true,
+              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
+            },
+            {
+              "key": "plan",
+              "display_name": "Pricing plan",
+              "description": "The desired pricing plan for Enterprise Application Service instance",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "Standard",
+                  "value": "standard"
+                },
+                {
+                  "displayname": "Trial",
+                  "value": "free"
+                }
+              ]
+            },
+            {
+              "key": "resource_tags",
+              "display_name": "Resource tags",
+              "description": "Metadata labels to be applied to the resources"
+            },
+            {
+              "key": "source_repo",
+              "display_name": "Source code or maven artifact repository",
+              "description": "The URL for the repository storing the source code of the application to build or the URL of the Maven artifact repository storing the existing prebuilt archive to run"
+            },
+            {
+              "key": "config_repo",
+              "display_name": "Configuration repository",
+              "description": "The URL for the repository storing the configuration to use for the application to run in Enterprise Application Service on IBM Cloud"
+            },
+            {
+              "key": "repos_git_token_secret_crn",
+              "display_name": "Git token secret CRN",
+              "description": "The CRN of the existing secret storing on Secrets Manager the GitHub token to read from the application and configuration repositories"
+            },
+            {
+              "key": "subscription_id_secret_crn",
+              "display_name": "SubscriptionID secret CRN",
+              "description": "The CRN of the existing secret storing on Secrets Manager the subscriptionID to use to create the Enterprise Application Service instance"
+            },
+            {
+              "key": "repos_git_token",
+              "display_name": "Git token",
+              "description": "The GitHub token to read from the application and configuration repositories"
+            },
+            {
+              "key": "subscription_id",
+              "display_name": "SubscriptionID",
+              "description": "The subscriptionID to use to create the Enterprise Application Service instance"
+            },
+            {
+              "key": "mq_s2s_policy_enable",
+              "display_name": "Enable Service to Service policy to MQ",
+              "description": "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach MQ instance"
+            },
+            {
+              "key": "mq_s2s_policy_roles",
+              "display_name": "Service to Service policy to MQ list of roles",
+              "description": "List of roles to be configured for the Service to Service policy"
+            },
+            {
+              "key": "mq_s2s_policy_target_resource_id",
+              "display_name": "MQ instance target for the Service to Service policy",
+              "description": "MQ resource instance ID to set as target for the Service to Service policy"
+            },
+            {
+              "key": "source_repo_type",
+              "required": true,
+              "default_value": "git",
+              "options": [
+                {
+                  "displayname": "GitHub",
+                  "value": "git"
+                },
+                {
+                  "displayname": "Maven",
+                  "value": "maven"
+                }
+              ],
+              "display_name": "Source repository type",
+              "description": "Type of the source code repository to use for the application, git for source code from github and maven for prebuilt archive from maven repository"
+            },
+            {
+              "key": "maven_repository_username",
+              "display_name": "Maven repository username",
+              "description": "Maven repository authentication username if needed"
+            },
+            {
+              "key": "maven_repository_password",
+              "display_name": "Maven repository username",
+              "description": "Maven repository authentication password if needed"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

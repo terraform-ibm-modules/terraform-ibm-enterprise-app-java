@@ -1,8 +1,8 @@
 {
   "products": [
     {
-      "name": "deploy-arch-ibm-ease",
-      "label": "Cloud automation for Enterprise Application Service",
+      "name": "testing-deploy-arch-ibm-ease",
+      "label": "[Add-ons Beta] Cloud automation for Enterprise Application Service",
       "product_kind": "solution",
       "tags": [
         "enterprise_app",
@@ -392,7 +392,14 @@
             {
               "key": "resource_tags",
               "display_name": "Resource tags",
-              "description": "Metadata labels to be applied to the resources"
+              "description": "Metadata labels to be applied to the resources",
+              "custom_config": {
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "type": "string"
+                  }
+              }
             },
             {
               "key": "source_repo",

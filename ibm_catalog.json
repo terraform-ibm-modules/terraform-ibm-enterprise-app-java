@@ -394,11 +394,11 @@
               "display_name": "Resource tags",
               "description": "Metadata labels to be applied to the resources",
               "custom_config": {
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                      "type": "string"
-                  }
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
               }
             },
             {
@@ -440,7 +440,14 @@
             {
               "key": "mq_s2s_policy_roles",
               "display_name": "Service to Service policy to MQ list of roles",
-              "description": "List of roles to be configured for the Service to Service policy"
+              "description": "List of roles to be configured for the Service to Service policy",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
               "key": "mq_s2s_policy_target_resource_id",

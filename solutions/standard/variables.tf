@@ -16,19 +16,14 @@ variable "resource_tags" {
 
 variable "prefix" {
   type        = string
-  description = "Prefix to add to all resources created by this deployable architecture . To not use any prefix value, you can set this value to `null` or an empty string."
+  description = "Prefix to add to all resources created by this deployable architecture. To not use any prefix value, you can set this value to `null` or an empty string."
   default     = "dev"
 }
 
-variable "use_existing_resource_group" {
-  type        = bool
-  description = "Whether to use an existing resource group."
-  default     = false
-}
-
-variable "resource_group_name" {
+variable "existing_resource_group_name" {
   type        = string
-  description = "The name of a new or an existing resource group to provision resources in to. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
+  description = "The name of the existing resource group to provision resources in to."
+  nullable    = false
 }
 
 variable "ease_name" {
@@ -42,7 +37,7 @@ variable "plan" {
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
   default     = "standard"
   validation {
-    # free plan is added only to allow test/validation execution (its catalog name is Trial)
+    # free plan is added only to allow test/validation execution (its catalog name is Trial, programmatic name is free)
     condition     = contains(["standard", "free"], var.plan)
     error_message = "The only values accepted for the plan field are standard and free."
   }

@@ -4,15 +4,13 @@ locals {
 }
 
 ########################################################################################################################
-# Resource group management
+# Loadong existing resource group
 ########################################################################################################################
 
 module "resource_group" {
-  source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.1.6"
-  # if an existing resource group is not set (null) create a new one using prefix
-  resource_group_name          = var.use_existing_resource_group == false ? try("${local.prefix}-${var.resource_group_name}", var.resource_group_name) : null
-  existing_resource_group_name = var.use_existing_resource_group == true ? var.resource_group_name : null
+  source                       = "terraform-ibm-modules/resource-group/ibm"
+  version                      = "1.1.6"
+  existing_resource_group_name = var.existing_resource_group_name
 }
 
 ########################################################################################################################
@@ -83,7 +81,7 @@ locals {
 
 module "ease" {
   source            = "../../"
-  ease_name         = try("${var.prefix}-${var.ease_name}", var.ease_name)
+  ease_name         = try("${local.prefix}-${var.ease_name}", var.ease_name)
   resource_group_id = module.resource_group.resource_group_id
   tags              = var.resource_tags
   plan              = var.plan

@@ -95,7 +95,16 @@
               "key": "existing_resource_group_name",
               "display_name": "Resource group",
               "default_value": "dev",
-              "description": "The name of the existing resource group in which to provision resources to."
+              "description": "The name of the existing resource group in which to provision resources to.",
+              "required": true,
+              "custom_config": {
+                  "type": "resource_group",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "identifier": "rg_name"
+                  }
+              }
             },
             {
               "key": "ease_name"
@@ -333,7 +342,16 @@
               "key": "existing_resource_group_name",
               "display_name": "Resource group",
               "default_value": "dev",
-              "description": "The name of the existing resource group in which to provision resources to."
+              "description": "The name of the existing resource group in which to provision resources to.",
+              "required": true,
+              "custom_config": {
+                  "type": "resource_group",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "identifier": "rg_name"
+                  }
+              }
             },
             {
               "key": "ease_name",

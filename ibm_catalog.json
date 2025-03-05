@@ -272,20 +272,6 @@
               "display_name": "IBM Cloud API Key"
             },
             {
-              "key": "existing_resource_group_name",
-              "display_name": "Resource group",
-              "default_value": "dev",
-              "required": true,
-              "custom_config": {
-                  "type": "resource_group",
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                      "identifier": "rg_name"
-                  }
-              }
-            },
-            {
               "key": "ease_name",
               "display_name": "Instance name"
             },
@@ -339,6 +325,20 @@
                 }
               ],
               "display_name": "Source repository type"
+            },
+            {
+              "key": "existing_resource_group_name",
+              "display_name": "Resource group",
+              "default_value": "dev",
+              "required": true,
+              "custom_config": {
+                  "type": "resource_group",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "identifier": "rg_name"
+                  }
+              }
             },
             {
               "key": "resource_tags",

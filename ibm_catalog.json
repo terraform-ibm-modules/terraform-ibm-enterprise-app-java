@@ -188,80 +188,86 @@
               ]
             },
             {
-                "name": "deploy-arch-ibm-db2-cloud",
-                "version": "^0.2.0",
-                "id": "fa1560c6-f626-4605-b2e7-6299686fac40",
-                "flavors": [
-                    "standard"
-                ],
-                "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
-                "optional": true,
-                "on_by_default": true,
-                "default_flavor": "standard",
-                "input_mapping": [
-                  {
-                    "reference_version": true,
-                    "dependency_input": "resource_group_name",
-                    "version_input": "existing_resource_group_name"
-                  },
-                  {
-                    "value": true,
-                    "dependency_input": "use_existing_resource_group"
-                  },
-                  {
-                    "reference_version": true,
-                    "dependency_input": "region",
-                    "version_input": "region"
-                  },
-                  {
-                    "reference_version": true,
-                    "dependency_input": "prefix",
-                    "version_input": "prefix"
-                  }
-                ],
-                "ignore_auto_referencing": ["*"]
+              "name": "testing-deploy-arch-ibm-db2-cloud",
+              "label": "[Add-ons Beta] Cloud automation for DB2 on Cloud",
+              "version": "^v0.3.0",
+              "id": "fa1560c6-f626-4605-b2e7-6299686fac40",
+              "flavors": [
+                "standard"
+              ],
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "optional": true,
+              "on_by_default": true,
+              "default_flavor": "standard",
+              "input_mapping": [
+                {
+                  "reference_version": true,
+                  "dependency_input": "resource_group_name",
+                  "version_input": "existing_resource_group_name"
+                },
+                {
+                  "value": true,
+                  "dependency_input": "use_existing_resource_group"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "region",
+                  "version_input": "region"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "prefix",
+                  "version_input": "prefix"
+                }
+              ],
+              "ignore_auto_referencing": [
+                "*"
+              ]
             },
             {
-                "name": "deploy-arch-ibm-mq-cloud",
-                "version": "^0.4.0",
-                "id": "272fbeb0-7a85-47b1-bb8a-e5478e3112f2",
-                "flavors": [
-                    "standard"
-                ],
-                "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
-                "optional": true,
-                "on_by_default": true,
-                "default_flavor": "standard",
-                "input_mapping": [
-                  {
-                    "reference_version": true,
-                    "dependency_input": "resource_group_name",
-                    "version_input": "existing_resource_group_name"
-                  },
-                  {
-                    "value": true,
-                    "dependency_input": "use_existing_resource_group"
-                  },
-                  {
-                    "reference_version": true,
-                    "dependency_input": "region",
-                    "version_input": "region"
-                  },
-                  {
-                    "reference_version": true,
-                    "dependency_input": "prefix",
-                    "version_input": "prefix"
-                  },
-                  {
-                    "dependency_output": "capacity_crn",
-                    "version_input": "mq_s2s_policy_target_crn"
-                  },
-                  {
-                    "value": true,
-                    "dependency_input": "mq_s2s_policy_enable"
-                  }
-                ],
-                "ignore_auto_referencing": ["*"]
+              "name": "testing-deploy-arch-ibm-mq-cloud",
+              "version": "^v0.4.1",
+              "label": "[Add-ons Beta] Cloud automation for MQ on Cloud",
+              "id": "272fbeb0-7a85-47b1-bb8a-e5478e3112f2",
+              "flavors": [
+                "standard"
+              ],
+              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "optional": true,
+              "on_by_default": true,
+              "default_flavor": "standard",
+              "input_mapping": [
+                {
+                  "reference_version": true,
+                  "dependency_input": "resource_group_name",
+                  "version_input": "existing_resource_group_name"
+                },
+                {
+                  "value": true,
+                  "dependency_input": "use_existing_resource_group"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "region",
+                  "version_input": "region"
+                },
+                {
+                  "reference_version": true,
+                  "dependency_input": "prefix",
+                  "version_input": "prefix"
+                },
+                {
+                  "dependency_output": "capacity_crn",
+                  "version_input": "mq_s2s_policy_target_crn"
+                },
+                {
+                  "value": true,
+                  "dependency_input": "mq_s2s_policy_enable"
+                }
+              ],
+              "ignore_auto_referencing": [
+                "*"
+              ]
             }
           ],
           "dependency_version_2": true,
@@ -332,12 +338,12 @@
               "default_value": "dev",
               "required": true,
               "custom_config": {
-                  "type": "resource_group",
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                      "identifier": "rg_name"
-                  }
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "identifier": "rg_name"
+                }
               }
             },
             {

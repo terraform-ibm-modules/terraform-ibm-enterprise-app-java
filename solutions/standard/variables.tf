@@ -17,7 +17,6 @@ variable "resource_tags" {
 variable "prefix" {
   type        = string
   description = "Prefix to add to all resources created by this deployable architecture. To not use any prefix value, you can set this value to `null` or an empty string."
-  default     = "dev"
 }
 
 variable "existing_resource_group_name" {
@@ -120,13 +119,13 @@ variable "mq_s2s_policy_roles" {
   }
 }
 
-variable "mq_s2s_policy_target_resource_id" {
+variable "mq_s2s_policy_target_crn" {
   type        = string
-  description = "MQ resource instance ID to set as target for the Service to Service policy. Default to null."
+  description = "MQ resource capacity instance CRN to set as target for the Service to Service policy. Default to null."
   default     = null
   validation {
-    condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_resource_id != null : true
-    error_message = "If var.mq_s2s_policy_enable is true the MQ instance ID to set as target of Service to Service policy cannot be null."
+    condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_crn != null : true
+    error_message = "If var.mq_s2s_policy_enable is true the MQ instance CRN to set as target of Service to Service policy cannot be null."
   }
 }
 

@@ -4,15 +4,13 @@ locals {
 }
 
 ########################################################################################################################
-# Resource group management
+# Loadong existing resource group
 ########################################################################################################################
 
 module "resource_group" {
-  source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.1.6"
-  # if an existing resource group is not set (null) create a new one using prefix
-  resource_group_name          = var.use_existing_resource_group == false ? try("${local.prefix}-${var.resource_group_name}", var.resource_group_name) : null
-  existing_resource_group_name = var.use_existing_resource_group == true ? var.resource_group_name : null
+  source                       = "terraform-ibm-modules/resource-group/ibm"
+  version                      = "1.1.6"
+  existing_resource_group_name = var.existing_resource_group_name
 }
 
 ########################################################################################################################
@@ -83,7 +81,7 @@ locals {
 
 module "ease" {
   source            = "../../"
-  ease_name         = try("${var.prefix}-${var.ease_name}", var.ease_name)
+  ease_name         = try("${local.prefix}-${var.ease_name}", var.ease_name)
   resource_group_id = module.resource_group.resource_group_id
   tags              = var.resource_tags
   plan              = var.plan
@@ -119,10 +117,18 @@ data "ibm_resource_instance" "ease_resource" {
 # reading the IAM account details from the provider
 data "ibm_iam_account_settings" "provider_account" {}
 
+# parsing secret crn to collect the MQ capacity instance ID and its owner account ID
+module "crn_parser_mq_capacity_instance_crn" {
+  count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
+  source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
+  version = "1.1.0"
+  crn     = var.mq_s2s_policy_target_crn
+}
+
 locals {
   # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
   mq_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
-  mq_s2s_target_account_id  = data.ibm_iam_account_settings.provider_account.account_id
+  mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : null
 }
 
 # creating S2S policy if enabled
@@ -167,7 +173,7 @@ resource "ibm_iam_authorization_policy" "policy" {
   resource_attributes {
     name     = "serviceInstance"
     operator = "stringEquals"
-    value    = var.mq_s2s_policy_target_resource_id
+    value    = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].resource : null
   }
 
 }

@@ -290,6 +290,10 @@
               "display_name": "Instance name"
             },
             {
+              "key": "prefix",
+              "required": true
+            },
+            {
               "key": "region",
               "required": true,
               "default_value": "us-east",
@@ -300,10 +304,6 @@
                   "value": "us-east"
                 }
               ]
-            },
-            {
-              "key": "prefix",
-              "required": true
             },
             {
               "key": "plan",
@@ -319,6 +319,26 @@
                   "value": "free"
                 }
               ]
+            },
+            {
+              "key": "subscription_id",
+              "display_name": "SubscriptionID",
+              "required": true
+            },
+            {
+              "key": "source_repo_type",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "GitHub",
+                  "value": "git"
+                },
+                {
+                  "displayname": "Maven",
+                  "value": "maven"
+                }
+              ],
+              "display_name": "Source repository type"
             },
             {
               "key": "resource_tags",
@@ -352,11 +372,6 @@
               "display_name": "Git token"
             },
             {
-              "key": "subscription_id",
-              "display_name": "SubscriptionID",
-              "required": true
-            },
-            {
               "key": "mq_s2s_policy_enable",
               "display_name": "Enable Service to Service policy to MQ capacity instance"
             },
@@ -374,21 +389,6 @@
             {
               "key": "mq_s2s_policy_target_crn",
               "display_name": "MQ capacity instance CRN for the Service to Service policy"
-            },
-            {
-              "key": "source_repo_type",
-              "required": true,
-              "options": [
-                {
-                  "displayname": "GitHub",
-                  "value": "git"
-                },
-                {
-                  "displayname": "Maven",
-                  "value": "maven"
-                }
-              ],
-              "display_name": "Source repository type"
             },
             {
               "key": "maven_repository_username",

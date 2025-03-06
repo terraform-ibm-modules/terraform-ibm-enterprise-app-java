@@ -307,7 +307,7 @@
                   "value": "standard"
                 },
                 {
-                  "displayname": "Trial",
+                  "displayname": "Trial (for allowlisted accounts only)",
                   "value": "free"
                 }
               ]

@@ -115,7 +115,7 @@ data "ibm_resource_instance" "ease_resource" {
 # reading the IAM account details from the provider to use when creating the S2S policies
 data "ibm_iam_account_settings" "provider_account" {}
 
-# Definining Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
 
 # parsing secret crn to collect the MQ capacity instance ID and its owner account ID
 module "crn_parser_mq_capacity_instance_crn" {
@@ -178,7 +178,7 @@ resource "ibm_iam_authorization_policy" "mq_s2s_policy" {
 
 }
 
-# Definining Service to Service (S2S) policy between Enterprise Application Service instance and DB2 instance
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and DB2 instance
 
 # parsing secret crn to collect the DB2 instance ID and its owner account ID
 module "crn_parser_db2_instance_crn" {

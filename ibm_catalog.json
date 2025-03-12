@@ -218,6 +218,14 @@
                   "reference_version": true,
                   "dependency_input": "prefix",
                   "version_input": "prefix"
+                },
+                {
+                  "dependency_output": "crn",
+                  "version_input": "db2_s2s_policy_target_crn"
+                },
+                {
+                  "value": true,
+                  "dependency_input": "db2_s2s_policy_enable"
                 }
               ],
               "ignore_auto_referencing": [
@@ -395,6 +403,25 @@
             {
               "key": "mq_s2s_policy_target_crn",
               "display_name": "MQ capacity instance CRN for the Service to Service policy"
+            },
+            {
+              "key": "db2_s2s_policy_enable",
+              "display_name": "Enable Service to Service policy to DB2 instance"
+            },
+            {
+              "key": "db2_s2s_policy_roles",
+              "display_name": "Service to Service policy to DB2 list of roles",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "key": "db2_s2s_policy_target_crn",
+              "display_name": "DB2 instance CRN for the Service to Service policy"
             },
             {
               "key": "maven_repository_username",

@@ -353,16 +353,16 @@
                   "identifier": "rg_name"
                 }
               }
-            },
-            {
+            },{
               "key": "resource_tags",
-              "display_name": "Resource tags",
+              "type": "string",
               "custom_config": {
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "type": "string"
-                }
+                  "type": "array",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "type": "string"
+                  }
               }
             },
             {
@@ -391,13 +391,14 @@
             },
             {
               "key": "mq_s2s_policy_roles",
-              "display_name": "Service to Service policy to MQ list of roles",
+              "type": "string",
               "custom_config": {
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "type": "string"
-                }
+                  "type": "array",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "type": "string"
+                  }
               }
             },
             {
@@ -410,13 +411,14 @@
             },
             {
               "key": "db2_s2s_policy_roles",
-              "display_name": "Service to Service policy to DB2 list of roles",
+              "type": "string",
               "custom_config": {
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "type": "string"
-                }
+                  "type": "array",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                      "type": "string"
+                  }
               }
             },
             {

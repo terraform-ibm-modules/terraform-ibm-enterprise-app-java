@@ -48,6 +48,9 @@ type Config struct {
 	SmCRN                  string `yaml:"secretsManagerCRN"`
 	GhTokenSecretId        string `yaml:"geretain-public-gh-token-dev-user"`
 	SubscriptionIdSecretId string `yaml:"geretain-appmod-ease4j-subscription-id"`
+	MQCapacityInstanceCRN  string `yaml:"mq_capacity_crn"`
+	// TODO: waiting for PR to be merged on common-dev-assets to get the DB2 CRN
+	// DB2InstanceForEase4JCRN string `yaml:"geretain-db2fore4j-instance"`
 }
 
 var smCRN string
@@ -55,6 +58,8 @@ var ghTokenSecretId string
 var ghTokenSecretCRN string
 var subscriptionIdSecretId string
 var subscriptionIdSecretCRN string
+var mqCapacityInstanceCRN string
+var db2InstanceForEase4JCRN string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
@@ -80,8 +85,16 @@ func TestMain(m *testing.M) {
 	// generating secret CRN from SM CRN and secret ID
 	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                                         // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)                                       // pragma: allowlist secret
+	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
+
+	// TODO: waiting for PR to be merged on common-dev-assets to get the DB2 CRN
+	// db2InstanceForEase4JCRN = config.DB2InstanceForEase4JCRN
+	db2InstanceForEase4JCRN = "crn:v1:bluemix:public:dashdb-for-transactions:us-east:a/abac0df06b644a9cabc6e44f55b3880e:13b09883-7ef8-4c7c-b9c5-05dc92243f66::"
+
+	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN) // pragma: allowlist secret
+	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)
+	log.Printf("Using MQ capacity instance CRN %s for S2S policy", mqCapacityInstanceCRN)
+	log.Printf("Using DB2 instance CRN %s for S2S policy", db2InstanceForEase4JCRN)
 
 	os.Exit(m.Run())
 }
@@ -216,6 +229,10 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
+		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "db2_s2s_policy_enable", Value: true, DataType: "bool"},
+		{Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
 	}
 
 	err := options.RunSchematicTest()

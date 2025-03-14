@@ -115,7 +115,7 @@ variable "mq_s2s_policy_enable" {
 
 variable "mq_s2s_policy_roles" {
   type        = list(string)
-  description = "List of roles to be configured for the Service to Service policy. Default to Viewer role."
+  description = "List of roles to be configured for the Service to Service policy to MQ. Default to Viewer role."
   default     = ["Viewer"]
   validation {
     condition = alltrue([
@@ -125,13 +125,45 @@ variable "mq_s2s_policy_roles" {
   }
 }
 
-variable "mq_s2s_policy_target_resource_id" {
+variable "mq_s2s_policy_target_crn" {
   type        = string
-  description = "MQ resource instance ID to set as target for the Service to Service policy. Default to null."
+  description = "MQ resource capacity instance CRN to set as target for the Service to Service policy. If mq_s2s_policy_enable is true this input variable is mandatory. Default to null."
   default     = null
   validation {
-    condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_resource_id != null : true
-    error_message = "If var.mq_s2s_policy_enable is true the MQ instance ID to set as target of Service to Service policy cannot be null."
+    condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_crn != null : true
+    error_message = "If var.mq_s2s_policy_enable is true the MQ instance CRN to set as target of Service to Service policy cannot be null."
+  }
+}
+
+###################################################
+# DB2 S2S policy definition
+###################################################
+
+variable "db2_s2s_policy_enable" {
+  type        = bool
+  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach DB2 instance. Default to false."
+  default     = false
+}
+
+variable "db2_s2s_policy_roles" {
+  type        = list(string)
+  description = "List of roles to be configured for the Service to Service policy to DB2. Default to Viewer role."
+  default     = ["Viewer"]
+  validation {
+    condition = alltrue([
+      for role in var.db2_s2s_policy_roles : contains(["Administrator", "Viewer", "Operator", "Editor"], role)
+    ])
+    error_message = "The values of var.db2_s2s_policy_roles must be one or more of \"Administrator\", \"Viewer\", \"Operator\", \"Editor\""
+  }
+}
+
+variable "db2_s2s_policy_target_crn" {
+  type        = string
+  description = "DB2 resource instance CRN to set as target for the Service to Service policy. If db2_s2s_policy_enable is true this input variable is mandatory. Default to null."
+  default     = null
+  validation {
+    condition     = var.db2_s2s_policy_enable == true ? var.db2_s2s_policy_target_crn != null : true
+    error_message = "If var.db2_s2s_policy_enable is true the SB2 instance CRN to set as target of Service to Service policy cannot be null."
   }
 }
 

@@ -121,7 +121,16 @@
                 ]
               },
               {
-                "key": "resource_tags"
+                "key": "resource_tags",
+                "type": "string",
+                "custom_config": {
+                    "type": "array",
+                    "grouping": "deployment",
+                    "original_grouping": "deployment",
+                    "config_constraints": {
+                        "type": "string"
+                    }
+                }
               },
               {
                 "key": "source_repo"
@@ -142,13 +151,44 @@
                 "key": "subscription_id"
               },
               {
-                "key": "mq_s2s_policy_enable"
+                "key": "mq_s2s_policy_enable",
+                "display_name": "Enable Service to Service policy to MQ capacity instance"
               },
               {
-                "key": "mq_s2s_policy_roles"
+                "key": "mq_s2s_policy_roles",
+                "type": "string",
+                "custom_config": {
+                    "type": "array",
+                    "grouping": "deployment",
+                    "original_grouping": "deployment",
+                    "config_constraints": {
+                        "type": "string"
+                    }
+                }
               },
               {
-                "key": "mq_s2s_policy_target_resource_id"
+                "key": "mq_s2s_policy_target_crn",
+                "display_name": "MQ capacity instance CRN for the Service to Service policy"
+              },
+              {
+                "key": "db2_s2s_policy_enable",
+                "display_name": "Enable Service to Service policy to DB2 instance"
+              },
+              {
+                "key": "db2_s2s_policy_roles",
+                "type": "string",
+                "custom_config": {
+                    "type": "array",
+                    "grouping": "deployment",
+                    "original_grouping": "deployment",
+                    "config_constraints": {
+                        "type": "string"
+                    }
+                }
+              },
+              {
+                "key": "db2_s2s_policy_target_crn",
+                "display_name": "DB2 instance CRN for the Service to Service policy"
               },
               {
                 "key": "source_repo_type",

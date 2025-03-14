@@ -114,19 +114,26 @@ data "ibm_resource_instance" "ease_resource" {
   identifier = module.ease.ease_instance.id
 }
 
-# Definining Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
 
-# reading the IAM account details from the provider
+module "crn_parser_mq_capacity_instance_crn" {
+  count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
+  source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
+  version = "1.1.0"
+  crn     = var.mq_s2s_policy_target_crn
+}
+
+# reading the IAM account details from the provider to use when creating the S2S policies
 data "ibm_iam_account_settings" "provider_account" {}
 
 locals {
   # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
   mq_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
-  mq_s2s_target_account_id  = data.ibm_iam_account_settings.provider_account.account_id
+  mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : null
 }
 
 # creating S2S policy if enabled
-resource "ibm_iam_authorization_policy" "policy" {
+resource "ibm_iam_authorization_policy" "mq_s2s_policy" {
   count = var.mq_s2s_policy_enable == true ? 1 : 0
   roles = var.mq_s2s_policy_roles
 
@@ -150,7 +157,7 @@ resource "ibm_iam_authorization_policy" "policy" {
     value    = module.ease.ease_instance.guid
   }
 
-  # limiting the target accountID of S2S policy to the provider account ID is used
+  # limiting the target accountID of S2S policy to the provider account ID
   resource_attributes {
     name     = "accountId"
     operator = "stringEquals"
@@ -167,7 +174,69 @@ resource "ibm_iam_authorization_policy" "policy" {
   resource_attributes {
     name     = "serviceInstance"
     operator = "stringEquals"
-    value    = var.mq_s2s_policy_target_resource_id
+    value    = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].service_instance : null
   }
 
+}
+
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and DB2 instance
+
+# parsing secret crn to collect the DB2 instance ID and its owner account ID
+module "crn_parser_db2_instance_crn" {
+  count   = var.db2_s2s_policy_target_crn != null ? 1 : 0
+  source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
+  version = "1.1.0"
+  crn     = var.db2_s2s_policy_target_crn
+}
+
+locals {
+  # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
+  db2_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
+  db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : null
+}
+
+# creating S2S policy if enabled
+resource "ibm_iam_authorization_policy" "db2_s2s_policy" {
+  count = var.db2_s2s_policy_enable == true ? 1 : 0
+  roles = var.db2_s2s_policy_roles
+
+  # limiting the source accountID of S2S policy to the provider account ID
+  subject_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.db2_s2s_subject_account_id
+  }
+
+  subject_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "enterprise-app-java"
+  }
+
+  # limiting the target serviceInstance of S2S policy to the Enterprise Application Service instance ID
+  subject_attributes {
+    name     = "serviceInstance"
+    operator = "stringEquals"
+    value    = module.ease.ease_instance.guid
+  }
+
+  # limiting the target accountID of S2S policy to the provider account ID
+  resource_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.db2_s2s_target_account_id
+  }
+
+  resource_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "dashdb-for-transactions"
+  }
+
+  # limiting the target serviceInstance of S2S policy to the DB2 instance ID
+  resource_attributes {
+    name     = "serviceInstance"
+    operator = "stringEquals"
+    value    = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].service_instance : null
+  }
 }

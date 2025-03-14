@@ -83,32 +83,29 @@
             },
             "configuration": [
               {
-                "key": "ibmcloud_api_key"
+                "key": "ibmcloud_api_key",
+                "required": true,
+                "display_name": "IBM Cloud API Key"
               },
               {
-                "key": "use_existing_resource_group",
+                "key": "ease_name",
+                "display_name": "Instance name"
+              },
+              {
+                "key": "prefix",
                 "required": true
-              },
-              {
-                "key": "resource_group_name"
-              },
-              {
-                "key": "ease_name"
               },
               {
                 "key": "region",
                 "required": true,
+                "default_value": "us-east",
+                "display_name": "Cloud region",
                 "options": [
                   {
                     "displayname": "Washington (us-east)",
                     "value": "us-east"
                   }
                 ]
-              },
-              {
-                "key": "prefix",
-                "required": true,
-                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
               },
               {
                 "key": "plan",
@@ -119,6 +116,40 @@
                     "value": "standard"
                   }
                 ]
+              },
+              {
+                "key": "subscription_id",
+                "display_name": "SubscriptionID",
+                "required": true
+              },
+              {
+                "key": "source_repo_type",
+                "required": true,
+                "options": [
+                  {
+                    "displayname": "GitHub",
+                    "value": "git"
+                  },
+                  {
+                    "displayname": "Maven",
+                    "value": "maven"
+                  }
+                ],
+                "display_name": "Source repository type"
+              },
+              {
+                "key": "existing_resource_group_name",
+                "display_name": "Resource group",
+                "default_value": "dev",
+                "required": true,
+                "custom_config": {
+                  "type": "resource_group",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                    "identifier": "rg_name"
+                  }
+                }
               },
               {
                 "key": "resource_tags",
@@ -133,22 +164,24 @@
                 }
               },
               {
-                "key": "source_repo"
+                "key": "source_repo",
+                "display_name": "Source code or maven artifact repository"
               },
               {
-                "key": "config_repo"
+                "key": "config_repo",
+                "display_name": "Configuration repository"
               },
               {
-                "key": "repos_git_token_secret_crn"
+                "key": "repos_git_token_secret_crn",
+                "display_name": "Git token secret CRN"
               },
               {
-                "key": "subscription_id_secret_crn"
+                "key": "subscription_id_secret_crn",
+                "display_name": "SubscriptionID secret CRN"
               },
               {
-                "key": "repos_git_token"
-              },
-              {
-                "key": "subscription_id"
+                "key": "repos_git_token",
+                "display_name": "Git token"
               },
               {
                 "key": "mq_s2s_policy_enable",
@@ -191,23 +224,12 @@
                 "display_name": "DB2 instance CRN for the Service to Service policy"
               },
               {
-                "key": "source_repo_type",
-                "options": [
-                  {
-                    "displayname": "GitHub",
-                    "value": "git"
-                  },
-                  {
-                    "displayname": "Maven",
-                    "value": "maven"
-                  }
-                ]
+                "key": "maven_repository_username",
+                "display_name": "Maven repository username"
               },
               {
-                "key": "maven_repository_username"
-              },
-              {
-                "key": "maven_repository_password"
+                "key": "maven_repository_password",
+                "display_name": "Maven repository password"
               }
             ]
           }

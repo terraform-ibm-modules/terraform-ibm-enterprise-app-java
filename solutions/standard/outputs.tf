@@ -2,6 +2,11 @@
 # Outputs
 ########################################################################################################################
 
+output "resource_group_name" {
+  description = "Resource group name where Enterprise Application Service instance is created"
+  value       = module.resource_group.resource_group_name
+}
+
 output "ease_instance_dashboard_url" {
   description = "Enterprise Application Service instance dashboard URL"
   value       = local.app_dashboard_url

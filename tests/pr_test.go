@@ -35,6 +35,9 @@ const mavenAppConfigRepo = "https://github.com/tim-openliberty-appflow-test/samp
 const mavenAppUsername = "username"
 const mavenAppPassword = "password" // pragma: allowlist secret
 
+// resource group to use as existing one for the DA test
+const daExistingResourceGroup = "geretain-test-e4j"
+
 // plan to use for tests
 const testPlan = "free" // free plan is used for testing but its catalog name is "Trial"
 
@@ -226,9 +229,9 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
 		{Name: "subscription_id_secret_crn", Value: subscriptionIdSecretCRN, DataType: "string"},
 		{Name: "plan", Value: testPlan, DataType: "string"},
-		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
 		{Name: "db2_s2s_policy_enable", Value: true, DataType: "bool"},

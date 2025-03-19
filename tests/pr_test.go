@@ -61,9 +61,6 @@ var subscriptionIdSecretId string
 var subscriptionIdSecretCRN string
 var mqCapacityInstanceCRN string
 
-// S2S policy currently not tested
-// var db2InstanceForEase4JCRN string
-
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
 	sharedInfoSvc, _ = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
@@ -87,16 +84,12 @@ func TestMain(m *testing.M) {
 	subscriptionIdSecretId = config.SubscriptionIdSecretId // pragma: allowlist secret
 	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
 
-	// S2S policy currently not tested - if to enable update with the new CRN of the resource
-	// db2InstanceForEase4JCRN = "crn:v1:bluemix:public:dashdb-for-transactions:us-east:a/abac0df06b644a9cabc6e44f55b3880e:13b09883-7ef8-4c7c-b9c5-05dc92243f66::"
-
 	// generating secret CRN from SM CRN and secret ID
 	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
 	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                                         // pragma: allowlist secret
 	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)
 	log.Printf("Using MQ capacity instance CRN %s for S2S policy", mqCapacityInstanceCRN)
-	// log.Printf("Using DB2 instance CRN %s for S2S policy", db2InstanceForEase4JCRN)
 
 	os.Exit(m.Run())
 }
@@ -234,9 +227,8 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
-		// S2S policy currently not tested
-		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
 	}
 
 	err := options.RunSchematicTest()

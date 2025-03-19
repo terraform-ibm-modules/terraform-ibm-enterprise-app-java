@@ -53,6 +53,7 @@ type Config struct {
 	SubscriptionIdSecretId string `yaml:"geretain-appmod-ease4j-subscription-id"`
 	MQCapacityInstanceCRN  string `yaml:"mq_capacity_crn"`
 	// TODO: waiting for PR to be merged on common-dev-assets to get the DB2 CRN
+	// https://github.com/terraform-ibm-modules/common-dev-assets/pull/1129
 	// DB2InstanceForEase4JCRN string `yaml:"geretain-db2fore4j-instance"`
 }
 
@@ -91,8 +92,9 @@ func TestMain(m *testing.M) {
 	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
 
 	// TODO: waiting for PR to be merged on common-dev-assets to get the DB2 CRN
+	// https://github.com/terraform-ibm-modules/common-dev-assets/pull/1129
 	// db2InstanceForEase4JCRN = config.DB2InstanceForEase4JCRN
-	db2InstanceForEase4JCRN = "crn:v1:bluemix:public:dashdb-for-transactions:us-east:a/abac0df06b644a9cabc6e44f55b3880e:13b09883-7ef8-4c7c-b9c5-05dc92243f66::"
+	db2InstanceForEase4JCRN = "crn:v1:bluemix:public:dashdb-for-transactions:us-east:a/abac0df06b644a9cabc6e44f55b3880e:9dd45b32-6ae8-4172-8ca6-31d08ef679ad::"
 
 	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN) // pragma: allowlist secret
 	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)

@@ -84,12 +84,10 @@
             "configuration": [
               {
                 "key": "ibmcloud_api_key",
-                "required": true,
-                "display_name": "IBM Cloud API Key"
+                "required": true
               },
               {
-                "key": "ease_name",
-                "display_name": "Instance name"
+                "key": "ease_name"
               },
               {
                 "key": "prefix",
@@ -98,8 +96,6 @@
               {
                 "key": "region",
                 "required": true,
-                "default_value": "us-east",
-                "display_name": "Cloud region",
                 "options": [
                   {
                     "displayname": "Washington (us-east)",
@@ -119,7 +115,6 @@
               },
               {
                 "key": "subscription_id",
-                "display_name": "SubscriptionID",
                 "required": true
               },
               {
@@ -139,7 +134,6 @@
               },
               {
                 "key": "existing_resource_group_name",
-                "display_name": "Resource group",
                 "default_value": "dev",
                 "required": true,
                 "custom_config": {
@@ -164,28 +158,22 @@
                 }
               },
               {
-                "key": "source_repo",
-                "display_name": "Source code or maven artifact repository"
+                "key": "source_repo"
               },
               {
-                "key": "config_repo",
-                "display_name": "Configuration repository"
+                "key": "config_repo"
               },
               {
-                "key": "repos_git_token_secret_crn",
-                "display_name": "Git token secret CRN"
+                "key": "repos_git_token_secret_crn"
               },
               {
-                "key": "subscription_id_secret_crn",
-                "display_name": "SubscriptionID secret CRN"
+                "key": "subscription_id_secret_crn"
               },
               {
-                "key": "repos_git_token",
-                "display_name": "Git token"
+                "key": "repos_git_token"
               },
               {
-                "key": "mq_s2s_policy_enable",
-                "display_name": "Enable Service to Service policy to MQ capacity instance"
+                "key": "mq_s2s_policy_enable"
               },
               {
                 "key": "mq_s2s_policy_roles",
@@ -200,12 +188,10 @@
                 }
               },
               {
-                "key": "mq_s2s_policy_target_crn",
-                "display_name": "MQ capacity instance CRN for the Service to Service policy"
+                "key": "mq_s2s_policy_target_crn"
               },
               {
-                "key": "db2_s2s_policy_enable",
-                "display_name": "Enable Service to Service policy to DB2 instance"
+                "key": "db2_s2s_policy_enable"
               },
               {
                 "key": "db2_s2s_policy_roles",
@@ -220,16 +206,13 @@
                 }
               },
               {
-                "key": "db2_s2s_policy_target_crn",
-                "display_name": "DB2 instance CRN for the Service to Service policy"
+                "key": "db2_s2s_policy_target_crn"
               },
               {
-                "key": "maven_repository_username",
-                "display_name": "Maven repository username"
+                "key": "maven_repository_username"
               },
               {
-                "key": "maven_repository_password",
-                "display_name": "Maven repository password"
+                "key": "maven_repository_password"
               }
             ]
           }

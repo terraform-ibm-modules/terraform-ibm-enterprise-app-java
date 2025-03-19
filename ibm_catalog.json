@@ -191,11 +191,11 @@
               "name": "testing-deploy-arch-ibm-db2-cloud",
               "label": "[Add-ons Beta] Cloud automation for DB2 on Cloud",
               "version": "^v1.0.0",
-              "id": "fa1560c6-f626-4605-b2e7-6299686fac40",
+              "id": "fa1560c6-f626-4605-b2e7-6299686fac40-global",
               "flavors": [
                 "standard"
               ],
-              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
               "on_by_default": true,
               "default_flavor": "standard",
@@ -291,7 +291,8 @@
             },
             {
               "key": "prefix",
-              "required": true
+              "required": true,
+              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
             },
             {
               "key": "region",
@@ -343,7 +344,6 @@
             {
               "key": "existing_resource_group_name",
               "display_name": "Resource group",
-              "default_value": "dev",
               "required": true,
               "custom_config": {
                 "type": "resource_group",

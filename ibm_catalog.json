@@ -236,11 +236,11 @@
               "name": "testing-deploy-arch-ibm-mq-cloud",
               "version": "^v0.4.1",
               "label": "[Add-ons Beta] Cloud automation for MQ on Cloud",
-              "id": "272fbeb0-7a85-47b1-bb8a-e5478e3112f2",
+              "id": "272fbeb0-7a85-47b1-bb8a-e5478e3112f2-global",
               "flavors": [
                 "standard"
               ],
-              "catalog_id": "f64499c8-eb50-4985-bf91-29f9e605a433",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
               "on_by_default": true,
               "default_flavor": "standard",

@@ -23,7 +23,7 @@ variable "existing_resource_group_name" {
   type        = string
   description = "The name of the existing resource group to provision resources in to."
   nullable    = false
-  default     = "default"
+  default     = "Default"
 }
 
 variable "ease_name" {

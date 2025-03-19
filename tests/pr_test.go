@@ -52,9 +52,6 @@ type Config struct {
 	GhTokenSecretId        string `yaml:"geretain-public-gh-token-dev-user"`
 	SubscriptionIdSecretId string `yaml:"geretain-appmod-ease4j-subscription-id"`
 	MQCapacityInstanceCRN  string `yaml:"mq_capacity_crn"`
-	// TODO: waiting for PR to be merged on common-dev-assets to get the DB2 CRN
-	// https://github.com/terraform-ibm-modules/common-dev-assets/pull/1129
-	// DB2InstanceForEase4JCRN string `yaml:"geretain-db2fore4j-instance"`
 }
 
 var smCRN string
@@ -63,7 +60,6 @@ var ghTokenSecretCRN string
 var subscriptionIdSecretId string
 var subscriptionIdSecretCRN string
 var mqCapacityInstanceCRN string
-var db2InstanceForEase4JCRN string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
@@ -91,15 +87,9 @@ func TestMain(m *testing.M) {
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
 	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
 
-	// TODO: waiting for PR to be merged on common-dev-assets to get the DB2 CRN
-	// https://github.com/terraform-ibm-modules/common-dev-assets/pull/1129
-	// db2InstanceForEase4JCRN = config.DB2InstanceForEase4JCRN
-	db2InstanceForEase4JCRN = "crn:v1:bluemix:public:dashdb-for-transactions:us-east:a/abac0df06b644a9cabc6e44f55b3880e:9dd45b32-6ae8-4172-8ca6-31d08ef679ad::"
-
 	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN) // pragma: allowlist secret
 	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)
 	log.Printf("Using MQ capacity instance CRN %s for S2S policy", mqCapacityInstanceCRN)
-	log.Printf("Using DB2 instance CRN %s for S2S policy", db2InstanceForEase4JCRN)
 
 	os.Exit(m.Run())
 }
@@ -236,8 +226,9 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
-		{Name: "db2_s2s_policy_enable", Value: true, DataType: "bool"},
-		{Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
+		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
+		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
+		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
 	}
 
 	err := options.RunSchematicTest()

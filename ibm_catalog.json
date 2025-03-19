@@ -193,12 +193,12 @@
               "version": "^v1.0.0",
               "id": "fa1560c6-f626-4605-b2e7-6299686fac40-global",
               "flavors": [
-                "standard"
+                "fully-configurable"
               ],
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
               "on_by_default": true,
-              "default_flavor": "standard",
+              "default_flavor": "fully-configurable",
               "input_mapping": [
                 {
                   "reference_version": true,
@@ -234,16 +234,16 @@
             },
             {
               "name": "testing-deploy-arch-ibm-mq-cloud",
-              "version": "^v0.4.1",
+              "version": "^v0.4.2",
               "label": "[Add-ons Beta] Cloud automation for MQ on Cloud",
               "id": "272fbeb0-7a85-47b1-bb8a-e5478e3112f2-global",
               "flavors": [
-                "standard"
+                "fully-configurable"
               ],
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
               "on_by_default": true,
-              "default_flavor": "standard",
+              "default_flavor": "fully-configurable",
               "input_mapping": [
                 {
                   "reference_version": true,

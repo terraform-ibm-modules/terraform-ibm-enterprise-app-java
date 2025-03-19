@@ -87,7 +87,7 @@
                 "required": true
               },
               {
-                "key": "ease_name"
+                "key": "easinstance_name"
               },
               {
                 "key": "prefix",
@@ -134,7 +134,6 @@
               },
               {
                 "key": "existing_resource_group_name",
-                "default_value": "dev",
                 "required": true,
                 "custom_config": {
                   "type": "resource_group",

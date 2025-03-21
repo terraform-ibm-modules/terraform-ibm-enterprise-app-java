@@ -4,7 +4,7 @@ locals {
 }
 
 ########################################################################################################################
-# Loadong existing resource group
+# Loading existing resource group
 ########################################################################################################################
 
 module "resource_group" {
@@ -112,12 +112,12 @@ data "ibm_resource_instance" "ease_resource" {
   identifier = module.ease.ease_instance.id
 }
 
-# reading the IAM account details from the provider to use when creating the S2S policies
+# reading the IAM account details from the provider to use when creating the S2S policies
 data "ibm_iam_account_settings" "provider_account" {}
 
 # Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
 
-# parsing secret crn to collect the MQ capacity instance ID and its owner account ID
+# parsing crn to collect the MQ capacity instance ID and its owner account ID
 module "crn_parser_mq_capacity_instance_crn" {
   count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
@@ -178,7 +178,7 @@ resource "ibm_iam_authorization_policy" "mq_s2s_policy" {
 
 }
 
-# Define Service to Service (S2S) policy between Enterprise Application Service instance and DB2 instance
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and DB2 instance
 
 # parsing secret crn to collect the DB2 instance ID and its owner account ID
 module "crn_parser_db2_instance_crn" {
@@ -189,12 +189,12 @@ module "crn_parser_db2_instance_crn" {
 }
 
 locals {
-  # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
+  # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
   db2_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
   db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : null
 }
 
-# creating S2S policy if enabled
+# creating S2S policy if enabled
 resource "ibm_iam_authorization_policy" "db2_s2s_policy" {
   count = var.db2_s2s_policy_enable == true ? 1 : 0
   roles = var.db2_s2s_policy_roles
@@ -238,5 +238,4 @@ resource "ibm_iam_authorization_policy" "db2_s2s_policy" {
     operator = "stringEquals"
     value    = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].service_instance : null
   }
-
 }

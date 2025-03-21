@@ -87,7 +87,9 @@ func TestMain(m *testing.M) {
 	// generating secret CRN from SM CRN and secret ID
 	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                                         // pragma: allowlist secret
+	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
+
+	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN) // pragma: allowlist secret
 	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)
 	log.Printf("Using MQ capacity instance CRN %s for S2S policy", mqCapacityInstanceCRN)
 
@@ -221,14 +223,13 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
 		{Name: "subscription_id_secret_crn", Value: subscriptionIdSecretCRN, DataType: "string"},
 		{Name: "plan", Value: testPlan, DataType: "string"},
-		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
-		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
+		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
 	}
 

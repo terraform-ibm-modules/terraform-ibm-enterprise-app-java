@@ -23,7 +23,7 @@ const basicExampleDir = "examples/basic"
 const bdrCompleteExampleDir = "examples/bdr_complete"
 const drCompleteExampleDir = "examples/dr_complete"
 const region = "us-east"
-const standardSolutionTerraformDir = "solutions/standard"
+const fullyConfigurableSolutionTerraformDir = "solutions/fully-configurable"
 
 // test application source and config repositories
 const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
@@ -204,9 +204,9 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		TarIncludePatterns: []string{
 			"*.tf",
 			"modules/*/*.tf",
-			standardSolutionTerraformDir + "/*.tf",
+			fullyConfigurableSolutionTerraformDir + "/*.tf",
 		},
-		TemplateFolder:         standardSolutionTerraformDir,
+		TemplateFolder:         fullyConfigurableSolutionTerraformDir,
 		Tags:                   []string{"test-schematic"},
 		Prefix:                 "ease-da",
 		DeleteWorkspaceOnFail:  false,

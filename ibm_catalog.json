@@ -87,7 +87,7 @@
                 "required": true
               },
               {
-                "key": "easinstance_name"
+                "key": "instance_name"
               },
               {
                 "key": "prefix",

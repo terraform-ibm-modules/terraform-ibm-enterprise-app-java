@@ -26,7 +26,7 @@ variable "existing_resource_group_name" {
   default     = "Default"
 }
 
-variable "easinstance_name" {
+variable "instance_name" {
   type        = string
   description = "The name for the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
   default     = "instance"

@@ -81,7 +81,7 @@ locals {
 
 module "ease" {
   source            = "../../"
-  ease_name         = try("${local.prefix}-${var.easinstance_name}", var.easinstance_name)
+  ease_name         = try("${local.prefix}-${var.instance_name}", var.instance_name)
   resource_group_id = module.resource_group.resource_group_id
   tags              = var.resource_tags
   plan              = var.plan

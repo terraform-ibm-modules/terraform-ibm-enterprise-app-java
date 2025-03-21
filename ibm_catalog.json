@@ -44,10 +44,10 @@
       ],
       "flavors": [
         {
-          "label": "Standard",
+          "label": "Fully configurable",
           "name": "standard",
           "install_type": "fullstack",
-          "working_directory": "solutions/standard",
+          "working_directory": "solutions/fully-configurable",
           "compliance": {
             "authority": "scc-v3",
             "profiles": []
@@ -285,7 +285,7 @@
               "required": true
             },
             {
-              "key": "easinstance_name"
+              "key": "instance_name"
             },
             {
               "key": "prefix",

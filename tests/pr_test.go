@@ -23,7 +23,7 @@ const basicExampleDir = "examples/basic"
 const bdrCompleteExampleDir = "examples/bdr_complete"
 const drCompleteExampleDir = "examples/dr_complete"
 const region = "us-east"
-const standardSolutionTerraformDir = "solutions/standard"
+const fullyConfigurableSolutionTerraformDir = "solutions/fully-configurable"
 
 // test application source and config repositories
 const appSourceRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started"
@@ -34,6 +34,9 @@ const mavenAppSourceRepo = "https://repo.maven.apache.org/maven2"
 const mavenAppConfigRepo = "https://github.com/tim-openliberty-appflow-test/sample-getting-started-config"
 const mavenAppUsername = "username"
 const mavenAppPassword = "password" // pragma: allowlist secret
+
+// resource group to use as existing one for the DA test
+const daExistingResourceGroup = "geretain-test-e4j"
 
 // plan to use for tests
 const testPlan = "free" // free plan is used for testing but its catalog name is "Trial"
@@ -48,6 +51,7 @@ type Config struct {
 	SmCRN                  string `yaml:"secretsManagerCRN"`
 	GhTokenSecretId        string `yaml:"geretain-public-gh-token-dev-user"`
 	SubscriptionIdSecretId string `yaml:"geretain-appmod-ease4j-subscription-id"`
+	MQCapacityInstanceCRN  string `yaml:"mq_capacity_crn"`
 }
 
 var smCRN string
@@ -55,6 +59,7 @@ var ghTokenSecretId string
 var ghTokenSecretCRN string
 var subscriptionIdSecretId string
 var subscriptionIdSecretCRN string
+var mqCapacityInstanceCRN string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
@@ -80,8 +85,11 @@ func TestMain(m *testing.M) {
 	// generating secret CRN from SM CRN and secret ID
 	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN)                                         // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)                                       // pragma: allowlist secret
+	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
+
+	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN) // pragma: allowlist secret
+	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)
+	log.Printf("Using MQ capacity instance CRN %s for S2S policy", mqCapacityInstanceCRN)
 
 	os.Exit(m.Run())
 }
@@ -196,9 +204,9 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		TarIncludePatterns: []string{
 			"*.tf",
 			"modules/*/*.tf",
-			standardSolutionTerraformDir + "/*.tf",
+			fullyConfigurableSolutionTerraformDir + "/*.tf",
 		},
-		TemplateFolder:         standardSolutionTerraformDir,
+		TemplateFolder:         fullyConfigurableSolutionTerraformDir,
 		Tags:                   []string{"test-schematic"},
 		Prefix:                 "ease-da",
 		DeleteWorkspaceOnFail:  false,
@@ -213,9 +221,14 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
 		{Name: "subscription_id_secret_crn", Value: subscriptionIdSecretCRN, DataType: "string"},
 		{Name: "plan", Value: testPlan, DataType: "string"},
-		{Name: "resource_group_name", Value: options.Prefix, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
+		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
+		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
+		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
+		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
 	}
 
 	err := options.RunSchematicTest()

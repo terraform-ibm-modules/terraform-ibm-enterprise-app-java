@@ -38,10 +38,10 @@
         ],
         "flavors": [
           {
-            "label": "Standard",
-            "name": "standard",
+            "label": "Fully Configurable",
+            "name": "fully-configurable",
             "install_type": "fullstack",
-            "working_directory": "solutions/standard",
+            "working_directory": "solutions/fully-configurable",
             "compliance": {
               "authority": "scc-v3",
               "profiles": []
@@ -83,17 +83,16 @@
             },
             "configuration": [
               {
-                "key": "ibmcloud_api_key"
-              },
-              {
-                "key": "use_existing_resource_group",
+                "key": "ibmcloud_api_key",
                 "required": true
               },
               {
-                "key": "resource_group_name"
+                "key": "instance_name"
               },
               {
-                "key": "ease_name"
+                "key": "prefix",
+                "required": true,
+                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
               },
               {
                 "key": "region",
@@ -106,11 +105,6 @@
                 ]
               },
               {
-                "key": "prefix",
-                "required": true,
-                "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
-              },
-              {
                 "key": "plan",
                 "required": true,
                 "options": [
@@ -121,7 +115,47 @@
                 ]
               },
               {
-                "key": "resource_tags"
+                "key": "subscription_id",
+                "required": true
+              },
+              {
+                "key": "source_repo_type",
+                "required": true,
+                "options": [
+                  {
+                    "displayname": "GitHub",
+                    "value": "git"
+                  },
+                  {
+                    "displayname": "Maven",
+                    "value": "maven"
+                  }
+                ],
+                "display_name": "Source repository type"
+              },
+              {
+                "key": "existing_resource_group_name",
+                "required": true,
+                "custom_config": {
+                  "type": "resource_group",
+                  "grouping": "deployment",
+                  "original_grouping": "deployment",
+                  "config_constraints": {
+                    "identifier": "rg_name"
+                  }
+                }
+              },
+              {
+                "key": "resource_tags",
+                "type": "string",
+                "custom_config": {
+                    "type": "array",
+                    "grouping": "deployment",
+                    "original_grouping": "deployment",
+                    "config_constraints": {
+                        "type": "string"
+                    }
+                }
               },
               {
                 "key": "source_repo"
@@ -139,29 +173,40 @@
                 "key": "repos_git_token"
               },
               {
-                "key": "subscription_id"
-              },
-              {
                 "key": "mq_s2s_policy_enable"
               },
               {
-                "key": "mq_s2s_policy_roles"
+                "key": "mq_s2s_policy_roles",
+                "type": "string",
+                "custom_config": {
+                    "type": "array",
+                    "grouping": "deployment",
+                    "original_grouping": "deployment",
+                    "config_constraints": {
+                        "type": "string"
+                    }
+                }
               },
               {
-                "key": "mq_s2s_policy_target_resource_id"
+                "key": "mq_s2s_policy_target_crn"
               },
               {
-                "key": "source_repo_type",
-                "options": [
-                  {
-                    "displayname": "GitHub",
-                    "value": "git"
-                  },
-                  {
-                    "displayname": "Maven",
-                    "value": "maven"
-                  }
-                ]
+                "key": "db2_s2s_policy_enable"
+              },
+              {
+                "key": "db2_s2s_policy_roles",
+                "type": "string",
+                "custom_config": {
+                    "type": "array",
+                    "grouping": "deployment",
+                    "original_grouping": "deployment",
+                    "config_constraints": {
+                        "type": "string"
+                    }
+                }
+              },
+              {
+                "key": "db2_s2s_policy_target_crn"
               },
               {
                 "key": "maven_repository_username"

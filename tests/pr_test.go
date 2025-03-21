@@ -229,6 +229,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
 		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
+		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
 	}
 
 	err := options.RunSchematicTest()

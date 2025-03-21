@@ -45,7 +45,7 @@
       "flavors": [
         {
           "label": "Fully configurable",
-          "name": "standard",
+          "name": "fully-configurable",
           "install_type": "fullstack",
           "working_directory": "solutions/fully-configurable",
           "compliance": {

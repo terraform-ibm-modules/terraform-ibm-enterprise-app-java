@@ -4,5 +4,6 @@
   "resource_tags": $TAGS,
   "prefix": $PREFIX,
   "plan": "free",
-  "subscription_id": "testvalue"
+  "subscription_id": "testvalue",
+  "existing_resource_group_name": "geretain-test-e4j"
 }

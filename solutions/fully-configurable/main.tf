@@ -112,17 +112,18 @@ data "ibm_resource_instance" "ease_resource" {
   identifier = module.ease.ease_instance.id
 }
 
-# Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
+# reading the IAM account details from the provider to use when creating the S2S policies
+data "ibm_iam_account_settings" "provider_account" {}
 
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
+
+# parsing crn to collect the MQ capacity instance ID and its owner account ID
 module "crn_parser_mq_capacity_instance_crn" {
   count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
   version = "1.1.0"
   crn     = var.mq_s2s_policy_target_crn
 }
-
-# reading the IAM account details from the provider to use when creating the S2S policies
-data "ibm_iam_account_settings" "provider_account" {}
 
 locals {
   # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account

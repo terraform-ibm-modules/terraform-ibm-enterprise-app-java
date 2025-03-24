@@ -320,7 +320,7 @@
             {
               "key": "subscription_id",
               "required": true,
-              "default": ""
+              "default_value": ""
             },
             {
               "key": "existing_resource_group_name",

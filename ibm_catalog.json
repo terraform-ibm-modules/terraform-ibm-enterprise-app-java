@@ -265,7 +265,8 @@
                   "version_input": "prefix"
                 },
                 {
-                  "dependency_output": "capacity_crn",
+                  "reference_version": true,
+                  "dependency_input": "existing_mq_capacity_crn",
                   "version_input": "mq_s2s_policy_target_crn"
                 },
                 {
@@ -377,6 +378,12 @@
               "description": "The GitHub token to read from the application and configuration repositories."
             },
             {
+              "key": "maven_repository_username"
+            },
+            {
+              "key": "maven_repository_password"
+            },
+            {
               "key": "mq_s2s_policy_enable"
             },
             {
@@ -411,12 +418,6 @@
             },
             {
               "key": "db2_s2s_policy_target_crn"
-            },
-            {
-              "key": "maven_repository_username"
-            },
-            {
-              "key": "maven_repository_password"
             }
           ],
           "swappable_dependencies": []

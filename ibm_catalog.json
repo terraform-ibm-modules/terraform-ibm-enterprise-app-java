@@ -319,21 +319,8 @@
             },
             {
               "key": "subscription_id",
-              "required": true
-            },
-            {
-              "key": "source_repo_type",
               "required": true,
-              "options": [
-                {
-                  "displayname": "GitHub",
-                  "value": "git"
-                },
-                {
-                  "displayname": "Maven",
-                  "value": "maven"
-                }
-              ]
+              "default": ""
             },
             {
               "key": "existing_resource_group_name",
@@ -359,19 +346,35 @@
               }
             },
             {
+              "key": "source_repo_type",
+              "options": [
+                {
+                  "displayname": "GitHub",
+                  "value": "git"
+                },
+                {
+                  "displayname": "Maven",
+                  "value": "maven"
+                }
+              ]
+            },
+            {
               "key": "source_repo"
             },
             {
               "key": "config_repo"
             },
             {
-              "key": "repos_git_token_secret_crn"
+              "key": "repos_git_token_secret_crn",
+              "hidden": true
             },
             {
-              "key": "subscription_id_secret_crn"
+              "key": "subscription_id_secret_crn",
+              "hidden": true
             },
             {
-              "key": "repos_git_token"
+              "key": "repos_git_token",
+              "description": "The GitHub token to read from the application and configuration repositories."
             },
             {
               "key": "mq_s2s_policy_enable"

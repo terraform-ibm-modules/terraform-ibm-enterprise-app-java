@@ -10,7 +10,8 @@
         "target_terraform",
         "terraform",
         "solution",
-        "application_modernization"
+        "application_modernization",
+        "ibm_beta"
       ],
       "keywords": [
         "IaC",
@@ -35,7 +36,7 @@
         },
         {
           "title": "Supports deploying of optional essential security and observability cloud services",
-          "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
+          "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services. <br/><br/>*Note: enabling the Observability additional services you need to manually edit the region to deploy the Event Notification component to one of its supported regions."
         },
         {
           "title": "Supports creating Service To Service authorisation policy towards a MQ instance",

@@ -25,7 +25,7 @@
         "microprofile"
       ],
       "short_description": "Cloud architecture including instance of Enterprise Application Service for Java with essential security and observability cloud services",
-      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services.<br/><br/>*Note: enabling the Observability additional services, the region to deploy the Event Notification component must be updated to one of its supported regions*.",
+      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services.<br/><br/>***Note:*** *enabling the Observability additional services, the region to deploy the Event Notification component must be updated to one of its supported regions*.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
       "provider_name": "IBM",

@@ -255,13 +255,11 @@
             },
             {
               "key": "prefix",
-              "required": true,
-              "description": "Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
+              "required": true
             },
             {
               "key": "region",
               "required": true,
-              "default_value": "us-east",
               "options": [
                 {
                   "displayname": "Washington (us-east)",

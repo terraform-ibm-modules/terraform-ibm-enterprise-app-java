@@ -131,9 +131,9 @@ locals {
   mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
-# creating S2S policy if enabled
-resource "ibm_iam_authorization_policy" "mq_s2s_policy" {
-  count = var.mq_s2s_policy_enable == true ? 1 : 0
+# creating S2S policy to MQ if enabled - MQ instance scope
+resource "ibm_iam_authorization_policy" "mq_s2s_policy_crn_scope" {
+  count = var.mq_s2s_policy_enable == true && var.mq_s2s_policy_target_crn != null ? 1 : 0
   roles = var.mq_s2s_policy_roles
 
   # limiting the source accountID of S2S policy to the provider account ID is used
@@ -169,11 +169,50 @@ resource "ibm_iam_authorization_policy" "mq_s2s_policy" {
     value    = "mqcloud"
   }
 
-  # limiting the target serviceInstance of S2S policy to the MQ instance ID
   resource_attributes {
     name     = "serviceInstance"
     operator = "stringEquals"
-    value    = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].service_instance : null
+    value    = module.crn_parser_mq_capacity_instance_crn[0].service_instance
+  }
+
+}
+
+# creating S2S policy to MQ if enabled - account scope scope
+resource "ibm_iam_authorization_policy" "mq_s2s_policy_account_scope" {
+  count = var.mq_s2s_policy_enable == true && var.mq_s2s_policy_target_crn == null ? 1 : 0
+  roles = var.mq_s2s_policy_roles
+
+  # limiting the source accountID of S2S policy to the provider account ID is used
+  subject_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.mq_s2s_subject_account_id
+  }
+
+  subject_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "enterprise-app-java"
+  }
+
+  # limiting the target serviceInstance of S2S policy to the Enterprise Application Service instance ID
+  subject_attributes {
+    name     = "serviceInstance"
+    operator = "stringEquals"
+    value    = module.ease.ease_instance.guid
+  }
+
+  # limiting the target accountID of S2S policy to the provider account ID
+  resource_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.mq_s2s_target_account_id
+  }
+
+  resource_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "mqcloud"
   }
 
 }
@@ -194,9 +233,9 @@ locals {
   db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
-# creating S2S policy if enabled
-resource "ibm_iam_authorization_policy" "db2_s2s_policy" {
-  count = var.db2_s2s_policy_enable == true ? 1 : 0
+# creating S2S policy to DB2 if enabled - DB2 instance scope
+resource "ibm_iam_authorization_policy" "db2_s2s_policy_crn_scope" {
+  count = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn != null ? 1 : 0
   roles = var.db2_s2s_policy_roles
 
   # limiting the source accountID of S2S policy to the provider account ID
@@ -232,10 +271,49 @@ resource "ibm_iam_authorization_policy" "db2_s2s_policy" {
     value    = "dashdb-for-transactions"
   }
 
-  # limiting the target serviceInstance of S2S policy to the DB2 instance ID
   resource_attributes {
     name     = "serviceInstance"
     operator = "stringEquals"
-    value    = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].service_instance : null
+    value    = module.crn_parser_db2_instance_crn[0].service_instance
   }
+}
+
+# creating S2S policy to DB2 if enabled - account scope
+resource "ibm_iam_authorization_policy" "db2_s2s_policy_account_scope" {
+  count = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn == null ? 1 : 0
+  roles = var.db2_s2s_policy_roles
+
+  # limiting the source accountID of S2S policy to the provider account ID
+  subject_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.db2_s2s_subject_account_id
+  }
+
+  subject_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "enterprise-app-java"
+  }
+
+  # limiting the target serviceInstance of S2S policy to the Enterprise Application Service instance ID
+  subject_attributes {
+    name     = "serviceInstance"
+    operator = "stringEquals"
+    value    = module.ease.ease_instance.guid
+  }
+
+  # limiting the target accountID of S2S policy to the provider account ID
+  resource_attributes {
+    name     = "accountId"
+    operator = "stringEquals"
+    value    = local.db2_s2s_target_account_id
+  }
+
+  resource_attributes {
+    name     = "serviceName"
+    operator = "stringEquals"
+    value    = "dashdb-for-transactions"
+  }
+
 }

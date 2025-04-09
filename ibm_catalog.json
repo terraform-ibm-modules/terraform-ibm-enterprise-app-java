@@ -39,8 +39,8 @@
           "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
         },
         {
-          "title": "Supports creating Service To Service authorisation policy towards a MQ instance",
-          "description": "Supports creating Service To Service authorisation policy towards a MQ instance to allow the Java application running in Enterprise Application Service for Java instance to connect to this"
+          "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
+          "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
         }
       ],
       "flavors": [

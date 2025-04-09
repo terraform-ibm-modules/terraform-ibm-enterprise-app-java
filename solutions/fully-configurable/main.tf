@@ -126,9 +126,9 @@ module "crn_parser_mq_capacity_instance_crn" {
 }
 
 locals {
-  # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
+  # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the MQ instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
   mq_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
-  mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : null
+  mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
 # creating S2S policy if enabled
@@ -189,9 +189,9 @@ module "crn_parser_db2_instance_crn" {
 }
 
 locals {
-  # for S2S policy, the source accountID is the one owning the ease instance and the target is the account creating the policy, so in this case are the same account
+  # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the DB2 instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
   db2_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
-  db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : null
+  db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
 # creating S2S policy if enabled

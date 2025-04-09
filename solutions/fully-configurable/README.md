@@ -4,8 +4,8 @@ This architecture creates an instance of Enterprise Application Service for Java
 
 - A resource group, if an existing one is not passed in.
 - An Enterprise Application Service for Java instance.
-- An optional [Service to Service authorisation policy](https://cloud.ibm.com/docs/account?topic=account-serviceauth) to authorise the Enterprise Application instance to reach an instance of MQ service. The authorisation policy is configured at MQ resource instance scope if enabled.
-- An optional [Service to Service authorisation policy](https://cloud.ibm.com/docs/account?topic=account-serviceauth) to authorise the Enterprise Application instance to reach an instance of DB2 service. The authorisation policy is configured at DB2 resource instance scope if enabled.
+- An optional [Service to Service authorisation policy](https://cloud.ibm.com/docs/account?topic=account-serviceauth) to authorise the Enterprise Application instance to reach an instance of MQ service. If enabled, the authorisation policy is configured at MQ resource instance scope if its CRN is provided, otherwise the policy is created for MQ service at account scope, with the account owner of the Enterprise Application instance as target account.
+- An optional [Service to Service authorisation policy](https://cloud.ibm.com/docs/account?topic=account-serviceauth) to authorise the Enterprise Application instance to reach an instance of DB2 service. If enabled, the authorisation policy is configured at DB2 resource instance scope if its CRN is provided, otherwise the policy is created for DB2 service at account scope, with the account owner of the Enterprise Application instance as target account.
 
 <!-- ![Enterprise Application Service for Java architecture](../../reference-architecture/deployable-architecture-ease.svg) -->
 

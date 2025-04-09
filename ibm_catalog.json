@@ -110,6 +110,10 @@
                   {
                     "displayname": "Standard",
                     "value": "standard"
+                  },
+                  {
+                    "displayname": "Trial (for allowlisted accounts only)",
+                    "value": "free"
                   }
                 ]
               },

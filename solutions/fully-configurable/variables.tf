@@ -104,8 +104,8 @@ variable "subscription_id_secret_crn" {
 
 variable "mq_s2s_policy_enable" {
   type        = bool
-  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach MQ instance. Default to false."
-  default     = false
+  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach MQ instance. Default to true."
+  default     = true
 }
 
 variable "mq_s2s_policy_roles" {
@@ -122,12 +122,8 @@ variable "mq_s2s_policy_roles" {
 
 variable "mq_s2s_policy_target_crn" {
   type        = string
-  description = "MQ resource capacity instance CRN to set as target for the Service to Service policy. If mq_s2s_policy_enable is true this input variable is mandatory. Default to null."
+  description = "MQ resource capacity instance CRN to restrict the target for the Service to Service policy to MQ service instance. If mq_s2s_policy_enable is true but this is null the S2S policy is created at account scope on Enterprise Application Service instance account owner. Default to null."
   default     = null
-  validation {
-    condition     = var.mq_s2s_policy_enable == true ? var.mq_s2s_policy_target_crn != null : true
-    error_message = "If var.mq_s2s_policy_enable is true the MQ instance CRN to set as target of Service to Service policy cannot be null."
-  }
 }
 
 ###################################################
@@ -136,8 +132,8 @@ variable "mq_s2s_policy_target_crn" {
 
 variable "db2_s2s_policy_enable" {
   type        = bool
-  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach DB2 instance. Default to false."
-  default     = false
+  description = "Flag to enable creation of the Service to Service policy to enable the Enterprise Application Service instance to reach DB2 instance. Default to true."
+  default     = true
 }
 
 variable "db2_s2s_policy_roles" {
@@ -154,12 +150,8 @@ variable "db2_s2s_policy_roles" {
 
 variable "db2_s2s_policy_target_crn" {
   type        = string
-  description = "DB2 resource instance CRN to set as target for the Service to Service policy. If db2_s2s_policy_enable is true this input variable is mandatory. Default to null."
+  description = "DB2 resource capacity instance CRN to restrict the target for the Service to Service policy to DB2 service instance. If db2_s2s_policy_enable is true but this is null the S2S policy is created at account scope on Enterprise Application Service instance account owner. Default to null."
   default     = null
-  validation {
-    condition     = var.db2_s2s_policy_enable == true ? var.db2_s2s_policy_target_crn != null : true
-    error_message = "If var.db2_s2s_policy_enable is true the SB2 instance CRN to set as target of Service to Service policy cannot be null."
-  }
 }
 
 ###################################################

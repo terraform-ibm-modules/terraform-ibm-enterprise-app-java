@@ -66,8 +66,8 @@
                   "description": "Supports application build and configuration using dedicated repositories"
                 },
                 {
-                  "title": "Supports Service To Service authorisation policy creation to a MQ instance",
-                  "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
+                  "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
+                  "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
                 }
               ],
               "diagrams": [

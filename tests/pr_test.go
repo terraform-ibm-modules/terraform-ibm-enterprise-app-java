@@ -246,7 +246,12 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 		if assert.NotEmpty(t, dashboardUrl, "EASe application dashboardUrl retrieved from terraform output but it looks empty") {
 			resp, err := http.Get(dashboardUrl)
 			if assert.Nil(t, err, "Error in performing request towards dashboardURL") {
-				defer resp.Body.Close()
+				defer func() {
+					err := resp.Body.Close()
+					if assert.Nil(t, err, "Error in closing response body") {
+						t.Logf("Error in closing response body")
+					}
+				}()
 				// collecting response details
 				statusCode := resp.StatusCode
 				status := resp.Status

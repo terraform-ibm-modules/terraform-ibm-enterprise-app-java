@@ -9,7 +9,7 @@ locals {
 
 module "resource_group" {
   source                       = "terraform-ibm-modules/resource-group/ibm"
-  version                      = "1.1.6"
+  version                      = "1.2.0"
   existing_resource_group_name = var.existing_resource_group_name
 }
 
@@ -233,7 +233,7 @@ locals {
   db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
-# creating S2S policy to DB2 if enabled - DB2 instance scope
+# creating S2S policy to DB2 if enabled - DB2 instance scope
 resource "ibm_iam_authorization_policy" "db2_s2s_policy_crn_scope" {
   count = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn != null ? 1 : 0
   roles = var.db2_s2s_policy_roles
@@ -278,7 +278,7 @@ resource "ibm_iam_authorization_policy" "db2_s2s_policy_crn_scope" {
   }
 }
 
-# creating S2S policy to DB2 if enabled - account scope
+# creating S2S policy to DB2 if enabled - account scope
 resource "ibm_iam_authorization_policy" "db2_s2s_policy_account_scope" {
   count = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn == null ? 1 : 0
   roles = var.db2_s2s_policy_roles

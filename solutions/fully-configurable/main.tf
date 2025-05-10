@@ -112,8 +112,12 @@ data "ibm_resource_instance" "ease_resource" {
   identifier = module.ease.ease_instance.id
 }
 
-# Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
+# reading the IAM account details from the provider to use when creating the S2S policies
+data "ibm_iam_account_settings" "provider_account" {}
 
+# Define Service to Service (S2S) policy between Enterprise Application Service instance and MQ capacity instance
+
+# parsing crn to collect the MQ capacity instance ID and its owner account ID
 module "crn_parser_mq_capacity_instance_crn" {
   count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
@@ -121,11 +125,8 @@ module "crn_parser_mq_capacity_instance_crn" {
   crn     = var.mq_s2s_policy_target_crn
 }
 
-# reading the IAM account details from the provider to use when creating the S2S policies
-data "ibm_iam_account_settings" "provider_account" {}
-
 locals {
-  # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the MQ instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
+  # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the MQ instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
   mq_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
   mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
@@ -227,12 +228,12 @@ module "crn_parser_db2_instance_crn" {
 }
 
 locals {
-  # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the DB2 instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
+  # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the DB2 instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
   db2_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
   db2_s2s_target_account_id  = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
-# creating S2S policy to DB2 if enabled - DB2 instance scope
+# creating S2S policy to DB2 if enabled - DB2 instance scope
 resource "ibm_iam_authorization_policy" "db2_s2s_policy_crn_scope" {
   count = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn != null ? 1 : 0
   roles = var.db2_s2s_policy_roles
@@ -277,7 +278,7 @@ resource "ibm_iam_authorization_policy" "db2_s2s_policy_crn_scope" {
   }
 }
 
-# creating S2S policy to DB2 if enabled - account scope
+# creating S2S policy to DB2 if enabled - account scope
 resource "ibm_iam_authorization_policy" "db2_s2s_policy_account_scope" {
   count = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn == null ? 1 : 0
   roles = var.db2_s2s_policy_roles

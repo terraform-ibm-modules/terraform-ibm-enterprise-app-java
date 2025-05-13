@@ -1,225 +1,224 @@
 {
-    "products": [
-      {
-        "name": "deploy-arch-ibm-ease",
-        "label": "Cloud automation for Enterprise Application Service",
-        "product_kind": "solution",
-        "tags": [
-          "enterprise_app",
-          "ibm_created",
-          "target_terraform",
-          "terraform",
-          "solution"
-        ],
-        "keywords": [
-          "IaC",
-          "infrastructure as code",
-          "terraform",
-          "solution"
-        ],
-        "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
-        "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public cloud.",
-        "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
-        "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
-        "provider_name": "IBM",
-        "features": [
-          {
-            "title": "Creates an instance of Enterprise Application Service for Java",
-            "description": "Creates and configures an instance of Enterprise Application Service for Java"
+  "products": [
+    {
+      "name": "deploy-arch-ibm-ease",
+      "label": "Cloud automation for Enterprise Application Service",
+      "product_kind": "solution",
+      "tags": [
+        "enterprise_app",
+        "ibm_created",
+        "target_terraform",
+        "terraform",
+        "solution"
+      ],
+      "keywords": [
+        "IaC",
+        "infrastructure as code",
+        "terraform",
+        "solution"
+      ],
+      "short_description": "Creates and configures an instance of Enterprise Application Service for Java",
+      "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public cloud.",
+      "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
+      "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Creates an instance of Enterprise Application Service for Java",
+          "description": "Creates and configures an instance of Enterprise Application Service for Java"
+        },
+        {
+          "title": "Supports application build",
+          "description": "Supports application build and configuration using dedicated repositories"
+        },
+        {
+          "title": "Supports Service To Service authorisation policy creation to a MQ instance",
+          "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
+        }
+      ],
+      "flavors": [
+        {
+          "label": "Fully Configurable",
+          "name": "fully-configurable",
+          "install_type": "fullstack",
+          "working_directory": "solutions/fully-configurable",
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": []
           },
-          {
-            "title": "Supports application build",
-            "description": "Supports application build and configuration using dedicated repositories"
-          },
-          {
-            "title": "Supports Service To Service authorisation policy creation to a MQ instance",
-            "description": "Supports Service To Service authorisation policy creation to a MQ instance to allow the Enterprise Application Service for Java to connect to this"
-          }
-        ],
-        "flavors": [
-          {
-            "label": "Fully Configurable",
-            "name": "fully-configurable",
-            "install_type": "fullstack",
-            "working_directory": "solutions/fully-configurable",
-            "compliance": {
-              "authority": "scc-v3",
-              "profiles": []
-            },
-            "iam_permissions": [
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "enterprise-application-service"
+            }
+          ],
+          "architecture": {
+            "features": [
               {
-                "role_crns": [
-                  "crn:v1:bluemix:public:iam::::role:Editor"
-                ],
-                "service_name": "enterprise-application-service"
+                "title": "Creates an instance of Enterprise Application Service for Java",
+                "description": "Creates and configures an instance of Enterprise Application Service for Java"
+              },
+              {
+                "title": "Supports application build",
+                "description": "Supports application build and configuration using dedicated repositories"
+              },
+              {
+                "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
+                "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
               }
             ],
-            "architecture": {
-              "descriptions": "This architecture creates and configures an instance of Enterprise Application Service for Java",
-              "features": [
-                {
-                  "title": "Creates an instance of Enterprise Application Service for Java",
-                  "description": "Creates and configures an instance of Enterprise Application Service for Java"
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "Creates and configures an instance of Enterprise Application Service for Java",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
+                  "type": "image/svg+xml"
                 },
+                "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
+              }
+            ]
+          },
+          "configuration": [
+            {
+              "key": "ibmcloud_api_key",
+              "required": true
+            },
+            {
+              "key": "instance_name"
+            },
+            {
+              "key": "prefix",
+              "required": true
+            },
+            {
+              "key": "region",
+              "required": true,
+              "options": [
                 {
-                  "title": "Supports application build",
-                  "description": "Supports application build and configuration using dedicated repositories"
-                },
-                {
-                  "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
-                  "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
-                }
-              ],
-              "diagrams": [
-                {
-                  "diagram": {
-                    "caption": "Creates and configures an instance of Enterprise Application Service for Java",
-                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
-                    "type": "image/svg+xml"
-                  },
-                  "description": "This architecture creates and configures an instance of Enterprise Application Service for Java"
+                  "displayname": "Washington (us-east)",
+                  "value": "us-east"
                 }
               ]
             },
-            "configuration": [
-              {
-                "key": "ibmcloud_api_key",
-                "required": true
-              },
-              {
-                "key": "instance_name"
-              },
-              {
-                "key": "prefix",
-                "required": true
-              },
-              {
-                "key": "region",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Washington (us-east)",
-                    "value": "us-east"
-                  }
-                ]
-              },
-              {
-                "key": "plan",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Standard",
-                    "value": "standard"
-                  },
-                  {
-                    "displayname": "Trial (for allowlisted accounts only)",
-                    "value": "free"
-                  }
-                ]
-              },
-              {
-                "key": "subscription_id",
-                "required": true
-              },
-              {
-                "key": "source_repo_type",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "GitHub",
-                    "value": "git"
-                  },
-                  {
-                    "displayname": "Maven",
-                    "value": "maven"
-                  }
-                ],
-                "display_name": "Source repository type"
-              },
-              {
-                "key": "existing_resource_group_name",
-                "required": true,
-                "custom_config": {
-                  "type": "resource_group",
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                    "identifier": "rg_name"
-                  }
+            {
+              "key": "plan",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "Standard",
+                  "value": "standard"
+                },
+                {
+                  "displayname": "Trial (for allowlisted accounts only)",
+                  "value": "free"
                 }
-              },
-              {
-                "key": "resource_tags",
-                "type": "string",
-                "custom_config": {
-                    "type": "array",
-                    "grouping": "deployment",
-                    "original_grouping": "deployment",
-                    "config_constraints": {
-                        "type": "string"
-                    }
+              ]
+            },
+            {
+              "key": "subscription_id",
+              "required": true
+            },
+            {
+              "key": "source_repo_type",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "GitHub",
+                  "value": "git"
+                },
+                {
+                  "displayname": "Maven",
+                  "value": "maven"
                 }
-              },
-              {
-                "key": "source_repo"
-              },
-              {
-                "key": "config_repo"
-              },
-              {
-                "key": "repos_git_token_secret_crn"
-              },
-              {
-                "key": "subscription_id_secret_crn"
-              },
-              {
-                "key": "repos_git_token"
-              },
-              {
-                "key": "mq_s2s_policy_enable"
-              },
-              {
-                "key": "mq_s2s_policy_roles",
-                "type": "string",
-                "custom_config": {
-                    "type": "array",
-                    "grouping": "deployment",
-                    "original_grouping": "deployment",
-                    "config_constraints": {
-                        "type": "string"
-                    }
+              ],
+              "display_name": "Source repository type"
+            },
+            {
+              "key": "existing_resource_group_name",
+              "required": true,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "identifier": "rg_name"
                 }
-              },
-              {
-                "key": "mq_s2s_policy_target_crn"
-              },
-              {
-                "key": "db2_s2s_policy_enable"
-              },
-              {
-                "key": "db2_s2s_policy_roles",
-                "type": "string",
-                "custom_config": {
-                    "type": "array",
-                    "grouping": "deployment",
-                    "original_grouping": "deployment",
-                    "config_constraints": {
-                        "type": "string"
-                    }
-                }
-              },
-              {
-                "key": "db2_s2s_policy_target_crn"
-              },
-              {
-                "key": "maven_repository_username"
-              },
-              {
-                "key": "maven_repository_password"
               }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+            },
+            {
+              "key": "resource_tags",
+              "type": "string",
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "key": "source_repo"
+            },
+            {
+              "key": "config_repo"
+            },
+            {
+              "key": "repos_git_token_secret_crn"
+            },
+            {
+              "key": "subscription_id_secret_crn"
+            },
+            {
+              "key": "repos_git_token"
+            },
+            {
+              "key": "mq_s2s_policy_enable"
+            },
+            {
+              "key": "mq_s2s_policy_roles",
+              "type": "string",
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "key": "mq_s2s_policy_target_crn"
+            },
+            {
+              "key": "db2_s2s_policy_enable"
+            },
+            {
+              "key": "db2_s2s_policy_roles",
+              "type": "string",
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "key": "db2_s2s_policy_target_crn"
+            },
+            {
+              "key": "maven_repository_username"
+            },
+            {
+              "key": "maven_repository_password"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

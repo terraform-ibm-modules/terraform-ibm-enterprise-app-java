@@ -73,8 +73,8 @@
                 "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
               },
               {
-                "title": "Supports creating Service To Service authorisation policy towards a MQ instance",
-                "description": "Supports creating Service To Service authorisation policy towards a MQ instance to allow the Java application running in Enterprise Application Service for Java instance to connect to this"
+                "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
+                "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
               }
             ],
             "diagrams": [
@@ -84,32 +84,35 @@
                   "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
                   "type": "image/svg+xml"
                 },
-                "description": "This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
+                "description": "This architecture supports creating and configuring Enterprise Application Service for Java resources"
               }
             ]
           },
           "dependencies": [
             {
-              "name": "testing-deploy-arch-ibm-secrets-manager",
-              "id": "5f149ae6-d781-460a-977d-c8c4171ad0fa-global",
+              "name": "deploy-arch-ibm-secrets-manager",
+              "id": "6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global",
               "flavors": [
-                "standard"
+                "fully-configurable"
               ],
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "version": "^1.2.2",
+              "version": "^v2.4.0",
               "optional": true,
               "on_by_default": true,
-              "default_flavor": "standard",
+              "default_flavor": "fully-configurable",
               "input_mapping": [
-                {
-                  "reference_version": true,
-                  "dependency_input": "region",
-                  "version_input": "region"
-                },
                 {
                   "reference_version": true,
                   "dependency_input": "prefix",
                   "version_input": "prefix"
+                },
+                {
+                  "dependency_output": "secrets_manager_crn",
+                  "version_input": "existing_secrets_manager_crn"
+                },
+                {
+                  "value": "us-south",
+                  "dependency_input": "region"
                 }
               ],
               "ignore_auto_referencing": [
@@ -117,21 +120,20 @@
               ]
             },
             {
-              "name": "testing-deploy-arch-ibm-observability",
-              "id": "daf2cf91-2384-4205-b7f4-621299a4896d-global",
+              "name": "deploy-arch-ibm-observability",
+              "id": "a3137d28-79e0-479d-8a24-758ebd5a0eab-global",
               "flavors": [
-                "standard"
+                "instances"
               ],
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
-              "version": "^1.3.3",
+              "version": "^v3.0.3",
               "on_by_default": true,
-              "default_flavor": "standard",
+              "default_flavor": "instances",
               "input_mapping": [
                 {
-                  "reference_version": true,
-                  "dependency_input": "region",
-                  "version_input": "region"
+                  "value": "us-south",
+                  "dependency_input": "region"
                 },
                 {
                   "reference_version": true,
@@ -149,8 +151,8 @@
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
               "on_by_default": true,
-              "default_flavor": "standard",
-              "version": "^v1.19.1",
+              "default_flavor": "resource-group-only",
+              "version": "^v3.0.7",
               "input_mapping": [
                 {
                   "reference_version": true,
@@ -158,8 +160,8 @@
                   "version_input": "prefix"
                 },
                 {
-                  "dependency_input": "skip_iam_account_settings",
-                  "value": true
+                  "dependency_input": "provision_trusted_profile_projects",
+                  "value": false
                 },
                 {
                   "dependency_output": "workload_resource_group_name",
@@ -297,16 +299,17 @@
                   "identifier": "rg_name"
                 }
               }
-            },{
+            },
+            {
               "key": "resource_tags",
               "type": "string",
               "custom_config": {
-                  "type": "array",
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                      "type": "string"
-                  }
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
               }
             },
             {
@@ -353,12 +356,12 @@
               "key": "mq_s2s_policy_roles",
               "type": "string",
               "custom_config": {
-                  "type": "array",
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                      "type": "string"
-                  }
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
               }
             },
             {
@@ -371,12 +374,12 @@
               "key": "db2_s2s_policy_roles",
               "type": "string",
               "custom_config": {
-                  "type": "array",
-                  "grouping": "deployment",
-                  "original_grouping": "deployment",
-                  "config_constraints": {
-                      "type": "string"
-                  }
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
               }
             },
             {

@@ -82,6 +82,8 @@ func TestMain(m *testing.M) {
 	smCRN = config.SmCRN
 	ghTokenSecretId = config.GhTokenSecretId               // pragma: allowlist secret
 	subscriptionIdSecretId = config.SubscriptionIdSecretId // pragma: allowlist secret
+	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
+
 	// generating secret CRN from SM CRN and secret ID
 	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret

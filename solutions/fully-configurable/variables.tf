@@ -56,7 +56,7 @@ variable "plan" {
 
 variable "region" {
   type        = string
-  description = "The desired region for deploying IBM Enterprise Application Service instance."
+  description = "The region to provision all resources in. [Learn more](https://terraform-ibm-modules.github.io/documentation/#/region) about how to select different regions for different services."
   default     = "us-east"
 }
 

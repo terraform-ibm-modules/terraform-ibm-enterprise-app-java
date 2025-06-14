@@ -9,7 +9,7 @@ locals {
 
 module "resource_group" {
   source                       = "terraform-ibm-modules/resource-group/ibm"
-  version                      = "1.2.0"
+  version                      = "1.2.1"
   existing_resource_group_name = var.existing_resource_group_name
 }
 
@@ -24,7 +24,7 @@ module "resource_group" {
 module "crn_parser_token" {
   count   = var.repos_git_token_secret_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.1.0"
+  version = "1.2.0"
   crn     = var.repos_git_token_secret_crn
 }
 
@@ -52,7 +52,7 @@ locals {
 module "crn_parser_subid" {
   count   = var.subscription_id_secret_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.1.0"
+  version = "1.2.0"
   crn     = var.subscription_id_secret_crn
 }
 
@@ -117,7 +117,7 @@ data "ibm_resource_instance" "ease_resource" {
 module "crn_parser_mq_capacity_instance_crn" {
   count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.1.0"
+  version = "1.2.0"
   crn     = var.mq_s2s_policy_target_crn
 }
 
@@ -222,7 +222,7 @@ resource "ibm_iam_authorization_policy" "mq_s2s_policy_account_scope" {
 module "crn_parser_db2_instance_crn" {
   count   = var.db2_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.1.0"
+  version = "1.2.0"
   crn     = var.db2_s2s_policy_target_crn
 }
 

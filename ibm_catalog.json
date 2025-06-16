@@ -21,6 +21,7 @@
       "long_description": "This architecture supports creating and configuring an instance of Enterprise Application Service for Java to build and deploy applications on public cloud.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
+      "support_details": "This product is in the community registry, as such support is handled through the originated repo. If you experience issues please open an issue in the repository [https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues). Please note this product is not supported via the IBM Cloud Support Center.",
       "provider_name": "IBM",
       "features": [
         {

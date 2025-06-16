@@ -88,7 +88,7 @@ func TestMain(m *testing.M) {
 	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
 
 	log.Printf("Using SM CRN %s to pull GitHub token", ghTokenSecretCRN) // pragma: allowlist secret
-	log.Printf("Using SM CRN %s to pull SubscriptionID", ghTokenSecretCRN)
+	log.Printf("Using SM CRN %s to pull SubscriptionID", subscriptionIdSecretCRN)
 	log.Printf("Using MQ capacity instance CRN %s for S2S policy", mqCapacityInstanceCRN)
 
 	os.Exit(m.Run())

@@ -382,6 +382,9 @@
               "key": "config_repo"
             },
             {
+              "key": "sm_ibmcloud_api_key"
+            },
+            {
               "key": "repos_git_token_secret_crn",
               "hidden": true
             },

@@ -218,6 +218,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "provider_visibility", Value: "public", DataType: "string"},
 		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
 		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},

@@ -5,6 +5,5 @@
   "prefix": $PREFIX,
   "plan": "free",
   "subscription_id": "testvalue",
-  "existing_resource_group_name": "geretain-test-e4j",
-  "provider_visibility": "public"
+  "existing_resource_group_name": "geretain-test-e4j"
 }

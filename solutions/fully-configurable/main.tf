@@ -60,7 +60,7 @@ module "crn_parser_subid" {
 # if null it is left to empty string
 locals {
   sm_region           = var.subscription_id_secret_crn != null ? module.crn_parser_subid[0].region : (var.repos_git_token_secret_crn != null ? module.crn_parser_token[0].region : "")
-  sm_ibmcloud_api_key = var.sm_ibmcloud_api_key == null ? var.ibmcloud_api_key : var.sm_ibmcloud_api_key
+  sm_ibmcloud_api_key = var.secrets_manager_ibmcloud_api_key == null ? var.ibmcloud_api_key : var.secrets_manager_ibmcloud_api_key
 }
 
 data "ibm_sm_arbitrary_secret" "sm_subscription_id" {

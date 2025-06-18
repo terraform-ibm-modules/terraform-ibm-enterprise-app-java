@@ -32,7 +32,7 @@
       "features": [
         {
           "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
-          "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud"
+          "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud.<br/>For more details about the features and the options available please refer to this [page](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
         },
         {
           "title": "Supports deploying of optional essential security and observability cloud services",
@@ -58,19 +58,10 @@
             }
           ],
           "architecture": {
-            "descriptions": "This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services",
             "features": [
               {
-                "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
-                "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud"
-              },
-              {
-                "title": "Supports deploying of optional essential security and observability cloud services",
-                "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
-              },
-              {
-                "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
-                "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
+                "title": " ",
+                "description": "Configured to use IBM secure by default standards, but can be edited to fit your use case."
               }
             ],
             "diagrams": [
@@ -138,8 +129,9 @@
                   "reference_version": true
                 },
                 {
-                  "value": "us-south",
-                  "dependency_input": "region"
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
                 }
               ],
               "optional": true,

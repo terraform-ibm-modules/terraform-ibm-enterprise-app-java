@@ -73,7 +73,7 @@ variable "instance_name" {
 
 variable "plan" {
   type        = string
-  description = "The desired pricing plan for IBM Enterprise Application Service instance."
+  description = "The desired pricing plan for Enterprise Application Service instance."
   default     = "standard"
   validation {
     # free plan is added only to allow test/validation execution (its catalog name is Trial, programmatic name is free)
@@ -86,6 +86,11 @@ variable "region" {
   type        = string
   description = "The region to provision all resources in. [Learn more](https://terraform-ibm-modules.github.io/documentation/#/region) about how to select different regions for different services."
   default     = "us-east"
+
+  validation {
+    condition     = contains(["us-east"], var.region)
+    error_message = "Invalid value for `region` , valid values for Enterprise Application Service offering are: `us-east`"
+  }
 }
 
 variable "source_repo" {

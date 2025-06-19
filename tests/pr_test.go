@@ -253,7 +253,7 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 		},
 		TemplateFolder:         fullyConfigurableSolutionTerraformDir,
 		Tags:                   []string{"test-schematic"},
-		Prefix:                 "ease-upgda",
+		Prefix:                 "ej-uda",
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
 		Region:                 "us-east",

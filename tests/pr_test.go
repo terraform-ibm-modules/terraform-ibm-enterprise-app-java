@@ -82,6 +82,8 @@ func TestMain(m *testing.M) {
 	smCRN = config.SmCRN
 	ghTokenSecretId = config.GhTokenSecretId               // pragma: allowlist secret
 	subscriptionIdSecretId = config.SubscriptionIdSecretId // pragma: allowlist secret
+	mqCapacityInstanceCRN = config.MQCapacityInstanceCRN
+
 	// generating secret CRN from SM CRN and secret ID
 	ghTokenSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), ghTokenSecretId)               // pragma: allowlist secret
 	subscriptionIdSecretCRN = fmt.Sprintf("%ssecret:%s", strings.TrimSuffix(smCRN, ":"), subscriptionIdSecretId) // pragma: allowlist secret
@@ -180,7 +182,8 @@ func TestRunDrCompleteExample(t *testing.T) {
 }
 
 func TestRunUpgradeExample(t *testing.T) {
-	t.Parallel()
+	// disabling parallel tests to avoid failure of test when reusing the same repos
+	// t.Parallel()
 
 	extTerraformVars := map[string]interface{}{
 		"subscription_id_secret_crn": subscriptionIdSecretCRN,
@@ -197,7 +200,8 @@ func TestRunUpgradeExample(t *testing.T) {
 }
 
 func TestRunStandardSolutionSchematics(t *testing.T) {
-	t.Parallel()
+	// disabling parallel tests to avoid failure of test when reusing the same repos
+	// t.Parallel()
 
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing: t,
@@ -216,6 +220,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "provider_visibility", Value: "public", DataType: "string"},
 		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
 		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
 		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
@@ -233,6 +238,49 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 
 	err := options.RunSchematicTest()
 	assert.Nil(t, err, "This should not have errored")
+}
+
+func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
+	// disabling parallel tests to avoid failure of test when reusing the same repos
+	// t.Parallel()
+
+	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
+		Testing: t,
+		TarIncludePatterns: []string{
+			"*.tf",
+			"modules/*/*.tf",
+			fullyConfigurableSolutionTerraformDir + "/*.tf",
+		},
+		TemplateFolder:         fullyConfigurableSolutionTerraformDir,
+		Tags:                   []string{"test-schematic"},
+		Prefix:                 "ej-uda",
+		DeleteWorkspaceOnFail:  false,
+		WaitJobCompleteMinutes: 60,
+		Region:                 "us-east",
+	})
+
+	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
+		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "provider_visibility", Value: "public", DataType: "string"},
+		{Name: "source_repo", Value: appSourceRepo, DataType: "string"},
+		{Name: "config_repo", Value: appConfigRepo, DataType: "string"},
+		{Name: "repos_git_token_secret_crn", Value: ghTokenSecretCRN, DataType: "string"},
+		{Name: "subscription_id_secret_crn", Value: subscriptionIdSecretCRN, DataType: "string"},
+		{Name: "plan", Value: testPlan, DataType: "string"},
+		{Name: "region", Value: region, DataType: "string"},
+		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
+		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
+		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
+		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
+		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
+	}
+
+	err := options.RunSchematicUpgradeTest()
+	if !options.UpgradeTestSkipped {
+		assert.NoError(t, err, "Schematic Upgrade Test had an unexpected error")
+	}
 }
 
 // checking the dashboard URL in the terraform output

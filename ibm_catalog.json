@@ -295,7 +295,7 @@
             },
             {
               "key": "subscription_id",
-              "description": "ID of the subscription to use to create the Enterprise Application Service instance",
+              "description": "ID of the subscription to use to create the Enterprise Application Service instance. If you don't want to pass it explicitly you should set it to null.",
               "required": true
             },
             {

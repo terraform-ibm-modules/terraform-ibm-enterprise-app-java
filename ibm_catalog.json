@@ -24,10 +24,10 @@
         "microprofile"
       ],
       "short_description": "Cloud architecture including instance of Enterprise Application Service for Java with essential security and observability cloud services",
-      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services.<br/><br/>***Note:*** *enabling the Observability additional services, the region to deploy the Event Notification component must be updated to one of its supported regions*.<br/><br/>ℹ️ This Terraform-based automation is part of a broader suite of IBM-maintained Infrastructure as Code (IaC) assets, each following the naming pattern \"Cloud automation for *servicename*\" and focusing on single IBM Cloud service. These single-service deployable architectures can be used on their own to streamline and automate service deployments through an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or assembled together into a broader [automated IaC stack](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to automate the deployment of an end-to-end solution architecture.",
+      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution for building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services.<br/><br/>***Note:*** *enabling the Observability additional services, the region to deploy the Event Notification component must be updated to one of its supported regions*.<br/><br/>ℹ️ This Terraform-based automation is part of a broader suite of IBM-maintained Infrastructure as Code (IaC) assets, each following the naming pattern \"Cloud automation for *servicename*\" and focusing on single IBM Cloud service. These single-service deployable architectures can be used on their own to streamline and automate service deployments through an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or assembled together into a broader [automated IaC stack](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to automate the deployment of an end-to-end solution architecture.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
-      "support_details": "This product is in the community registry, as such support is handled through the originated repo. If you experience issues please open an issue in the repository [https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues). Please note this product is not supported via the IBM Cloud Support Center.",
+      "support_details": "This product is in the community registry, support is handled through the originated repo. If you experience issues please open an issue in the repository [https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues). Please note this product is not supported via the IBM Cloud Support Center.",
       "provider_name": "IBM",
       "features": [
         {
@@ -39,8 +39,8 @@
           "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
         },
         {
-          "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
-          "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
+          "title": "Supports Service To Service authorisation policy creation to MQ and DB2 instances",
+          "description": "Supports Service To Service authorisation policy creation to MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
         }
       ],
       "flavors": [
@@ -78,7 +78,7 @@
           "dependencies": [
             {
               "name": "deploy-arch-ibm-secrets-manager",
-              "description": "Enable to provisions and configures IBM Cloud Secrets Manager for securely storing generated secrets.",
+              "description": "Enable to provision and configure IBM Cloud Secrets Manager for securely storing generated secrets.",
               "id": "6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global",
               "flavors": [
                 "fully-configurable"
@@ -307,7 +307,7 @@
               "key": "enable_platform_metrics",
               "type": "string",
               "default_value": "true",
-              "description": "When set to `true`, the IBM Cloud Monitoring instance will be configured to collect platform metrics from the provided region. You can configure 1 instance only of the IBM Cloud Monitoring service per region to collect platform metrics in that location. Check with the account or service administrator if another monitoring instance has already been configured. You may not have permissions to see all monitoring instances in the region. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_enabling).",
+              "description": "When set to `true`, the IBM Cloud Monitoring instance will be configured to collect platform metrics from the provided region. You can configure only 1 instance of the IBM Cloud Monitoring service per region to collect platform metrics in that location. Check with the account or service administrator if another monitoring instance has already been configured. You may not have permissions to see all monitoring instances in the region. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_enabling).",
               "required": true,
               "virtual": true
             },

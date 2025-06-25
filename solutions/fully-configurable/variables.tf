@@ -127,14 +127,13 @@ variable "repos_git_token" {
 
 variable "subscription_id" {
   type        = string
-  description = "ID of the subscription to use to create the Enterprise Application Service instance."
-  default     = null
+  description = "ID of the subscription to use to create the Enterprise Application Service instance. Set to null to use the value from subscription_id_secret_crn."
   sensitive   = true
 }
 
 variable "subscription_id_secret_crn" {
   type        = string
-  description = "The CRN of the existing secret storing on Secrets Manager the subscriptionID to use to create the Enterprise Application Service instance."
+  description = "The CRN of the existing secret storing on Secrets Manager the subscriptionID to use to create the Enterprise Application Service instance. Default to null."
   default     = null
   validation {
     condition     = var.subscription_id_secret_crn == null ? var.subscription_id != null : true

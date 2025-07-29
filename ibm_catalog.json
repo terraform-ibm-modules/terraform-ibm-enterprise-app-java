@@ -489,7 +489,8 @@
             {
               "key": "db2_s2s_policy_target_crn"
             }
-          ]
+          ],
+          "terraform_version": "1.10.5"
         }
       ]
     }

@@ -60,9 +60,8 @@ variable "prefix" {
 
 variable "existing_resource_group_name" {
   type        = string
-  description = "The name of the existing resource group to provision resources in to."
-  nullable    = false
-  default     = "Default"
+  description = "The name of an existing resource group to provision the resources. If not provided the default resource group will be used."
+  default     = null
 }
 
 variable "instance_name" {

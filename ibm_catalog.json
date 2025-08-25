@@ -24,24 +24,24 @@
         "Jakarta",
         "microprofile"
       ],
-      "short_description": "Cloud architecture including instance of Enterprise Application Service for Java with essential security and observability cloud services",
-      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services.<br/><br/>***Note:*** *enabling the Observability additional services, the region to deploy the Event Notification component must be updated to one of its supported regions*.<br/><br/>ℹ️ This Terraform-based automation is part of a broader suite of IBM-maintained Infrastructure as Code (IaC) assets, each following the naming pattern \"Cloud automation for *servicename*\" and focusing on single IBM Cloud service. These single-service deployable architectures can be used on their own to streamline and automate service deployments through an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or assembled together into a broader [automated IaC stack](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to automate the deployment of an end-to-end solution architecture.",
+      "short_description": "Creates and configures an IBM Enterprise Application Service for Java instance with optional security and observability tools. ",
+      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution for building and running Java applications on IBM Cloud. This deployable architecture supports deploying an instance of Enterprise Application Service together with optional security and observability tools.\n\nℹ️ This deployable architecture is a part of a larger collection that IBM provides. Each deployable architecture focuses on a single IBM Cloud service. You can use these deployable architectures on their own to automate deployments by following an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or you can [combine them together](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to deploy a more complex end-to-end solution architecture.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
       "support_details": "This product is in the community registry, as such support is handled through the originated repo. If you experience issues please open an issue in the repository [https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues). Please note this product is not supported via the IBM Cloud Support Center.",
       "provider_name": "IBM",
       "features": [
         {
-          "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
-          "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud.<br/>For more details about the features and the options available please refer to this [page](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
+          "title": "Creates an Enterprise Application Service instance",
+          "description": "Get started with Enterprise Application Service by creating an instance. [Learn more](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
         },
         {
-          "title": "Supports deploying of optional essential security and observability cloud services",
-          "description": "Supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services"
+          "title": "Sets up optional observability tools",
+          "description": "Use Enterprise Application Service with [Cloud automation for Observability](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-observability-a3137d28-79e0-479d-8a24-758ebd5a0eab-global), which provides monitoring and logging capabilities to deliver deep operational insights into your Enterprise Application Service deployment."
         },
         {
-          "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
-          "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
+          "title": "Sets up authorization policies to MQ and Db2 instances",
+          "description": "Sets up IBM IAM authorization policies between the Enterprise Application Service instance and MQ and Db2 instances."
         }
       ],
       "flavors": [
@@ -62,24 +62,24 @@
             "features": [
               {
                 "title": " ",
-                "description": "Configured to use IBM secure by default standards, but can be edited to fit your use case."
+                "description": "Configured to use IBM secure-by-default standards, but you can edit it to fit your use case."
               }
             ],
             "diagrams": [
               {
                 "diagram": {
-                  "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability cloud services",
+                  "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability tools.",
                   "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
                   "type": "image/svg+xml"
                 },
-                "description": "This architecture supports creating and configuring Enterprise Application Service for Java resources"
+                "description": "This deployable architecture supports creating and configuring Enterprise Application Service for Java resources."
               }
             ]
           },
           "dependencies": [
             {
               "name": "deploy-arch-ibm-secrets-manager",
-              "description": "Enable to provisions and configures IBM Cloud Secrets Manager for securely storing generated secrets.",
+              "description": "Creates and configures an IBM Cloud Secrets Manager instance for securely storing secrets like API keys.",
               "id": "6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global",
               "flavors": [
                 "fully-configurable"
@@ -113,7 +113,7 @@
             },
             {
               "name": "deploy-arch-ibm-observability",
-              "description": "Configure IBM Cloud Logs, Cloud Monitoring and Activity Tracker event routing for analysing logs and metrics generated by the Enterprise Application Service instance.",
+              "description": "Configure IBM Cloud Logs, Cloud Monitoring and Activity Tracker event routing for analyzing logs and metrics that are generated by the Enterprise Application Service instance.",
               "flavors": [
                 "instances"
               ],
@@ -147,7 +147,7 @@
             },
             {
               "name": "deploy-arch-ibm-account-infra-base",
-              "description": "Cloud automation for account configuration organizes your IBM Cloud account with a ready-made set of resource groups by default. When you enable the “with account settings” option, it also applies baseline security and governance settings.",
+              "description": "Advanced users can leverage the Cloud automation for account configuration deployable architecture to configure an IBM Cloud account with a ready-made set of resource groups by default. When you enable the \"with account settings\" option, it also applies baseline security and governance settings.",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "flavors": [
                 "resource-group-only",
@@ -172,7 +172,7 @@
             },
             {
               "name": "deploy-arch-ibm-db2-cloud",
-              "description": "Enable to provision and configure IBM DB2 on Cloud instance and to automatically configure the authorisation policy with Enterprise Application Service instance.",
+              "description": "Creates and configures an IBM Db2 on Cloud instance and sets up the IAM authorization policy between the Enterprise Application Service instance and the Db2 instance.",
               "label": "Cloud automation for DB2 on Cloud",
               "version": "v1.1.0",
               "id": "90a14f92-4b86-4b27-acc1-dd6eefe0bfe9-global",
@@ -206,7 +206,7 @@
             },
             {
               "name": "deploy-arch-ibm-mq-cloud",
-              "description": "Enable to provision and configure IBM MQ on Cloud instance and to automatically configure the authorisation policy with Enterprise Application Service instance.",
+              "description": "Creates and configures an IBM MQ on Cloud instance and sets up the IAM authorization policy between the Enterprise Application Service instance and the MQ instance.",
               "version": "v1.0.0",
               "label": "Cloud automation for MQ on Cloud",
               "id": "30a698d4-ab56-4668-bc01-03cd2135d7e4-global",
@@ -296,7 +296,7 @@
             },
             {
               "key": "subscription_id",
-              "description": "ID of the subscription to use to create the Enterprise Application Service instance. If you don't want to pass it explicitly you should set it to null.",
+              "description": "ID of the subscription to use to create the Enterprise Application Service instance. If you don't want to pass it explicitly, set the value to `null`.",
               "required": true
             },
             {
@@ -316,7 +316,7 @@
               "required": true,
               "virtual": true,
               "default_value": "us-south",
-              "description": "The region to provision a new Secrets Manager instance in.",
+              "description": "The region where the Secrets Manager instance is created.",
               "options": [
                 {
                   "displayname": "Osaka (jp-osa)",
@@ -380,13 +380,13 @@
                 }
               ],
               "default_value": "__NOT_SET__",
-              "description": "The pricing plan to use when provisioning a Secrets Manager instance. Possible values: `standard`, `trial`. You can create only one Trial instance of Secrets Manager per account. Before you can create a new Trial instance, you must delete the existing Trial instance and its reclamation. [Learn more](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui#upgrade-instance-standard)."
+              "description": "The pricing plan to use to create a Secrets Manager instance. Possible values are `standard` or `trial`. You can create only one Trial instance of Secrets Manager per account. Before you can create a new Trial instance, you must delete the existing Trial instance and its reclamation. [Learn more](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui#upgrade-instance-standard)."
             },
             {
               "key": "enable_platform_metrics",
               "type": "string",
               "default_value": "true",
-              "description": "When set to `true`, the IBM Cloud Monitoring instance will be configured to collect platform metrics from the provided region. You can configure 1 instance only of the IBM Cloud Monitoring service per region to collect platform metrics in that location. Check with the account or service administrator if another monitoring instance has already been configured. You may not have permissions to see all monitoring instances in the region. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_enabling).",
+              "description": "When set to `true`, the IBM Cloud Monitoring instance is configured to collect platform metrics from the specified region. You can configure only one instance of the IBM Cloud Monitoring service per region to collect platform metrics in that location. Check with the account or service administrator if another Monitoring instance is already configured. You might not have permissions to see all monitoring instances in the region. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_enabling).",
               "required": true,
               "virtual": true
             },

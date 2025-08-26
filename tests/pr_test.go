@@ -16,7 +16,7 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testaddons"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
-	"gopkg.in/yaml.v3"
+	"gopkg.in/yaml.v2"
 )
 
 // Use existing resource group
@@ -340,6 +340,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 		map[string]interface{}{
 			"prefix":                       options.Prefix,
 			"existing_resource_group_name": resourceGroup,
+			"subscription_id":              subscriptionIdSecretId,
 		},
 	)
 
@@ -359,6 +360,7 @@ func TestDependencyPermutations(t *testing.T) {
 			Inputs: map[string]interface{}{
 				"prefix":                       "ease-perm",
 				"existing_resource_group_name": resourceGroup,
+				"subscription_id":              subscriptionIdSecretId,
 			},
 		},
 	})

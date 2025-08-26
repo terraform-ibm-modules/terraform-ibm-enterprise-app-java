@@ -33,7 +33,7 @@
       "features": [
         {
           "title": "Creates an Enterprise Application Service instance",
-          "description": "Get started with Enterprise Application Service by creating an instance. [Learn more](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
+          "description": "Supports building, deploying, and running Jakarta EE and MicroProfile applications on Liberty in public cloud. [Learn more](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
         },
         {
           "title": "Sets up optional observability tools",

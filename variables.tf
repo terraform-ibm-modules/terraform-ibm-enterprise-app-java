@@ -38,7 +38,7 @@ variable "region" {
 
 variable "source_repo" {
   type        = string
-  description = "The URL for the repository that contains the source code of the application to deploy and run through Enterprise Application Service on IBM Cloud."
+  description = "The URL for the GitHub repository that contains the source code, or the URL of the Maven artifact repository that contains enterprise archive (EAR) or web archive (WAR) files for the application to deploy and run through Enterprise Application Service on IBM Cloud."
   default     = null
 }
 
@@ -50,12 +50,12 @@ variable "config_repo" {
 
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repositories. It cannot be set to `null` if `var.source_repo` and `var.config_repo` are not also set to `null`."
+  description = "The GitHub token to read from the application and configuration repositories. It cannot be set to `null` if `var.source_repo` and `var.config_repo` are not also set to `null`. Make sure that these variables are consistently set to either `null` or a valid value."
   default     = null
   sensitive   = true
   validation {
     condition     = var.repos_git_token != null ? (var.source_repo != null && var.config_repo != null) : (var.source_repo == null && var.config_repo == null)
-    error_message = "`var.repos_git_token` cannot be set to `null` if `var.source_repo` and `var.config_repo` are not also set to `null`."
+    error_message = "`var.repos_git_token` cannot be set to `null` unless both `var.source_repo` and `var.config_repo` are also set to `null`. Make sure that these variables are consistently set to either `null` or a valid value."
   }
 }
 

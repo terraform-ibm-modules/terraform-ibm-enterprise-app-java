@@ -50,12 +50,12 @@ variable "config_repo" {
 
 variable "repos_git_token" {
   type        = string
-  description = "The GitHub token to read from the application and configuration repositories. It cannot be set to `null` if `var.source_repo` and `var.config_repo` are not also set to `null`. Make sure that these variables are consistently set to either `null` or a valid value."
+  description = "The GitHub token to read from the application and configuration repositories. This variable must be consistently set with `var.source_repo` and `var.config_repo`. All of these variables must be set to `null` or they must all be set to valid values."
   default     = null
   sensitive   = true
   validation {
     condition     = var.repos_git_token != null ? (var.source_repo != null && var.config_repo != null) : (var.source_repo == null && var.config_repo == null)
-    error_message = "`var.repos_git_token` cannot be set to `null` unless both `var.source_repo` and `var.config_repo` are also set to `null`. Make sure that these variables are consistently set to either `null` or a valid value."
+    error_message = "To maintain proper access to the application and configuration repositories, `var.repos_git_token` must be set along with `var.source_repo` and `var.config_repo`. All of these variables must be set to `null`, or they must all be set to valid values."
   }
 }
 

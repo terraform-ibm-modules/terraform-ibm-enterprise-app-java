@@ -188,24 +188,24 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository storing the configuration to use for the application to run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
-| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format. | `string` | `"instance"` | no |
-| <a name="input_maven_repository_password"></a> [maven\_repository\_password](#input\_maven\_repository\_password) | Maven repository authentication password if needed. Default to null. | `string` | `null` | no |
-| <a name="input_maven_repository_username"></a> [maven\_repository\_username](#input\_maven\_repository\_username) | Maven repository authentication username if needed. Default to null. | `string` | `null` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"standard"` | no |
-| <a name="input_region"></a> [region](#input\_region) | The desired region for deploying Enterprise Application Service instance. | `string` | `"us-east"` | no |
-| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repositories. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
-| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance. | `string` | n/a | yes |
-| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the repository storing the source code of the application or the URL of the Maven artifact repository storing the existing prebuilt archive (WAR or EAR) to deploy and run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
-| <a name="input_source_repo_type"></a> [source\_repo\_type](#input\_source\_repo\_type) | Type of the source code repository. For maven source repository type, use value `maven`. Git for GitHub repository. Default value set to git. | `string` | `"git"` | no |
+| <a name="input_config_repo"></a> [config\_repo](#input\_config\_repo) | The URL for the repository that contains the configuration of the application to run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
+| <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name of the Enterprise Application Service instance to create. If a `prefix` input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format. | `string` | `"instance"` | no |
+| <a name="input_maven_repository_password"></a> [maven\_repository\_password](#input\_maven\_repository\_password) | Password to authenticate with a Maven repository, if applicable. Default value is `null`. | `string` | `null` | no |
+| <a name="input_maven_repository_username"></a> [maven\_repository\_username](#input\_maven\_repository\_username) | Username to authenticate with a Maven repository, if applicable. Default value is `null`. | `string` | `null` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | The pricing plan for the Enterprise Application Service instance. Possible values are `standard` and `free`. | `string` | `"standard"` | no |
+| <a name="input_region"></a> [region](#input\_region) | The region where the Enterprise Application Service instance is created. | `string` | `"us-east"` | no |
+| <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repositories. This variable must be consistently set with `var.source_repo` and `var.config_repo`. All of these variables must be set to `null` or they must all be set to valid values. | `string` | `null` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group that contains the Enterprise Application Service instance. | `string` | n/a | yes |
+| <a name="input_source_repo"></a> [source\_repo](#input\_source\_repo) | The URL for the GitHub repository that contains the source code, or the URL of the Maven artifact repository that contains enterprise archive (EAR) or web archive (WAR) files for the application to deploy and run through Enterprise Application Service on IBM Cloud. | `string` | `null` | no |
+| <a name="input_source_repo_type"></a> [source\_repo\_type](#input\_source\_repo\_type) | Type of the source code repository. Possible values are `maven` for Maven repository types and `git` for GitHub repository types. Default value is `git`. | `string` | `"git"` | no |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | ID of the subscription to use to create the Enterprise Application Service instance. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing the service instance, i.e. test | `list(string)` | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels that describe the Enterprise Application Service instance, i.e. `test`. | `list(string)` | `[]` | no |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ease_instance"></a> [ease\_instance](#output\_ease\_instance) | Enterprise Application Service instance details |
+| <a name="output_ease_instance"></a> [ease\_instance](#output\_ease\_instance) | Details of the Enterprise Application Service instance. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set-up steps for contributors to follow -->

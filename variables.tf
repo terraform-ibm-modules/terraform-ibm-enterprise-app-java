@@ -55,7 +55,7 @@ variable "repos_git_token" {
   sensitive   = true
   validation {
     condition     = var.repos_git_token != null ? (var.source_repo != null && var.config_repo != null) : (var.source_repo == null && var.config_repo == null)
-    error_message = "To maintain proper access to the application and configuration repositories, `var.repos_git_token` must be set along with `var.source_repo` and `var.config_repo`. All of these variables must be set to `null`, or they must all be set to valid values."
+    error_message = "To maintain proper access to the application and configuration repositories, `var.repos_git_token` must be consistently set along with `var.source_repo` and `var.config_repo`. All of these variables must be set to `null`, or they must all be set to valid values."
   }
 }
 

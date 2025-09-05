@@ -286,7 +286,7 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 }
 
 // checking the dashboard URL in the terraform output
-// the response is expected to have (1) statusCode 200 (2) status 200 OK (3) lenght of the response greater than 0
+// the response is expected to have (1) statusCode 200 (2) status 200 OK (3) length of the response greater than 0
 // returning true if the dashboard URL is found on the terraform output, if not empty, and if the checks on the response are successful, false otherwise
 func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) bool {
 	_, tfOutputsErr := testhelper.ValidateTerraformOutputs(terraformOutput, "ease_instance_dashboard_url")

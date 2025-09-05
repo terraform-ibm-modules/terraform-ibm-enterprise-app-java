@@ -22,7 +22,7 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 
 Use this module to provision and configure an [Enterprise Application Service](https://cloud.ibm.com/catalog/services/enterprise-application-service) (also shorthened to EASeJava or simply to `ease`) instance on IBM Cloud.
 
-For more information about the Enterprice Application Service product you can refer to the [product documentation](https://www.ibm.com/docs/en/ease?topic=overview)
+For more information about the Enterprise Application Service product you can refer to the [product documentation](https://www.ibm.com/docs/en/ease?topic=overview)
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->

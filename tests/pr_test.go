@@ -16,7 +16,7 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testaddons"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 // Use existing resource group

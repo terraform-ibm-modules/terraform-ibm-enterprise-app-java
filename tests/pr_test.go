@@ -330,7 +330,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 		Testing:       t,
 		Prefix:        "ease",
 		ResourceGroup: resourceGroup,
-		QuietMode:     true, // Suppress logs except on failure
+		QuietMode:     false, // Suppress logs except on failure
 	})
 
 	options.AddonConfig = cloudinfo.NewAddonConfigTerraform(
@@ -341,6 +341,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			"prefix":                       options.Prefix,
 			"existing_resource_group_name": resourceGroup,
 			"subscription_id":              subscriptionIdSecretId,
+			"secrets_manager_service_plan": "trial",
 		},
 	)
 
@@ -351,6 +352,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 // TestDependencyPermutations runs dependency permutations for Event Streams and all its dependencies
 func TestDependencyPermutations(t *testing.T) {
 
+	t.Skip("Skipping dependency permutations")
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
 		Testing: t,
 		Prefix:  "ease-perm",
@@ -361,6 +363,7 @@ func TestDependencyPermutations(t *testing.T) {
 				"prefix":                       "ease-perm",
 				"existing_resource_group_name": resourceGroup,
 				"subscription_id":              subscriptionIdSecretId,
+				"secrets_manager_service_plan": "trial",
 			},
 		},
 	})

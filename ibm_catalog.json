@@ -286,6 +286,11 @@
                 },
                 {
                   "reference_version": true,
+                  "dependency_input": "queue_manager_name",
+                  "version_input": "queue_manager_name"
+                },
+                {
+                  "reference_version": true,
                   "dependency_input": "existing_mq_capacity_crn",
                   "version_input": "mq_s2s_policy_target_crn"
                 },
@@ -518,6 +523,14 @@
             },
             {
               "key": "maven_repository_password"
+            },
+            {
+              "key": "queue_manager_name",
+              "type": "string",
+              "default_value": "queuemanager",
+              "description": "The name of the queue manager.",
+              "required": true,
+              "virtual": true
             },
             {
               "key": "mq_s2s_policy_enable"

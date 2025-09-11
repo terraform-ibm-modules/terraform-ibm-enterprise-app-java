@@ -292,6 +292,11 @@
                 {
                   "value": true,
                   "dependency_input": "mq_s2s_policy_enable"
+                },
+                {
+                  "dependency_input": "secrets_manager_service_plan",
+                  "version_input": "secrets_manager_service_plan",
+                  "reference_version": true
                 }
               ]
             }

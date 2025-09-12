@@ -345,6 +345,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			"existing_resource_group_name": resourceGroup,
 			"subscription_id":              subscriptionIdSecretId,
 			"secrets_manager_service_plan": "trial",
+			"secrets_manager_region":       "eu-de",
 		},
 	)
 
@@ -352,7 +353,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 	require.NoError(t, err)
 }
 
-// TestDependencyPermutations runs dependency permutations for Event Streams and all its dependencies
+// TestDependencyPermutations runs dependency permutations for all dependencies
 func TestDependencyPermutations(t *testing.T) {
 
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
@@ -366,6 +367,7 @@ func TestDependencyPermutations(t *testing.T) {
 				"existing_resource_group_name": resourceGroup,
 				"subscription_id":              subscriptionIdSecretId,
 				"secrets_manager_service_plan": "trial",
+				"secrets_manager_region":       "eu-de",
 			},
 		},
 	})

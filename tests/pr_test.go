@@ -13,6 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
+	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/common"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testaddons"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
@@ -231,6 +232,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "plan", Value: testPlan, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
@@ -273,6 +275,7 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 		{Name: "plan", Value: testPlan, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},

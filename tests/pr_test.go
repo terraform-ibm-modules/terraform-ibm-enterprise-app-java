@@ -327,7 +327,6 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 }
 
 func TestAddonsDefaultConfiguration(t *testing.T) {
-	t.Parallel()
 
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
 		Testing:       t,
@@ -345,6 +344,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			"existing_resource_group_name": resourceGroup,
 			"subscription_id":              subscriptionIdSecretId,
 			"secrets_manager_service_plan": "trial",
+			"plan":                         "free",
 			"secrets_manager_region":       "eu-de",
 		},
 	)

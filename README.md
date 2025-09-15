@@ -192,7 +192,7 @@ No modules.
 | <a name="input_ease_name"></a> [ease\_name](#input\_ease\_name) | The name for the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format. | `string` | `"instance"` | no |
 | <a name="input_maven_repository_password"></a> [maven\_repository\_password](#input\_maven\_repository\_password) | Maven repository authentication password if needed. Default to null. | `string` | `null` | no |
 | <a name="input_maven_repository_username"></a> [maven\_repository\_username](#input\_maven\_repository\_username) | Maven repository authentication username if needed. Default to null. | `string` | `null` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"standard"` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | The desired pricing plan for Enterprise Application Service instance. | `string` | `"Standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The desired region for deploying Enterprise Application Service instance. | `string` | `"us-east"` | no |
 | <a name="input_repos_git_token"></a> [repos\_git\_token](#input\_repos\_git\_token) | The GitHub token to read from the application and configuration repositories. It cannot be null if var.source\_repo and var.config\_repo are not null. | `string` | `null` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the resource group to use for the creation of the Enterprise Application Service instance. | `string` | n/a | yes |

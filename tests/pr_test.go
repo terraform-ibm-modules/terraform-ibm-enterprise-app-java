@@ -356,6 +356,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 // TestDependencyPermutations runs dependency permutations for all dependencies
 func TestDependencyPermutations(t *testing.T) {
 
+	t.Skip("Skip permutation test until some fix is done in testwrapper to tackle heavy load")
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
 		Testing: t,
 		Prefix:  "ease-perm",

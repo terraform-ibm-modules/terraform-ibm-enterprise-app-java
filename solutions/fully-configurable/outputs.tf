@@ -79,7 +79,7 @@ output "db2_s2s_policy_id_crn_scope" {
 
 output "db2_s2s_policy_id_account_scope" {
   description = "Service to Service policy id to DB2 service with account scope"
-  value       = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn != null ? ibm_iam_authorization_policy.db2_s2s_policy_account_scope[0].id : null
+  value       = var.db2_s2s_policy_enable == true && var.db2_s2s_policy_target_crn == null ? ibm_iam_authorization_policy.db2_s2s_policy_account_scope[0].id : null
 }
 
 output "db2_s2s_resource_id" {

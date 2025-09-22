@@ -73,11 +73,11 @@ variable "instance_name" {
 variable "plan" {
   type        = string
   description = "The desired pricing plan for Enterprise Application Service instance."
-  default     = "standard"
+  default     = "Standard"
   validation {
     # free plan is added only to allow test/validation execution (its catalog name is Trial, programmatic name is free)
-    condition     = contains(["standard", "free"], var.plan)
-    error_message = "The only values accepted for the plan field are standard and free."
+    condition     = contains(["Standard", "free"], var.plan)
+    error_message = "The only values accepted for the plan field are Standard and free."
   }
 }
 

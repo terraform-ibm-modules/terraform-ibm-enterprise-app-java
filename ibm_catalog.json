@@ -87,7 +87,7 @@
           "dependencies": [
             {
               "name": "deploy-arch-ibm-secrets-manager",
-              "description": "Enable to provisions and configures IBM Cloud Secrets Manager for securely storing generated secrets.",
+              "description": "Provisions a Secrets Manager instance to centrally manage Ingress subdomain certificates and other sensitive credentials.",
               "id": "6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global",
               "flavors": [
                 "fully-configurable"
@@ -121,7 +121,7 @@
             },
             {
               "name": "deploy-arch-ibm-cloud-monitoring",
-              "description": "Configure IBM Cloud Monitoring to collect the platform metrics.",
+              "description": "Sets up a Cloud Monitoring instance to collect the platform metrics.",
               "flavors": [
                 "fully-configurable"
               ],
@@ -150,7 +150,7 @@
             },
             {
               "name": "deploy-arch-ibm-cloud-logs",
-              "description": "Configure IBM Cloud Logs to analyse the platform logs.",
+              "description": "Configure an IBM Cloud Logs instance to analyse the platform logs.",
               "flavors": [
                 "fully-configurable"
               ],
@@ -203,7 +203,7 @@
             },
             {
               "name": "deploy-arch-ibm-account-infra-base",
-              "description": "Cloud automation for account configuration organizes your IBM Cloud account with a ready-made set of resource groups by default. When you enable the “with account settings” option, it also applies baseline security and governance settings.",
+              "description": "Organize your IBM Cloud account with preconfigured resource groups. If not selected, the default resource group is used. Optionally, expand to apply recommended security controls via \"with Account Settings\" variation.",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "flavors": [
                 "resource-group-only",
@@ -228,7 +228,7 @@
             },
             {
               "name": "deploy-arch-ibm-db2-cloud",
-              "description": "Enable to provision and configure IBM DB2 on Cloud instance and to automatically configure the authorisation policy with Enterprise Application Service instance.",
+              "description": "Provision DB2 instance and automatically configure authorization policies.",
               "label": "Cloud automation for DB2 on Cloud",
               "version": "v1.2.0",
               "id": "90a14f92-4b86-4b27-acc1-dd6eefe0bfe9-global",
@@ -262,7 +262,7 @@
             },
             {
               "name": "deploy-arch-ibm-mq-cloud",
-              "description": "Enable to provision and configure IBM MQ on Cloud instance and to automatically configure the authorisation policy with Enterprise Application Service instance.",
+              "description": "Provision MQ instance and automatically configure authorization policies.",
               "version": "v1.1.0",
               "label": "Cloud automation for MQ on Cloud",
               "id": "30a698d4-ab56-4668-bc01-03cd2135d7e4-global",

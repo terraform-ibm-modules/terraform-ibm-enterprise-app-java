@@ -121,7 +121,7 @@
             },
             {
               "name": "deploy-arch-ibm-cloud-monitoring",
-              "description": "Sets up a Cloud Monitoring instance to collect the platform metrics.",
+              "description": "Sets up a Cloud Monitoring instance to collect platform metrics.",
               "flavors": [
                 "fully-configurable"
               ],
@@ -150,7 +150,7 @@
             },
             {
               "name": "deploy-arch-ibm-cloud-logs",
-              "description": "Configure an IBM Cloud Logs instance to analyse the platform logs.",
+              "description": "Configure an IBM Cloud Logs instance to analyze the platform logs.",
               "flavors": [
                 "fully-configurable"
               ],

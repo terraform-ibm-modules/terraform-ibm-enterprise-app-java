@@ -121,7 +121,7 @@
             },
             {
               "name": "deploy-arch-ibm-cloud-monitoring",
-              "description": "Sets up a Cloud Monitoring instance to collect platform metrics.",
+              "description": "Set up a Cloud Monitoring instance to collect platform metrics.",
               "flavors": [
                 "fully-configurable"
               ],
@@ -150,7 +150,7 @@
             },
             {
               "name": "deploy-arch-ibm-cloud-logs",
-              "description": "Configure an IBM Cloud Logs instance to analyze the platform logs.",
+              "description": "Set up an IBM Cloud Logs instance to analyze platform logs.",
               "flavors": [
                 "fully-configurable"
               ],
@@ -228,7 +228,7 @@
             },
             {
               "name": "deploy-arch-ibm-db2-cloud",
-              "description": "Provision DB2 instance and automatically configure authorization policies.",
+              "description": "Configure DB2 on Cloud instance and the authorization policy with Enterprise Application Service.",
               "label": "Cloud automation for DB2 on Cloud",
               "version": "v1.2.0",
               "id": "90a14f92-4b86-4b27-acc1-dd6eefe0bfe9-global",
@@ -262,7 +262,7 @@
             },
             {
               "name": "deploy-arch-ibm-mq-cloud",
-              "description": "Provision MQ instance and automatically configure authorization policies.",
+              "description": "Configure MQ on Cloud instance and the authorization policy with Enterprise Application Service.",
               "version": "v1.1.0",
               "label": "Cloud automation for MQ on Cloud",
               "id": "30a698d4-ab56-4668-bc01-03cd2135d7e4-global",

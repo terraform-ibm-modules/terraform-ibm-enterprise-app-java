@@ -87,7 +87,7 @@
           "dependencies": [
             {
               "name": "deploy-arch-ibm-secrets-manager",
-              "description": "Configure IBM Cloud Secrets Manager to securely store generated secrets.",
+              "description": "Configure an IBM Cloud Secrets Manager to securely store generated secrets.",
               "id": "6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global",
               "flavors": [
                 "fully-configurable"

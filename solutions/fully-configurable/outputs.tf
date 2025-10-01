@@ -86,3 +86,18 @@ output "db2_s2s_resource_id" {
   description = "Target Resource ID for the Service to Service policy for DB2 instance"
   value       = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].service_instance : null
 }
+
+output "next_steps_text" {
+  value       = "Enterprise Application Service instance dashboard"
+  description = "Access the Enterprise Application Service instance dashboard"
+}
+
+output "next_step_primary_label" {
+  value       = "Enterprise Application Service Instance"
+  description = "Primary label"
+}
+
+output "next_step_primary_url" {
+  value       = local.app_dashboard_url
+  description = "primary url"
+}

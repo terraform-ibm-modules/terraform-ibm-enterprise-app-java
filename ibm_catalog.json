@@ -550,10 +550,12 @@
               }
             },
             {
-              "key": "mq_s2s_policy_target_crn"
+              "key": "mq_s2s_policy_target_crn",
+              "description": "The CRN of the existing MQ capacity instance to create the Service to Service authorisation policy. If set it is used also as existing MQ capacity instance for MQ on Cloud Deployable architecture if enabled."
             },
             {
-              "key": "db2_s2s_policy_enable"
+              "key": "db2_s2s_policy_enable",
+              "description": "The CRN of the existing DB2 on Cloud instance to create the Service to Service authorisation policy."
             },
             {
               "key": "db2_s2s_policy_roles",

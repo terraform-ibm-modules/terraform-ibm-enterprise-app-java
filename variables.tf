@@ -9,7 +9,7 @@ variable "resource_group_id" {
 
 variable "ease_name" {
   type        = string
-  description = "The name for the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
+  description = "The name of the newly provisioned Enterprise Application Service instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
   default     = "instance"
 }
 

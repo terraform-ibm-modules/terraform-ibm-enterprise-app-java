@@ -356,7 +356,7 @@
               "options": [
                 {
                   "displayname": "Standard",
-                  "value": "Standard"
+                  "value": "standard"
                 },
                 {
                   "displayname": "Trial (for allowlisted accounts only)",

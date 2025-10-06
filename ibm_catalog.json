@@ -305,7 +305,7 @@
                 },
                 {
                   "dependency_output": "capacity_crn",
-                  "version_input": "existing_mq_capacity_crn"
+                  "version_input": "mq_s2s_policy_target_crn"
                 }
               ]
             }

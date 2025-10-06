@@ -302,6 +302,10 @@
                   "dependency_input": "secrets_manager_service_plan",
                   "version_input": "secrets_manager_service_plan",
                   "reference_version": true
+                },
+                {
+                  "dependency_output": "capacity_crn",
+                  "version_input": "existing_mq_capacity_crn"
                 }
               ]
             }

@@ -347,6 +347,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			"plan":                         "free",
 			"secrets_manager_region":       "eu-de",
 			"mq_s2s_policy_target_crn":     mqCapacityInstanceCRN,
+			"existing_mq_capacity_crn":     mqCapacityInstanceCRN,
 		},
 	)
 

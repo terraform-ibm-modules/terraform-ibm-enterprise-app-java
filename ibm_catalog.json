@@ -560,6 +560,7 @@
               "key": "existing_mq_capacity_crn",
               "required": true,
               "virtual": true,
+              "default_value": "__NULL__",
               "type": "string",
               "description": "The existing MQ capacity instance for MQ on Cloud Deployable architecture."
             },

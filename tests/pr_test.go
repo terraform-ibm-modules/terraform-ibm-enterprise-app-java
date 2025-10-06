@@ -11,7 +11,10 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
+	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/common"
+	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testaddons"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
 	"gopkg.in/yaml.v3"
@@ -229,6 +232,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "plan", Value: testPlan, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
@@ -271,6 +275,7 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 		{Name: "plan", Value: testPlan, DataType: "string"},
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
 		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
@@ -319,4 +324,56 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 		}
 	}
 	return false
+}
+
+func TestAddonsDefaultConfiguration(t *testing.T) {
+
+	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
+		Testing:       t,
+		Prefix:        "ease",
+		ResourceGroup: resourceGroup,
+		QuietMode:     false, // Suppress logs except on failure
+	})
+
+	options.AddonConfig = cloudinfo.NewAddonConfigTerraform(
+		options.Prefix,
+		"deploy-arch-ibm-ease",
+		"fully-configurable",
+		map[string]interface{}{
+			"prefix":                       options.Prefix,
+			"existing_resource_group_name": resourceGroup,
+			"subscription_id":              subscriptionIdSecretId,
+			"secrets_manager_service_plan": "trial",
+			"plan":                         "free",
+			"secrets_manager_region":       "eu-de",
+			"mq_s2s_policy_target_crn":     mqCapacityInstanceCRN,
+		},
+	)
+
+	err := options.RunAddonTest()
+	require.NoError(t, err)
+}
+
+// TestDependencyPermutations runs dependency permutations for all dependencies
+func TestDependencyPermutations(t *testing.T) {
+
+	t.Skip("Skip permutation test until some fix is done in testwrapper to tackle heavy load")
+	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
+		Testing: t,
+		Prefix:  "ease-perm",
+		AddonConfig: cloudinfo.AddonConfig{
+			OfferingName:   "deploy-arch-ibm-ease",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"prefix":                       "ease-perm",
+				"existing_resource_group_name": resourceGroup,
+				"subscription_id":              subscriptionIdSecretId,
+				"secrets_manager_service_plan": "trial",
+				"secrets_manager_region":       "eu-de",
+			},
+		},
+	})
+
+	err := options.RunAddonPermutationTest()
+	assert.NoError(t, err, "Dependency permutation test should not fail")
 }

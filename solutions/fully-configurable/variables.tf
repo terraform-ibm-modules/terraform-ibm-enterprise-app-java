@@ -162,7 +162,7 @@ variable "mq_s2s_policy_roles" {
   }
 }
 
-variable "mq_s2s_policy_target_crn" {
+variable "mq_capacity_s2s_policy_target_crn" {
   type        = string
   description = "MQ resource capacity instance CRN to restrict the target for the Service to Service policy to MQ service instance. If mq_s2s_policy_enable is true but this is null the S2S policy is created at account scope on Enterprise Application Service instance account owner. Default to null."
   default     = null

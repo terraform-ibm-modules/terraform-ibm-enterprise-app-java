@@ -22,11 +22,11 @@ variable "tags" {
 variable "plan" {
   type        = string
   description = "The desired pricing plan for Enterprise Application Service instance."
-  default     = "Standard"
+  default     = "standard"
   validation {
     # free plan is added only to allow test/validation execution (its catalog name is Trial)
-    condition     = contains(["Standard", "free"], var.plan)
-    error_message = "The only values accepted for the plan field are Standard and free."
+    condition     = contains(["standard", "free"], var.plan)
+    error_message = "The only values accepted for the plan field are standard and free."
   }
 }
 

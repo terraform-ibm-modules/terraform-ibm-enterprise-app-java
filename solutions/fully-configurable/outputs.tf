@@ -49,22 +49,22 @@ output "ease_instance_resource_status" {
 
 output "mq_capacity_instance_crn" {
   description = "MQ capacity instance crn"
-  value       = var.mq_s2s_policy_target_crn != null ? var.mq_s2s_policy_target_crn : null
+  value       = var.mq_capacity_s2s_policy_target_crn != null ? var.mq_capacity_s2s_policy_target_crn : null
 }
 
 output "mq_s2s_policy_id_crn_scope" {
   description = "Service to Service policy id to MQ capacity instance"
-  value       = var.mq_s2s_policy_enable == true && var.mq_s2s_policy_target_crn != null ? ibm_iam_authorization_policy.mq_s2s_policy_crn_scope[0].id : null
+  value       = var.mq_s2s_policy_enable == true && var.mq_capacity_s2s_policy_target_crn != null ? ibm_iam_authorization_policy.mq_s2s_policy_crn_scope[0].id : null
 }
 
 output "mq_s2s_policy_id_account_scope" {
   description = "Service to Service policy id to MQ service with account scope"
-  value       = var.mq_s2s_policy_enable == true && var.mq_s2s_policy_target_crn == null ? ibm_iam_authorization_policy.mq_s2s_policy_account_scope[0].id : null
+  value       = var.mq_s2s_policy_enable == true && var.mq_capacity_s2s_policy_target_crn == null ? ibm_iam_authorization_policy.mq_s2s_policy_account_scope[0].id : null
 }
 
 output "mq_s2s_resource_id" {
   description = "Target Resource ID for the Service to Service policy for MQ capacity instance"
-  value       = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].service_instance : null
+  value       = var.mq_capacity_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].service_instance : null
 }
 
 output "db2_instance_crn" {
@@ -85,4 +85,19 @@ output "db2_s2s_policy_id_account_scope" {
 output "db2_s2s_resource_id" {
   description = "Target Resource ID for the Service to Service policy for DB2 instance"
   value       = var.db2_s2s_policy_target_crn != null ? module.crn_parser_db2_instance_crn[0].service_instance : null
+}
+
+output "next_steps_text" {
+  value       = "Enterprise Application Service instance dashboard"
+  description = "Access the Enterprise Application Service instance dashboard"
+}
+
+output "next_step_primary_label" {
+  value       = "Enterprise Application Service Instance"
+  description = "Primary label"
+}
+
+output "next_step_primary_url" {
+  value       = local.app_dashboard_url
+  description = "primary url"
 }

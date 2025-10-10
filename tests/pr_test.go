@@ -235,7 +235,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
-		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "mq_capacity_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
 		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
@@ -278,7 +278,7 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
-		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "mq_capacity_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
 		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
@@ -340,13 +340,14 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 		"deploy-arch-ibm-ease",
 		"fully-configurable",
 		map[string]interface{}{
-			"prefix":                       options.Prefix,
-			"existing_resource_group_name": resourceGroup,
-			"subscription_id":              subscriptionIdSecretId,
-			"secrets_manager_service_plan": "trial",
-			"plan":                         "free",
-			"secrets_manager_region":       "eu-de",
-			"mq_s2s_policy_target_crn":     mqCapacityInstanceCRN,
+			"prefix":                            options.Prefix,
+			"existing_resource_group_name":      resourceGroup,
+			"subscription_id":                   subscriptionIdSecretId,
+			"secrets_manager_service_plan":      "trial",
+			"plan":                              "free",
+			"secrets_manager_region":            "eu-de",
+			"mq_capacity_s2s_policy_target_crn": mqCapacityInstanceCRN,
+			"existing_mq_capacity_crn":          mqCapacityInstanceCRN,
 		},
 	)
 

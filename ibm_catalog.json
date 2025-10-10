@@ -316,7 +316,7 @@
                 {
                   "reference_version": true,
                   "dependency_input": "existing_mq_capacity_crn",
-                  "version_input": "mq_s2s_policy_target_crn"
+                  "version_input": "mq_capacity_s2s_policy_target_crn"
                 },
                 {
                   "value": true,
@@ -376,7 +376,7 @@
               "options": [
                 {
                   "displayname": "Standard",
-                  "value": "Standard"
+                  "value": "standard"
                 },
                 {
                   "displayname": "Trial (for allowlisted accounts only)",
@@ -574,7 +574,12 @@
               }
             },
             {
-              "key": "mq_s2s_policy_target_crn"
+              "display_name": "existing_mq_capacity_crn",
+              "key": "mq_capacity_s2s_policy_target_crn",
+              "required": true,
+              "default_value": "__NOT_SET__",
+              "type": "string",
+              "description": "The existing MQ capacity instance for MQ on Cloud Deployable Architecture. If set this value is used to create an instance of MQ on Cloud using the existing MQ capacity instance and to setup a Service to Service policy from Enterprise Application Service instance to MQ on Cloud. Set explicitly to null to not use it."
             },
             {
               "key": "db2_s2s_policy_enable"

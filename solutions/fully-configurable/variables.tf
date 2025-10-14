@@ -166,6 +166,10 @@ variable "mq_capacity_s2s_policy_target_crn" {
   type        = string
   description = "MQ resource capacity instance CRN to restrict the target for the Service to Service policy to MQ service instance. If mq_s2s_policy_enable is true but this is null the S2S policy is created at account scope on Enterprise Application Service instance account owner. Default to null."
   default     = null
+  validation {
+    condition     = var.mq_capacity_s2s_policy_target_crn != null ? can(regex("^crn\\:v\\d\\:bluemix\\:public\\:\\w*\\:[\\w\\-_]*\\:(a\\/[\\w_\\-]+)?\\:([\\w_\\-]*)\\:([\\w_\\-]*)\\:([\\w_\\-]*)$", var.mq_capacity_s2s_policy_target_crn)) : true
+    error_message = "The value for var.mq_capacity_s2s_policy_target_crn is not a valid CRN."
+  }
 }
 
 ###################################################

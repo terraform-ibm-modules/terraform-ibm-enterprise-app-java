@@ -534,11 +534,25 @@
             },
             {
               "key": "repos_git_token_secret_crn",
-              "hidden": true
+              "hidden": true,
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'repos_git_token_secret_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(secrets-manager):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "subscription_id_secret_crn",
-              "hidden": true
+              "hidden": true,
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'subscription_id_secret_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(secrets-manager):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "repos_git_token",
@@ -579,7 +593,14 @@
               "required": true,
               "default_value": "__NOT_SET__",
               "type": "string",
-              "description": "The existing MQ capacity instance for MQ on Cloud Deployable Architecture. If set this value is used to create an instance of MQ on Cloud using the existing MQ capacity instance and to setup a Service to Service policy from Enterprise Application Service instance to MQ on Cloud. Set explicitly to null to not use it."
+              "description": "The existing MQ capacity instance for MQ on Cloud Deployable Architecture. If set this value is used to create an instance of MQ on Cloud using the existing MQ capacity instance and to setup a Service to Service policy from Enterprise Application Service instance to MQ on Cloud. Set explicitly to null to not use it.",
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'existing_mq_capacity_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(mqcloud):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "db2_s2s_policy_enable"
@@ -597,7 +618,14 @@
               }
             },
             {
-              "key": "db2_s2s_policy_target_crn"
+              "key": "db2_s2s_policy_target_crn",
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'db2_s2s_policy_target_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(dashdb-for-transactions):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             }
           ],
           "terraform_version": "1.10.5"

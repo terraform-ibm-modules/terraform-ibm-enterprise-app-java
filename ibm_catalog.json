@@ -77,7 +77,7 @@
               {
                 "diagram": {
                   "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability cloud services",
-                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architectures/deployable-architecture-ease.svg",
                   "type": "image/svg+xml"
                 },
                 "description": "This architecture supports creating and configuring Enterprise Application Service for Java resources"
@@ -118,6 +118,30 @@
                   "version_input": "existing_secrets_manager_crn"
                 }
               ]
+            },
+            {
+              "name": "deploy-arch-ibm-scc-workload-protection",
+              "description": "Configure an IBM Cloud Security and Compliance Center Workload Protection instance to help you manage security and compliance for your organization.",
+              "flavors": [
+                "fully-configurable"
+              ],
+              "id": "4322cf44-2289-49aa-a719-dd79e39b14dc-global",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
+              "input_mapping": [
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
+                }
+              ],
+              "optional": true,
+              "on_by_default": true,
+              "version": "v1.11.4"
             },
             {
               "name": "deploy-arch-ibm-cloud-monitoring",
@@ -292,7 +316,7 @@
                 {
                   "reference_version": true,
                   "dependency_input": "existing_mq_capacity_crn",
-                  "version_input": "mq_s2s_policy_target_crn"
+                  "version_input": "mq_capacity_s2s_policy_target_crn"
                 },
                 {
                   "value": true,
@@ -352,7 +376,7 @@
               "options": [
                 {
                   "displayname": "Standard",
-                  "value": "Standard"
+                  "value": "standard"
                 },
                 {
                   "displayname": "Trial (for allowlisted accounts only)",
@@ -510,11 +534,25 @@
             },
             {
               "key": "repos_git_token_secret_crn",
-              "hidden": true
+              "hidden": true,
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'repos_git_token_secret_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(secrets-manager):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "subscription_id_secret_crn",
-              "hidden": true
+              "hidden": true,
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'subscription_id_secret_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(secrets-manager):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "repos_git_token",
@@ -550,7 +588,19 @@
               }
             },
             {
-              "key": "mq_s2s_policy_target_crn"
+              "display_name": "existing_mq_capacity_crn",
+              "key": "mq_capacity_s2s_policy_target_crn",
+              "required": true,
+              "default_value": "__NOT_SET__",
+              "type": "string",
+              "description": "The existing MQ capacity instance for MQ on Cloud Deployable Architecture. If set this value is used to create an instance of MQ on Cloud using the existing MQ capacity instance and to setup a Service to Service policy from Enterprise Application Service instance to MQ on Cloud. Set explicitly to null to not use it.",
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'existing_mq_capacity_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(mqcloud):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "db2_s2s_policy_enable"
@@ -568,7 +618,14 @@
               }
             },
             {
-              "key": "db2_s2s_policy_target_crn"
+              "key": "db2_s2s_policy_target_crn",
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'db2_s2s_policy_target_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(dashdb-for-transactions):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             }
           ],
           "terraform_version": "1.10.5"

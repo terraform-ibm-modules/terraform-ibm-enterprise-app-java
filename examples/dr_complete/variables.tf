@@ -29,7 +29,7 @@ variable "resource_group" {
 variable "plan" {
   type        = string
   description = "The desired pricing plan for IBM Enterprise Application Service instance."
-  default     = "Standard"
+  default     = "standard"
 }
 
 variable "region" {

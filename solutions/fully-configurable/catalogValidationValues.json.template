@@ -5,5 +5,6 @@
   "prefix": $PREFIX,
   "plan": "free",
   "subscription_id": "testvalue",
-  "existing_resource_group_name": "geretain-test-e4j"
+  "existing_resource_group_name": "geretain-test-e4j",
+  "mq_capacity_s2s_policy_target_crn": "__NULL__"
 }

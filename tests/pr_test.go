@@ -354,7 +354,6 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			"secrets_manager_region":            "eu-de",
 			"mq_capacity_s2s_policy_target_crn": mqCapacityInstanceCRN,
 			"existing_mq_capacity_crn":          mqCapacityInstanceCRN,
-			"region":                            "us-south",
 		},
 	)
 
@@ -385,6 +384,14 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 				"service_plan":                         "__NULL__", // no plan value needed when using existing SM
 				"skip_secrets_manager_iam_auth_policy": true,       // since using an existing Secrets Manager instance, attempting to re-create auth policy can cause conflicts if the policy already exists
 				"secret_groups":                        []string{}, // passing empty array for secret groups as default value is creating general group and it will cause conflicts as we are using an existing SM
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-event-notifications",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"region": "us-south",
 			},
 			Enabled: core.BoolPtr(true),
 		},

@@ -26,7 +26,7 @@ const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 const bdrCompleteExampleDir = "examples/bdr_complete"
 const drCompleteExampleDir = "examples/dr_complete"
-const region = "us-south"
+const region = "us-east"
 const fullyConfigurableSolutionTerraformDir = "solutions/fully-configurable"
 
 // test application source and config repositories
@@ -221,7 +221,7 @@ func TestRunFullyConfigurableSolutionSchematics(t *testing.T) {
 		Prefix:                 "ease-da",
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
-		Region:                 "us-south",
+		Region:                 "us-east",
 		TerraformVersion:       terraformVersion,
 	})
 
@@ -335,10 +335,11 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 func TestAddonsDefaultConfiguration(t *testing.T) {
 
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
-		Testing:       t,
-		Prefix:        "ease",
-		ResourceGroup: resourceGroup,
-		QuietMode:     false, // Suppress logs except on failure
+		Testing:               t,
+		Prefix:                "ease",
+		ResourceGroup:         resourceGroup,
+		QuietMode:             false, // Suppress logs except on failure
+		OverrideInputMappings: core.BoolPtr(true),
 	})
 
 	options.AddonConfig = cloudinfo.NewAddonConfigTerraform(
@@ -388,7 +389,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			Enabled: core.BoolPtr(true),
 		},
 		{
-			OfferingName:   "deploy-arch-ibm-event-notifications",
+			OfferingName:   "deploy-arch-ibm-apprapp",
 			OfferingFlavor: "fully-configurable",
 			Inputs: map[string]interface{}{
 				"region": "us-south",

@@ -26,7 +26,7 @@ const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 const bdrCompleteExampleDir = "examples/bdr_complete"
 const drCompleteExampleDir = "examples/dr_complete"
-const region = "us-east"
+const region = "us-south"
 const fullyConfigurableSolutionTerraformDir = "solutions/fully-configurable"
 
 // test application source and config repositories
@@ -221,7 +221,7 @@ func TestRunFullyConfigurableSolutionSchematics(t *testing.T) {
 		Prefix:                 "ease-da",
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
-		Region:                 "us-east",
+		Region:                 "us-south",
 		TerraformVersion:       terraformVersion,
 	})
 
@@ -354,6 +354,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			"secrets_manager_region":            "eu-de",
 			"mq_capacity_s2s_policy_target_crn": mqCapacityInstanceCRN,
 			"existing_mq_capacity_crn":          mqCapacityInstanceCRN,
+			"region":                            "us-south",
 		},
 	)
 
@@ -391,29 +392,4 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 
 	err := options.RunAddonTest()
 	require.NoError(t, err)
-}
-
-// TestDependencyPermutations runs dependency permutations for all dependencies
-func TestDependencyPermutations(t *testing.T) {
-
-	t.Skip("Skip permutation test until some fix is done in testwrapper to tackle heavy load")
-	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
-		Testing: t,
-		Prefix:  "ease-perm",
-		AddonConfig: cloudinfo.AddonConfig{
-			OfferingName:   "deploy-arch-ibm-ease",
-			OfferingFlavor: "fully-configurable",
-			Inputs: map[string]interface{}{
-				"prefix":                       "ease-perm",
-				"existing_resource_group_name": resourceGroup,
-				"subscription_id":              subscriptionIdSecretId,
-				"secrets_manager_service_plan": "trial",
-				"plan":                         "free",
-				"secrets_manager_region":       "eu-de",
-			},
-		},
-	})
-
-	err := options.RunAddonPermutationTest()
-	assert.NoError(t, err, "Dependency permutation test should not fail")
 }

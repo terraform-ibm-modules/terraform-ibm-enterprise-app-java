@@ -396,6 +396,14 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			},
 			Enabled: core.BoolPtr(true),
 		},
+		{
+			OfferingName:   "deploy-arch-ibm-apprapp",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"region": "us-south",
+			},
+			Enabled: core.BoolPtr(true),
+		},
 	}
 
 	err := options.RunAddonTest()

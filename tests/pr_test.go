@@ -389,7 +389,7 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 			Enabled: core.BoolPtr(true),
 		},
 		{
-			OfferingName:   "deploy-arch-ibm-apprapp",
+			OfferingName:   "deploy-arch-ibm-event-notifications",
 			OfferingFlavor: "fully-configurable",
 			Inputs: map[string]interface{}{
 				"region": "us-south",

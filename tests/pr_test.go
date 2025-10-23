@@ -10,6 +10,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/IBM/go-sdk-core/core"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
@@ -46,6 +47,8 @@ const testPlan = "free" // free plan is used for testing but its catalog name is
 
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
+
+const terraformVersion = "terraform_v1.10" // This should match the version in the ibm_catalog.json
 
 // var permanentResources map[string]interface{}
 var sharedInfoSvc *cloudinfo.CloudInfoService
@@ -202,7 +205,7 @@ func TestRunUpgradeExample(t *testing.T) {
 	}
 }
 
-func TestRunStandardSolutionSchematics(t *testing.T) {
+func TestRunFullyConfigurableSolutionSchematics(t *testing.T) {
 	// disabling parallel tests to avoid failure of test when reusing the same repos
 	// t.Parallel()
 
@@ -219,6 +222,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
 		Region:                 "us-east",
+		TerraformVersion:       terraformVersion,
 	})
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
@@ -245,7 +249,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 	assert.Nil(t, err, "This should not have errored")
 }
 
-func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
+func TestRunFullyConfigurableSolutionUpgradeSchematics(t *testing.T) {
 	// disabling parallel tests to avoid failure of test when reusing the same repos
 	// t.Parallel()
 
@@ -256,12 +260,14 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 			"modules/*/*.tf",
 			fullyConfigurableSolutionTerraformDir + "/*.tf",
 		},
-		TemplateFolder:         fullyConfigurableSolutionTerraformDir,
-		Tags:                   []string{"test-schematic"},
-		Prefix:                 "ej-uda",
-		DeleteWorkspaceOnFail:  false,
-		WaitJobCompleteMinutes: 60,
-		Region:                 "us-east",
+		TemplateFolder:             fullyConfigurableSolutionTerraformDir,
+		Tags:                       []string{"test-schematic"},
+		Prefix:                     "ej-uda",
+		DeleteWorkspaceOnFail:      false,
+		WaitJobCompleteMinutes:     60,
+		Region:                     "us-east",
+		TerraformVersion:           terraformVersion,
+		CheckApplyResultForUpgrade: true,
 	})
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
@@ -329,10 +335,11 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 func TestAddonsDefaultConfiguration(t *testing.T) {
 
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
-		Testing:       t,
-		Prefix:        "ease",
-		ResourceGroup: resourceGroup,
-		QuietMode:     false, // Suppress logs except on failure
+		Testing:               t,
+		Prefix:                "ease",
+		ResourceGroup:         resourceGroup,
+		QuietMode:             false, // Suppress logs except on failure
+		OverrideInputMappings: core.BoolPtr(true),
 	})
 
 	options.AddonConfig = cloudinfo.NewAddonConfigTerraform(
@@ -351,31 +358,54 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 		},
 	)
 
-	err := options.RunAddonTest()
-	require.NoError(t, err)
-}
-
-// TestDependencyPermutations runs dependency permutations for all dependencies
-func TestDependencyPermutations(t *testing.T) {
-
-	t.Skip("Skip permutation test until some fix is done in testwrapper to tackle heavy load")
-	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
-		Testing: t,
-		Prefix:  "ease-perm",
-		AddonConfig: cloudinfo.AddonConfig{
-			OfferingName:   "deploy-arch-ibm-ease",
+	// Disable target / route creation to prevent hitting quota in account
+	// Use existing SM instance to prevent hitting quota in account
+	options.AddonConfig.Dependencies = []cloudinfo.AddonConfig{
+		{
+			OfferingName:   "deploy-arch-ibm-cloud-monitoring",
 			OfferingFlavor: "fully-configurable",
 			Inputs: map[string]interface{}{
-				"prefix":                       "ease-perm",
-				"existing_resource_group_name": resourceGroup,
-				"subscription_id":              subscriptionIdSecretId,
-				"secrets_manager_service_plan": "trial",
-				"plan":                         "free",
-				"secrets_manager_region":       "eu-de",
+				"enable_metrics_routing_to_cloud_monitoring": false,
 			},
+			Enabled: core.BoolPtr(true),
 		},
-	})
+		{
+			OfferingName:   "deploy-arch-ibm-activity-tracker",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"enable_activity_tracker_event_routing_to_cloud_logs": false,
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-secrets-manager",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"existing_secrets_manager_crn":         smCRN,
+				"service_plan":                         "__NULL__", // no plan value needed when using existing SM
+				"skip_secrets_manager_iam_auth_policy": true,       // since using an existing Secrets Manager instance, attempting to re-create auth policy can cause conflicts if the policy already exists
+				"secret_groups":                        []string{}, // passing empty array for secret groups as default value is creating general group and it will cause conflicts as we are using an existing SM
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-event-notifications",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"region": "us-south",
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-apprapp",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"region": "us-south",
+			},
+			Enabled: core.BoolPtr(true),
+		},
+	}
 
-	err := options.RunAddonPermutationTest()
-	assert.NoError(t, err, "Dependency permutation test should not fail")
+	err := options.RunAddonTest()
+	require.NoError(t, err)
 }

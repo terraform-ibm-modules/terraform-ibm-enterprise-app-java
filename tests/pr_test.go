@@ -347,7 +347,6 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 		"deploy-arch-ibm-ease",
 		"fully-configurable",
 		map[string]interface{}{
-			"prefix":                            options.Prefix,
 			"existing_resource_group_name":      resourceGroup,
 			"subscription_id":                   subscriptionIdSecretId,
 			"secrets_manager_service_plan":      "trial",

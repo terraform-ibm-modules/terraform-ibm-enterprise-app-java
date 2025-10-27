@@ -64,6 +64,109 @@
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
               "service_name": "enterprise-application-service"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "dashdb-for-transactions",
+              "notes": "[Optional] Required for creating a new DB2 instance."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "mqcloud",
+              "notes": "[Optional] Required to provision and manage IBM MQ on Cloud."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Administrator",
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "secrets-manager",
+              "notes": "[Optional] Required to create a Secrets Manager instance."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "event-notifications",
+              "notes": "[Optional] Required to create an Event Notifications instance."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Administrator",
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "apprapp",
+              "notes": "[Optional] Required for provisioning the App Configuration instance."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Viewer"
+              ],
+              "service_name": "Resource group only",
+              "notes": "Viewer access is required in the resource group you want to provision in."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "sysdig-monitor",
+              "notes": "[Optional] Required for creating a new instance of Cloud Monitoring."
+            },
+            {
+              "service_name": "logs",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "notes": "[Optional] Required for creating a new instance of Cloud Logs."
+            },
+            {
+              "service_name": "cloud-object-storage",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Viewer"
+              ],
+              "notes": "[Optional] Required for creating a Object Storage instance to store logs and metrics data."
+            },
+            {
+              "service_name": "kms",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "notes": "[Optional] Required if KMS encryption is enabled and Key protect is used for encryption."
+            },
+            {
+              "service_name": "hs-crypto",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "notes": "[Optional] Required if KMS encryption is enabled and Hyper Protect Crypto Services is used for encryption."
+            },
+            {
+              "service_name": "atracker",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "notes": "[Optional] Required for configuring Activity Tracker event routing to cloud object storage bucket and cloud logs."
+            },
+            {
+              "service_name": "sysdig-secure",
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "notes": "[Optional] Required for creating and managing SCC Workload Protection instance."
             }
           ],
           "architecture": {
@@ -93,7 +196,7 @@
                 "fully-configurable"
               ],
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "version": "v2.10.0",
+              "version": "v2.11.0",
               "optional": true,
               "on_by_default": true,
               "default_flavor": "fully-configurable",
@@ -116,6 +219,11 @@
                 {
                   "dependency_output": "secrets_manager_crn",
                   "version_input": "existing_secrets_manager_crn"
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ]
             },
@@ -137,11 +245,16 @@
                   "dependency_input": "region",
                   "version_input": "region",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ],
               "optional": true,
               "on_by_default": true,
-              "version": "v1.12.3"
+              "version": "v1.14.0"
             },
             {
               "name": "deploy-arch-ibm-cloud-monitoring",
@@ -166,11 +279,16 @@
                   "dependency_input": "enable_platform_metrics",
                   "version_input": "enable_platform_metrics",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ],
               "optional": true,
               "on_by_default": true,
-              "version": "v1.7.2"
+              "version": "v1.9.0"
             },
             {
               "name": "deploy-arch-ibm-cloud-logs",
@@ -195,11 +313,16 @@
                   "dependency_input": "logs_routing_tenant_regions",
                   "version_input": "logs_routing_tenant_regions",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ],
               "optional": true,
               "on_by_default": true,
-              "version": "v1.6.28"
+              "version": "v1.9.0"
             },
             {
               "name": "deploy-arch-ibm-activity-tracker",
@@ -219,42 +342,22 @@
                   "dependency_input": "region",
                   "version_input": "region",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ],
               "optional": true,
               "on_by_default": true,
-              "version": "v1.2.34"
-            },
-            {
-              "name": "deploy-arch-ibm-account-infra-base",
-              "description": "Organize your IBM Cloud account with preconfigured resource groups. If not selected, the default resource group is used. Optionally, expand to apply recommended security controls via \"with Account Settings\" variation.",
-              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "flavors": [
-                "resource-group-only",
-                "resource-groups-with-account-settings"
-              ],
-              "default_flavor": "resource-group-only",
-              "id": "63641cec-6093-4b4f-b7b0-98d2f4185cd6-global",
-              "input_mapping": [
-                {
-                  "dependency_input": "prefix",
-                  "version_input": "prefix",
-                  "reference_version": true
-                },
-                {
-                  "dependency_output": "workload_resource_group_name",
-                  "version_input": "existing_resource_group_name"
-                }
-              ],
-              "optional": true,
-              "on_by_default": false,
-              "version": "v3.0.23"
+              "version": "v1.4.3"
             },
             {
               "name": "deploy-arch-ibm-db2-cloud",
               "description": "Configure a DB2 on Cloud instance and the authorization policy with Enterprise Application Service.",
               "label": "Cloud automation for DB2 on Cloud",
-              "version": "v1.2.5",
+              "version": "v1.3.0",
               "id": "90a14f92-4b86-4b27-acc1-dd6eefe0bfe9-global",
               "flavors": [
                 "fully-configurable"
@@ -281,13 +384,18 @@
                 {
                   "value": true,
                   "dependency_input": "db2_s2s_policy_enable"
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ]
             },
             {
               "name": "deploy-arch-ibm-mq-cloud",
               "description": "Configure a MQ on Cloud instance and the authorization policy with Enterprise Application Service.",
-              "version": "v1.1.5",
+              "version": "v1.2.0",
               "label": "Cloud automation for MQ on Cloud",
               "id": "30a698d4-ab56-4668-bc01-03cd2135d7e4-global",
               "flavors": [
@@ -326,6 +434,11 @@
                   "dependency_input": "secrets_manager_service_plan",
                   "version_input": "secrets_manager_service_plan",
                   "reference_version": true
+                },
+                {
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
+                  "reference_version": true
                 }
               ]
             }
@@ -358,7 +471,18 @@
             },
             {
               "key": "prefix",
-              "required": true
+              "required": true,
+              "default_value": "dev",
+              "random_string": {
+                "length": 4
+              },
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "Prefix must begin with a lowercase letter and may contain only lowercase letters, digits, and hyphens '-'. It must not end with a hyphen('-'), and cannot contain consecutive hyphens ('--'). It should not exceed 16 characters.",
+                  "value": "^$|^__NULL__$|^[a-z](?!.*--)(?:[a-z0-9-]{0,14}[a-z0-9])?$"
+                }
+              ]
             },
             {
               "key": "region",
@@ -399,9 +523,7 @@
                 "config_constraints": {
                   "identifier": "rg_name"
                 }
-              },
-              "default_value": "Default",
-              "description": "The name of an existing resource group to provision the resources."
+              }
             },
             {
               "key": "secrets_manager_region",

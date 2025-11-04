@@ -111,7 +111,7 @@ variable "repos_git_token_secret_crn" {
   description = "The CRN of the existing secret storing on Secrets Manager the GitHub token to read from the application and configuration repositories."
   default     = null
   validation {
-    condition     = var.repos_git_token_secret_crn != null ? can(regex("^crn:(.*:){3}secrets-manager:(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}:secret:[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$", var.repos_git_token_secret_crn)) : true
+    condition     = var.repos_git_token_secret_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){4}\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*", var.repos_git_token_secret_crn)) : true
     error_message = "The value for var.repos_git_token_secret_crn is not a valid CRN."
   }
 }

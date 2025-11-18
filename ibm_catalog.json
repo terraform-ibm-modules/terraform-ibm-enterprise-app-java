@@ -656,11 +656,12 @@
             },
             {
               "key": "repos_git_token_secret_crn",
+              "hidden": true,
               "value_constraints": [
                 {
                   "type": "regex",
                   "description": "The value provided for 'repos_git_token_secret_crn' is not valid.",
-                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){4}\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){4}\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
                 }
               ]
             },

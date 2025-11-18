@@ -48,7 +48,7 @@ const testPlan = "free" // free plan is used for testing but its catalog name is
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 
-const terraformVersion = "terraform_v1.10" // This should match the version in the ibm_catalog.json
+const terraformVersion = "terraform_v1.12.2" // This should match the version in the ibm_catalog.json
 
 // var permanentResources map[string]interface{}
 var sharedInfoSvc *cloudinfo.CloudInfoService

@@ -656,12 +656,11 @@
             },
             {
               "key": "repos_git_token_secret_crn",
-              "hidden": true,
               "value_constraints": [
                 {
                   "type": "regex",
                   "description": "The value provided for 'repos_git_token_secret_crn' is not valid.",
-                  "value": "^__NULL__$|^crn:(.*:){3}(secrets-manager):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager\\:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret\\:[\\w\\-_]*"
                 }
               ]
             },
@@ -672,7 +671,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'subscription_id_secret_crn' is not valid.",
-                  "value": "^__NULL__$|^crn:(.*:){3}(secrets-manager):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager\\:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret\\:[\\w\\-_]*"
                 }
               ]
             },
@@ -720,7 +719,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'existing_mq_capacity_crn' is not valid.",
-                  "value": "^__NULL__$|^crn:(.*:){3}(mqcloud):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:mqcloud::[\\w\\-_]*):([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
                 }
               ]
             },
@@ -745,7 +744,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'db2_s2s_policy_target_crn' is not valid.",
-                  "value": "^__NULL__$|^crn:(.*:){3}(dashdb-for-transactions):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:dashdb-for-transactions::[\\w\\-_]*):([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
                 }
               ]
             }

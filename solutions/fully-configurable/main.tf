@@ -9,7 +9,7 @@ locals {
 
 module "resource_group" {
   source                       = "terraform-ibm-modules/resource-group/ibm"
-  version                      = "1.3.0"
+  version                      = "1.4.0"
   existing_resource_group_name = var.existing_resource_group_name
 }
 
@@ -24,7 +24,7 @@ module "resource_group" {
 module "crn_parser_token" {
   count   = var.repos_git_token_secret_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.2.0"
+  version = "1.3.0"
   crn     = var.repos_git_token_secret_crn
 }
 
@@ -52,7 +52,7 @@ locals {
 module "crn_parser_subid" {
   count   = var.subscription_id_secret_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.2.0"
+  version = "1.3.0"
   crn     = var.subscription_id_secret_crn
 }
 
@@ -120,21 +120,21 @@ data "ibm_iam_account_settings" "provider_account" {}
 
 # parsing crn to collect the MQ capacity instance ID and its owner account ID
 module "crn_parser_mq_capacity_instance_crn" {
-  count   = var.mq_s2s_policy_target_crn != null ? 1 : 0
+  count   = var.mq_capacity_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.2.0"
-  crn     = var.mq_s2s_policy_target_crn
+  version = "1.3.0"
+  crn     = var.mq_capacity_s2s_policy_target_crn
 }
 
 locals {
   # for S2S policy, the source accountID is the one owning the Enterprise Application Service instance and the target is the account retrieved from the MQ instance CRN or, if this is null, the one creating the policy and owning the Enterprise Application Service instance
   mq_s2s_subject_account_id = data.ibm_iam_account_settings.provider_account.account_id
-  mq_s2s_target_account_id  = var.mq_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
+  mq_s2s_target_account_id  = var.mq_capacity_s2s_policy_target_crn != null ? module.crn_parser_mq_capacity_instance_crn[0].account_id : data.ibm_iam_account_settings.provider_account.account_id
 }
 
 # creating S2S policy to MQ if enabled - MQ instance scope
 resource "ibm_iam_authorization_policy" "mq_s2s_policy_crn_scope" {
-  count = var.mq_s2s_policy_enable == true && var.mq_s2s_policy_target_crn != null ? 1 : 0
+  count = var.mq_s2s_policy_enable == true && var.mq_capacity_s2s_policy_target_crn != null ? 1 : 0
   roles = var.mq_s2s_policy_roles
 
   # limiting the source accountID of S2S policy to the provider account ID is used
@@ -180,7 +180,7 @@ resource "ibm_iam_authorization_policy" "mq_s2s_policy_crn_scope" {
 
 # creating S2S policy to MQ if enabled - account scope scope
 resource "ibm_iam_authorization_policy" "mq_s2s_policy_account_scope" {
-  count = var.mq_s2s_policy_enable == true && var.mq_s2s_policy_target_crn == null ? 1 : 0
+  count = var.mq_s2s_policy_enable == true && var.mq_capacity_s2s_policy_target_crn == null ? 1 : 0
   roles = var.mq_s2s_policy_roles
 
   # limiting the source accountID of S2S policy to the provider account ID is used
@@ -224,7 +224,7 @@ resource "ibm_iam_authorization_policy" "mq_s2s_policy_account_scope" {
 module "crn_parser_db2_instance_crn" {
   count   = var.db2_s2s_policy_target_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.2.0"
+  version = "1.3.0"
   crn     = var.db2_s2s_policy_target_crn
 }
 

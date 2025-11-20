@@ -308,10 +308,7 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 			resp, err := http.Get(dashboardUrl)
 			if assert.Nil(t, err, "Error in performing request towards dashboardURL") {
 				defer func() {
-					err := resp.Body.Close()
-					if assert.Nil(t, err, "Error in closing response body") {
-						t.Logf("Error in closing response body")
-					}
+					_ = resp.Body.Close()
 				}()
 				// collecting response details
 				statusCode := resp.StatusCode

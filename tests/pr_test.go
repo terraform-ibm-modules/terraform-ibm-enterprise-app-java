@@ -316,10 +316,10 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 				// collecting response details
 				statusCode := resp.StatusCode
 				status := resp.Status
-				respSize := resp.ContentLength
-				// reading body (body not used as not needed)
-				_, err := io.ReadAll(resp.Body)
+				// reading body to check actual response size (ContentLength can be -1 if not provided by server)
+				respBody, err := io.ReadAll(resp.Body)
 				if assert.Nil(t, err, "Error in reading response body") {
+					respSize := int64(len(respBody))
 					t.Logf("Got response from %s - statusCode %d - status %s - response size %d", dashboardUrl, statusCode, status, respSize)
 					if assert.Equal(t, 200, statusCode, "Response status code different from expected 200") && assert.Equal(t, "200 OK", status, "Response status different from expected '200 OK'") && assert.Greater(t, respSize, int64(0), "Response size not greater than 0") {
 						t.Logf("All checks on response got from dashboard URL %s are successful", dashboardUrl)

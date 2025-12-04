@@ -666,7 +666,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'repos_git_token_secret_crn' is not valid.",
-                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager\\:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret\\:[\\w\\-_]*"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret:[\\w\\-_]*"
                 }
               ]
             },
@@ -677,7 +677,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'subscription_id_secret_crn' is not valid.",
-                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager\\:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret\\:[\\w\\-_]*"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret:[\\w\\-_]*"
                 }
               ]
             },
@@ -725,7 +725,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'existing_mq_capacity_crn' is not valid.",
-                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:mqcloud::[\\w\\-_]*):([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:mqcloud:[\\w\\-_]*:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
                 }
               ]
             },
@@ -750,7 +750,7 @@
                 {
                   "type": "regex",
                   "description": "The value provided for 'db2_s2s_policy_target_crn' is not valid.",
-                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:dashdb-for-transactions::[\\w\\-_]*):([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
+                  "value": "^__NULL__$|^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:dashdb-for-transactions:[\\w\\-_]*:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}"
                 }
               ]
             }

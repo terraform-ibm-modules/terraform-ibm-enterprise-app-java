@@ -111,7 +111,7 @@ variable "repos_git_token_secret_crn" {
   description = "The CRN of the existing secret storing on Secrets Manager the GitHub token to read from the application and configuration repositories."
   default     = null
   validation {
-    condition     = var.repos_git_token_secret_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager\\:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret\\:[\\w\\-_]*", var.repos_git_token_secret_crn)) : true
+    condition     = var.repos_git_token_secret_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret:[\\w\\-_]*", var.repos_git_token_secret_crn)) : true
     error_message = "The value for var.repos_git_token_secret_crn is not a valid CRN."
   }
 }
@@ -142,7 +142,7 @@ variable "subscription_id_secret_crn" {
     error_message = "Input parameters subscription_id_secret_crn and subscription_id cannot be both null."
   }
   validation {
-    condition     = var.subscription_id_secret_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager\\:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret\\:[\\w\\-_]*", var.subscription_id_secret_crn)) : true
+    condition     = var.subscription_id_secret_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:secrets-manager:[\\w\\-_]*\\:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*)\\:secret:[\\w\\-_]*", var.subscription_id_secret_crn)) : true
     error_message = "The value for var.subscription_id_secret_crn is not a valid CRN."
   }
 }
@@ -174,7 +174,7 @@ variable "mq_capacity_s2s_policy_target_crn" {
   description = "MQ resource capacity instance CRN to restrict the target for the Service to Service policy to MQ service instance. If mq_s2s_policy_enable is true but this is null the S2S policy is created at account scope on Enterprise Application Service instance account owner. Default to null."
   default     = null
   validation {
-    condition     = var.mq_capacity_s2s_policy_target_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:mqcloud::[\\w\\-_]*):([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}", var.mq_capacity_s2s_policy_target_crn)) : true
+    condition     = var.mq_capacity_s2s_policy_target_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:mqcloud:[\\w\\-_]*:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}", var.mq_capacity_s2s_policy_target_crn)) : true
     error_message = "The value for var.mq_capacity_s2s_policy_target_crn is not a valid CRN."
   }
 }
@@ -206,7 +206,7 @@ variable "db2_s2s_policy_target_crn" {
   description = "DB2 resource capacity instance CRN to restrict the target for the Service to Service policy to DB2 service instance. If db2_s2s_policy_enable is true but this is null the S2S policy is created at account scope on Enterprise Application Service instance account owner. Default to null."
   default     = null
   validation {
-    condition     = var.db2_s2s_policy_target_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:dashdb-for-transactions::[\\w\\-_]*):([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}", var.db2_s2s_policy_target_crn)) : true
+    condition     = var.db2_s2s_policy_target_crn != null ? can(regex("^crn\\:v\\d(\\:[\\w\\-_]*){2}\\:dashdb-for-transactions:[\\w\\-_]*:([aos]\\/[\\w_\\-]+)?(\\:[\\w_\\-]*){3}", var.db2_s2s_policy_target_crn)) : true
     error_message = "The value for var.db2_s2s_policy_target_crn is not a valid CRN."
   }
 }

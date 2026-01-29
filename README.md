@@ -30,9 +30,9 @@ For more information about the Enterprise Application Service product you can re
 ## Overview
 * [terraform-ibm-enterprise-app-java](#terraform-ibm-enterprise-app-java)
 * [Examples](./examples)
-    * [Basic example](./examples/basic)
-    * [Build, deploy and run complete example](./examples/bdr_complete)
-    * [Deploy and run complete example](./examples/dr_complete)
+    * <div style="display: inline-block;"><a href="./examples/basic">Basic example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=eaj-basic-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/tree/main/examples/basic" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
+    * <div style="display: inline-block;"><a href="./examples/bdr_complete">Build, deploy and run complete example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=eaj-bdr_complete-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/tree/main/examples/bdr_complete" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
+    * <div style="display: inline-block;"><a href="./examples/dr_complete">Deploy and run complete example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=eaj-dr_complete-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/tree/main/examples/dr_complete" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -142,28 +142,11 @@ module "ease_module" {
 
 ### Required IAM access policies
 
-<!-- PERMISSIONS REQUIRED TO RUN MODULE
-If this module requires permissions, uncomment the following block and update
-the sample permissions, following the format.
-Replace the sample Account and IBM Cloud service names and roles with the
-information in the console at
-Manage > Access (IAM) > Access groups > Access policies.
--->
-
 You need the following permissions to run this module:
 
 - IAM services
     - **enterprise-application-service** service
         - `Editor` platform access
-
-<!-- NO PERMISSIONS FOR MODULE
-If no permissions are required for the module, uncomment the following
-statement instead the previous block.
--->
-
-<!--
-No permissions are needed to run this module.
--->
 
 <!-- The following content is automatically populated by the pre-commit hook -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

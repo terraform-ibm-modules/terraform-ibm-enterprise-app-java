@@ -10,6 +10,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
@@ -47,6 +48,8 @@ const testPlan = "free" // free plan is used for testing but its catalog name is
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 
+const terraformVersion = "terraform_v1.12.2" // This should match the version in the ibm_catalog.json
+
 // var permanentResources map[string]interface{}
 var sharedInfoSvc *cloudinfo.CloudInfoService
 
@@ -66,7 +69,11 @@ var mqCapacityInstanceCRN string
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
-	sharedInfoSvc, _ = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
+	var err error
+	sharedInfoSvc, err = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Read the YAML file contents
 	data, err := os.ReadFile(yamlLocation)
@@ -202,7 +209,7 @@ func TestRunUpgradeExample(t *testing.T) {
 	}
 }
 
-func TestRunStandardSolutionSchematics(t *testing.T) {
+func TestRunFullyConfigurableSolutionSchematics(t *testing.T) {
 	// disabling parallel tests to avoid failure of test when reusing the same repos
 	// t.Parallel()
 
@@ -219,6 +226,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
 		Region:                 "us-east",
+		TerraformVersion:       terraformVersion,
 	})
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
@@ -235,7 +243,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
-		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "mq_capacity_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
 		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
@@ -245,7 +253,7 @@ func TestRunStandardSolutionSchematics(t *testing.T) {
 	assert.Nil(t, err, "This should not have errored")
 }
 
-func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
+func TestRunFullyConfigurableSolutionUpgradeSchematics(t *testing.T) {
 	// disabling parallel tests to avoid failure of test when reusing the same repos
 	// t.Parallel()
 
@@ -256,12 +264,14 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 			"modules/*/*.tf",
 			fullyConfigurableSolutionTerraformDir + "/*.tf",
 		},
-		TemplateFolder:         fullyConfigurableSolutionTerraformDir,
-		Tags:                   []string{"test-schematic"},
-		Prefix:                 "ej-uda",
-		DeleteWorkspaceOnFail:  false,
-		WaitJobCompleteMinutes: 60,
-		Region:                 "us-east",
+		TemplateFolder:             fullyConfigurableSolutionTerraformDir,
+		Tags:                       []string{"test-schematic"},
+		Prefix:                     "ej-uda",
+		DeleteWorkspaceOnFail:      false,
+		WaitJobCompleteMinutes:     60,
+		Region:                     "us-east",
+		TerraformVersion:           terraformVersion,
+		CheckApplyResultForUpgrade: true,
 	})
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
@@ -278,7 +288,7 @@ func TestRunStandardSolutionUpgradeSchematics(t *testing.T) {
 		{Name: "instance_name", Value: fmt.Sprintf("instance-%s", common.UniqueId(3)), DataType: "string"},
 		{Name: "existing_resource_group_name", Value: daExistingResourceGroup, DataType: "string"},
 		{Name: "mq_s2s_policy_enable", Value: true, DataType: "bool"},
-		{Name: "mq_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
+		{Name: "mq_capacity_s2s_policy_target_crn", Value: mqCapacityInstanceCRN, DataType: "string"},
 		{Name: "db2_s2s_policy_enable", Value: false, DataType: "bool"},
 		// DB2 S2S policy currently not tested - if to test we need to explore how to create the pre-existing instance during the test and destroy it at the end
 		// {Name: "db2_s2s_policy_target_crn", Value: db2InstanceForEase4JCRN, DataType: "string"},
@@ -310,12 +320,12 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 				// collecting response details
 				statusCode := resp.StatusCode
 				status := resp.Status
-				respSize := resp.ContentLength
-				// reading body (body not used as not needed)
-				_, err := io.ReadAll(resp.Body)
+				// reading body to check actual response size (ContentLength can be -1 if not provided by server)
+				respBody, err := io.ReadAll(resp.Body)
 				if assert.Nil(t, err, "Error in reading response body") {
-					t.Logf("Got response from %s - statusCode %d - status %s - response size %d", dashboardUrl, statusCode, status, uint64(respSize))
-					if assert.Equal(t, 200, statusCode, "Response status code different from expected 200") && assert.Equal(t, "200 OK", status, "Response status different from expected '200 OK'") && assert.Greater(t, uint64(respSize), uint64(0), "Response size not greater than 0") {
+					respSize := int64(len(respBody))
+					t.Logf("Got response from %s - statusCode %d - status %s - response size %d", dashboardUrl, statusCode, status, respSize)
+					if assert.Equal(t, 200, statusCode, "Response status code different from expected 200") && assert.Equal(t, "200 OK", status, "Response status different from expected '200 OK'") && assert.Greater(t, respSize, int64(0), "Response size not greater than 0") {
 						t.Logf("All checks on response got from dashboard URL %s are successful", dashboardUrl)
 						return true
 					}
@@ -329,10 +339,11 @@ func checkDashboardUrl(t *testing.T, terraformOutput map[string]interface{}) boo
 func TestAddonsDefaultConfiguration(t *testing.T) {
 
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
-		Testing:       t,
-		Prefix:        "ease",
-		ResourceGroup: resourceGroup,
-		QuietMode:     false, // Suppress logs except on failure
+		Testing:               t,
+		Prefix:                "ease",
+		ResourceGroup:         resourceGroup,
+		QuietMode:             false, // Suppress logs except on failure
+		OverrideInputMappings: core.BoolPtr(true),
 	})
 
 	options.AddonConfig = cloudinfo.NewAddonConfigTerraform(
@@ -340,40 +351,64 @@ func TestAddonsDefaultConfiguration(t *testing.T) {
 		"deploy-arch-ibm-ease",
 		"fully-configurable",
 		map[string]interface{}{
-			"prefix":                       options.Prefix,
-			"existing_resource_group_name": resourceGroup,
-			"subscription_id":              subscriptionIdSecretId,
-			"secrets_manager_service_plan": "trial",
-			"plan":                         "free",
-			"secrets_manager_region":       "eu-de",
-			"mq_s2s_policy_target_crn":     mqCapacityInstanceCRN,
+			"existing_resource_group_name":      resourceGroup,
+			"subscription_id":                   subscriptionIdSecretId,
+			"secrets_manager_service_plan":      "trial",
+			"plan":                              "free",
+			"secrets_manager_region":            "eu-de",
+			"mq_capacity_s2s_policy_target_crn": mqCapacityInstanceCRN,
+			"existing_mq_capacity_crn":          mqCapacityInstanceCRN,
 		},
 	)
 
-	err := options.RunAddonTest()
-	require.NoError(t, err)
-}
-
-// TestDependencyPermutations runs dependency permutations for all dependencies
-func TestDependencyPermutations(t *testing.T) {
-
-	t.Skip("Skip permutation test until some fix is done in testwrapper to tackle heavy load")
-	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
-		Testing: t,
-		Prefix:  "ease-perm",
-		AddonConfig: cloudinfo.AddonConfig{
-			OfferingName:   "deploy-arch-ibm-ease",
+	// Disable target / route creation to prevent hitting quota in account
+	// Use existing SM instance to prevent hitting quota in account
+	options.AddonConfig.Dependencies = []cloudinfo.AddonConfig{
+		{
+			OfferingName:   "deploy-arch-ibm-cloud-monitoring",
 			OfferingFlavor: "fully-configurable",
 			Inputs: map[string]interface{}{
-				"prefix":                       "ease-perm",
-				"existing_resource_group_name": resourceGroup,
-				"subscription_id":              subscriptionIdSecretId,
-				"secrets_manager_service_plan": "trial",
-				"secrets_manager_region":       "eu-de",
+				"enable_metrics_routing_to_cloud_monitoring": false,
 			},
+			Enabled: core.BoolPtr(true),
 		},
-	})
+		{
+			OfferingName:   "deploy-arch-ibm-activity-tracker",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"enable_activity_tracker_event_routing_to_cloud_logs": false,
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-secrets-manager",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"existing_secrets_manager_crn":         smCRN,
+				"service_plan":                         "__NULL__", // no plan value needed when using existing SM
+				"skip_secrets_manager_iam_auth_policy": true,       // since using an existing Secrets Manager instance, attempting to re-create auth policy can cause conflicts if the policy already exists
+				"secret_groups":                        []string{}, // passing empty array for secret groups as default value is creating general group and it will cause conflicts as we are using an existing SM
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-event-notifications",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"region": "us-south",
+			},
+			Enabled: core.BoolPtr(true),
+		},
+		{
+			OfferingName:   "deploy-arch-ibm-apprapp",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"region": "us-south",
+			},
+			Enabled: core.BoolPtr(true),
+		},
+	}
 
-	err := options.RunAddonPermutationTest()
-	assert.NoError(t, err, "Dependency permutation test should not fail")
+	err := options.RunAddonTest()
+	require.NoError(t, err)
 }

@@ -22,7 +22,7 @@ module "resource_group" {
 module "crn_parser_token" {
   count   = var.repos_git_token_secret_crn != null ? 1 : 0
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.3.7"
+  version = "1.4.1"
   crn     = var.repos_git_token_secret_crn
 }
 
@@ -46,7 +46,7 @@ locals {
 # parsing secret crn to collect the secrets manager ID, the region and the secret ID
 module "crn_parser_subid" {
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.3.7"
+  version = "1.4.1"
   crn     = var.subscription_id_secret_crn
 }
 

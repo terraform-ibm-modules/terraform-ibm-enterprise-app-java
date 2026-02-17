@@ -1,5 +1,10 @@
 # Deploy and run complete example
 
+<!-- BEGIN SCHEMATICS DEPLOY HOOK -->
+<a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=enterprise-app-java-dr_complete-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/tree/main/examples/dr_complete"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom;"></a>
+<!-- END SCHEMATICS DEPLOY HOOK -->
+
+
 A Deploy and run use-case example to show how to provision an Enterprise Application Service instance by passing an already built maven application through its maven repository URL as source repository and the application configuration through the config repository as input parameters.
 The example sets also the var.source_repo_type input variable to "maven" and the "username" and "password" values to a set of fake values for testing purposes
 In addiction to the configuration repository, the example shows how to
@@ -10,3 +15,7 @@ Note that the three parameters, maven and configuration repositories and the git
 The following resources are provisioned by this example:
  - A new resource group, if an existing one is not passed in.
  - A new Enterprise Application Service instance in the given resource group on an IBM Cloud account.
+
+<!-- BEGIN SCHEMATICS DEPLOY TIP HOOK -->
+:information_source: Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab
+<!-- END SCHEMATICS DEPLOY TIP HOOK -->

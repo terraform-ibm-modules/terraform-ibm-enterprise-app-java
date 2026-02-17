@@ -325,7 +325,6 @@
                 "fully-configurable"
               ],
               "id": "918453c3-4f97-4583-8c4a-83ef12fc7916-global",
-              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "input_mapping": [
                 {
                   "dependency_input": "prefix",

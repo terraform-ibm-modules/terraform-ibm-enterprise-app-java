@@ -318,35 +318,6 @@
               "version": "v1.11.3"
             },
             {
-              "name": "deploy-arch-ibm-account-infra-base",
-              "description": "Advanced users can leverage the Cloud automation for account configuration deployable architecture to configure an IBM Cloud account with a ready-made set of resource groups by default. When you enable the \"with account settings\" option, it also applies baseline security and governance settings.",
-              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "flavors": [
-                "fully-configurable"
-              ],
-              "id": "918453c3-4f97-4583-8c4a-83ef12fc7916-global",
-              "input_mapping": [
-                {
-                  "dependency_input": "prefix",
-                  "version_input": "prefix",
-                  "reference_version": true
-                },
-                {
-                  "dependency_input": "region",
-                  "version_input": "region",
-                  "reference_version": true
-                },
-                {
-                  "dependency_input": "existing_resource_group_name",
-                  "version_input": "existing_resource_group_name",
-                  "reference_version": true
-                }
-              ],
-              "optional": true,
-              "on_by_default": true,
-              "version": "v1.6.13"
-            },
-            {
               "name": "deploy-arch-ibm-db2-cloud",
               "description": "Creates and configures an IBM Db2 on Cloud instance and sets up the IAM authorization policy between the Enterprise Application Service instance and the Db2 instance.",
               "label": "Cloud automation for DB2 on Cloud",

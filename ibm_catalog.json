@@ -716,7 +716,7 @@
               }
             },
             {
-              "display_name": "existing_mq_capacity_crn",
+              "display_name": "existing_mq_capacity_instance",
               "key": "mq_capacity_s2s_policy_target_crn",
               "required": true,
               "default_value": "__NOT_SET__",

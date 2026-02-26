@@ -24,7 +24,7 @@
         "Jakarta",
         "microprofile"
       ],
-      "short_description": "Creates and configures an IBM Enterprise Application Service for Java instance with optional security and observability tools. ",
+      "short_description": "Creates and configures an IBM Enterprise Application Service for Java instance with optional security and observability tools.",
       "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution for building and running Java applications on IBM Cloud. This deployable architecture supports deploying an instance of Enterprise Application Service together with optional security and observability tools.\n\nℹ️ This deployable architecture is a part of a larger collection that IBM provides. Each deployable architecture focuses on a single IBM Cloud service. You can use these deployable architectures on their own to automate deployments by following an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or you can [combine them together](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to deploy a more complex end-to-end solution architecture.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",

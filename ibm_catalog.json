@@ -24,36 +24,24 @@
         "Jakarta",
         "microprofile"
       ],
-      "short_description": "Cloud architecture including instance of Enterprise Application Service for Java with essential security and observability cloud services",
-      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution to building and running secure Jakarta EE/MicroProfile applications running efficiently in Liberty deployed on public clouds. This architecture supports deploying an instance of Enterprise Application Service for Java on cloud together with optional security and observability cloud services.<br/><br/>***Note:*** *enabling the Observability additional services, the region to deploy the Event Notification component must be updated to one of its supported regions*.<br/><br/>ℹ️ This Terraform-based automation is part of a broader suite of IBM-maintained Infrastructure as Code (IaC) assets, each following the naming pattern \"Cloud automation for *servicename*\" and focusing on single IBM Cloud service. These single-service deployable architectures can be used on their own to streamline and automate service deployments through an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or assembled together into a broader [automated IaC stack](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to automate the deployment of an end-to-end solution architecture. \n\nLeverage [Terraform IBM Modules](https://github.com/terraform-ibm-modules) to shape and scale your solutions. You can integrate Terraform IBM Modules (TIM) to extend functionality and design a solution tailored to your environment and operations needs. These modules offer reusable, customizable elements that follow IBM Cloud's recommended practices. You can access the [source code and documentation](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java) and use it to extend your current architecture or create new solutions.",
-      "offering_docs_url": "https://cloud.ibm.com/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-about-tim",
+      "short_description": "Creates and configures an IBM Enterprise Application Service for Java instance with optional security and observability tools. ",
+      "long_description": "IBM Enterprise Application Service for Java is an end-to-end solution for building and running Java applications on IBM Cloud. This deployable architecture supports deploying an instance of Enterprise Application Service together with optional security and observability tools.\n\nℹ️ This deployable architecture is a part of a larger collection that IBM provides. Each deployable architecture focuses on a single IBM Cloud service. You can use these deployable architectures on their own to automate deployments by following an [IaC approach](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understanding-projects), or you can [combine them together](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-config-stack) to deploy a more complex end-to-end solution architecture.",
+      "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-ease/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/images/deploy-arch-ibm-ease.svg",
       "support_details": "This product is in the community registry, as such support is handled through the originated repo. If you experience issues please open an issue in the repository [https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/issues). Please note this product is not supported via the IBM Cloud Support Center.",
       "provider_name": "IBM",
       "features": [
         {
-          "title": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud",
-          "description": "Supports building, deploying and running Jakarta EE/MicroProfile applications on Liberty in public cloud.<br/>For more details about the features and the options available please refer to this [page](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
+          "title": "Creates an Enterprise Application Service instance",
+          "description": "Supports building, deploying, and running Jakarta EE and MicroProfile applications on Liberty in public cloud. [Learn more](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java/blob/main/solutions/fully-configurable/DA-details.md)."
         },
         {
-          "title": "Sets up logging for the Enterprise Application Service for Java instance",
-          "description": "Optionally, you can deploy Cloud automation for Cloud Logs to route, alert, and visualize platform logs that are generated by your Enterprise Application Service for Java instance."
+          "title": "Sets up optional observability tools",
+          "description": "Use Enterprise Application Service with [Cloud automation for Cloud Logs](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-cloud-logs-63d8ae58-fbf3-41ce-b844-0fb5b85882ab-global), which provides monitoring and logging capabilities to deliver deep operational insights into your Enterprise Application Service deployment."
         },
         {
-          "title": "Sets up monitoring operational metrics for the Enterprise Application Service for Java instance",
-          "description": "Optionally, you can deploy Cloud automation for Cloud Monitoring to measure how users and applications interact with your Enterprise Application Service for Java instance."
-        },
-        {
-          "title": "Sets up activity tracking for the Enterprise Application Service for Java instance",
-          "description": "Optionally, you can deploy Cloud automation for Activity Tracker Event Routing to route and securely store auditing events that are related to your Enterprise Application Service for Java instance."
-        },
-        {
-          "title": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances",
-          "description": "Supports Service To Service authorisation policy creation to a MQ and DB2 instances to allow the Enterprise Application Service for Java to connect to them"
-        },
-        {
-          "title": "Composable and Extensible Architecture",
-          "description": "This architecture illustrates how Terraform IBM Modules(TIM) can be integrated to deliver a complete solution on IBM Cloud. Each module is a reusable, and validated component for security, compliance, and operational IBM best practices. You can deploy this architecture as-is or configure it as code by leveraging the underlying modules to fit your specific requirements. Explore the [source code and documentation](https://github.com/terraform-ibm-modules/terraform-ibm-enterprise-app-java) to adapt, extend, or create entirely new solutions using these building blocks."
+          "title": "Sets up authorization policies to MQ and Db2 instances",
+          "description": "Sets up IBM IAM authorization policies between the Enterprise Application Service instance and MQ and Db2 instances."
         }
       ],
       "flavors": [
@@ -69,7 +57,8 @@
               "role_crns": [
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
-              "service_name": "enterprise-application-service"
+              "service_name": "enterprise-application-service",
+              "notes": "Required to provision and manage Enterprise Application Service."
             },
             {
               "role_crns": [
@@ -77,7 +66,7 @@
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
               "service_name": "dashdb-for-transactions",
-              "notes": "[Optional] Required for creating a new DB2 instance."
+              "notes": "[Optional] Required to provision and manage IBM DB2 on Cloud."
             },
             {
               "role_crns": [
@@ -93,7 +82,7 @@
                 "crn:v1:bluemix:public:iam::::serviceRole:Manager"
               ],
               "service_name": "secrets-manager",
-              "notes": "[Optional] Required to create a Secrets Manager instance."
+              "notes": "[Optional] Required for creating a Secrets Manager instance."
             },
             {
               "role_crns": [
@@ -101,15 +90,61 @@
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
               "service_name": "event-notifications",
-              "notes": "[Optional] Required to create an Event Notifications instance."
+              "notes": "[Optional] Required for creating an Event Notifications instance."
             },
             {
               "role_crns": [
-                "crn:v1:bluemix:public:iam::::role:Administrator",
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
               ],
-              "service_name": "apprapp",
-              "notes": "[Optional] Required for provisioning the App Configuration instance."
+              "service_name": "sysdig-monitor",
+              "notes": "[Optional] Required to create an instance of Cloud Monitoring."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "logs",
+              "notes": "[Optional] Required to create an instance of Cloud Logs."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "hs-crypto",
+              "notes": "[Optional] Required if IBM Hyper Protect Crypto Services is used for encryption."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "kms",
+              "notes": "[Optional] Required if Key Protect is used for encryption."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "atracker",
+              "notes": "[Optional] Required to set up Activity Tracker Event Routing of auditing events."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Administrator"
+              ],
+              "service_name": "All Account Management services",
+              "notes": "[Optional] Required to deploy Cloud automation for account configuration, which creates foundational IBM Cloud account resources, like IAM settings, trusted profiles, access groups, and resource groups."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Administrator"
+              ],
+              "service_name": "All Identity and Access enabled services",
+              "notes": "[Optional] Required to deploy Cloud automation for account configuration, which creates foundational IBM Cloud account resources, like IAM settings, trusted profiles, access groups, and resource group with account settings."
             },
             {
               "role_crns": [
@@ -123,80 +158,32 @@
                 "crn:v1:bluemix:public:iam::::serviceRole:Manager",
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
-              "service_name": "sysdig-monitor",
-              "notes": "[Optional] Required for creating a new instance of Cloud Monitoring."
-            },
-            {
-              "service_name": "logs",
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "notes": "[Optional] Required for creating a new instance of Cloud Logs."
-            },
-            {
               "service_name": "cloud-object-storage",
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
-                "crn:v1:bluemix:public:iam::::role:Viewer"
-              ],
-              "notes": "[Optional] Required for creating a Object Storage instance to store logs and metrics data."
-            },
-            {
-              "service_name": "kms",
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "notes": "[Optional] Required if KMS encryption is enabled and Key protect is used for encryption."
-            },
-            {
-              "service_name": "hs-crypto",
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "notes": "[Optional] Required if KMS encryption is enabled and Hyper Protect Crypto Services is used for encryption."
-            },
-            {
-              "service_name": "atracker",
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "notes": "[Optional] Required for configuring Activity Tracker event routing to cloud object storage bucket and cloud logs."
-            },
-            {
-              "service_name": "sysdig-secure",
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
-                "crn:v1:bluemix:public:iam::::role:Editor"
-              ],
-              "notes": "[Optional] Required for creating and managing SCC Workload Protection instance."
+              "notes": "[Optional] Required to create an Object Storage instance."
             }
           ],
           "architecture": {
             "features": [
               {
                 "title": " ",
-                "description": "Configured to use IBM secure by default standards, but can be edited to fit your use case."
+                "description": "Configured to use IBM secure-by-default standards, but you can edit it to fit your use case."
               }
             ],
             "diagrams": [
               {
                 "diagram": {
-                  "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability cloud services",
-                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architectures/deployable-architecture-ease.svg",
+                  "caption": "Creates and configures an instance of Enterprise Application Service for Java with optional security and observability tools.",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-ease/main/reference-architecture/deployable-architecture-ease.svg",
                   "type": "image/svg+xml"
                 },
-                "description": "This architecture supports creating and configuring Enterprise Application Service for Java resources"
+                "description": "This architecture supports deploying an instance of <b>Enterprise Application Service</b>: IBM Enterprise Application Service for Java is an end-to-end solution for building and running Java applications on IBM Cloud.<br><br>You can integrate your Enterprise Application Service instance with <b>IBM DB2 on Cloud</b> by selecting the [Cloud automation for DB2 on Cloud](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-db2-cloud-90a14f92-4b86-4b27-acc1-dd6eefe0bfe9-global) dependency or you can use an existing IBM DB2 on Cloud instance if any.<br><br>You can also integrate it with <b>IBM MQ on Cloud</b> by selecting the [Cloud automation for MQ on Cloud](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-mq-cloud-30a698d4-ab56-4668-bc01-03cd2135d7e4-global) dependency or you can use an existing IBM MQ on Cloud instance if any.<br><br>For logging and monitoring needs, you can enable <b>Observability</b> for your Enterprise Application Service instance. [Cloud automation for Observability](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-observability-a3137d28-79e0-479d-8a24-758ebd5a0eab-global) provides advanced monitoring, logging, and operational insights into the performance and health of your deployment.<br><br><b>Secrets Manager</b> Integration can also be enabled using [Cloud automation for Secrets Manager](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-secrets-manager-6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global) for centrally managing GitHub token and Subscription ID, ensuring secure management of sensitive credentials."
               }
             ]
           },
           "dependencies": [
             {
               "name": "deploy-arch-ibm-secrets-manager",
-              "description": "Configure an IBM Cloud Secrets Manager to securely store generated secrets.",
+              "description": "Creates and configures an IBM Cloud Secrets Manager instance for securely storing secrets like API keys.",
               "id": "6d6ebc76-7bbd-42f5-8bc7-78f4fabd5944-global",
               "flavors": [
                 "fully-configurable"
@@ -331,37 +318,8 @@
               "version": "v1.11.3"
             },
             {
-              "name": "deploy-arch-ibm-activity-tracker",
-              "description": "Configure Activity Tracker Event Routing to route the auditing events.",
-              "flavors": [
-                "fully-configurable"
-              ],
-              "id": "918453c3-4f97-4583-8c4a-83ef12fc7916-global",
-              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
-              "input_mapping": [
-                {
-                  "dependency_input": "prefix",
-                  "version_input": "prefix",
-                  "reference_version": true
-                },
-                {
-                  "dependency_input": "region",
-                  "version_input": "region",
-                  "reference_version": true
-                },
-                {
-                  "dependency_input": "existing_resource_group_name",
-                  "version_input": "existing_resource_group_name",
-                  "reference_version": true
-                }
-              ],
-              "optional": true,
-              "on_by_default": true,
-              "version": "v1.6.13"
-            },
-            {
               "name": "deploy-arch-ibm-db2-cloud",
-              "description": "Configure a DB2 on Cloud instance and the authorization policy with Enterprise Application Service.",
+              "description": "Creates and configures an IBM Db2 on Cloud instance and sets up the IAM authorization policy between the Enterprise Application Service instance and the Db2 instance.",
               "label": "Cloud automation for DB2 on Cloud",
               "version": "v1.5.7",
               "id": "90a14f92-4b86-4b27-acc1-dd6eefe0bfe9-global",
@@ -400,7 +358,7 @@
             },
             {
               "name": "deploy-arch-ibm-mq-cloud",
-              "description": "Configure a MQ on Cloud instance and the authorization policy with Enterprise Application Service.",
+              "description": "Creates and configures an IBM MQ on Cloud instance and sets up the IAM authorization policy between the Enterprise Application Service instance and the MQ instance.",
               "version": "v1.5.2",
               "label": "Cloud automation for MQ on Cloud",
               "id": "30a698d4-ab56-4668-bc01-03cd2135d7e4-global",
@@ -516,7 +474,7 @@
             },
             {
               "key": "subscription_id",
-              "description": "ID of the subscription to use to create the Enterprise Application Service instance. If you don't want to pass it explicitly you should set it to null.",
+              "description": "ID of the subscription to use to create the Enterprise Application Service instance. If you don't want to pass it explicitly, set the value to `null`.",
               "required": true
             },
             {
@@ -537,7 +495,7 @@
               "required": true,
               "virtual": true,
               "default_value": "us-south",
-              "description": "The region to provision a new Secrets Manager instance in.",
+              "description": "The region where the Secrets Manager instance is created.",
               "options": [
                 {
                   "displayname": "Osaka (jp-osa)",
@@ -600,14 +558,14 @@
                   "value": "trial"
                 }
               ],
-              "default_value": "standard",
-              "description": "The pricing plan to use when provisioning a Secrets Manager instance. Possible values: `standard`, `trial`. You can create only one Trial instance of Secrets Manager per account. Before you can create a new Trial instance, you must delete the existing Trial instance and its reclamation. [Learn more](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui#upgrade-instance-standard)."
+              "default_value": "__NOT_SET__",
+              "description": "The pricing plan to use to create a Secrets Manager instance. Possible values are `standard` or `trial`. You can create only one Trial instance of Secrets Manager per account. Before you can create a new Trial instance, you must delete the existing Trial instance and its reclamation. [Learn more](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-create-instance&interface=ui#upgrade-instance-standard)."
             },
             {
               "key": "enable_platform_metrics",
-              "type": "boolean",
-              "default_value": false,
-              "description": "When set to `true`, the IBM Cloud Monitoring instance will be configured to collect platform metrics from the provided region. You can configure 1 instance only of the IBM Cloud Monitoring service per region to collect platform metrics in that location. Check with the account or service administrator if another monitoring instance has already been configured. You may not have permissions to see all monitoring instances in the region. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_enabling).",
+              "type": "string",
+              "default_value": "true",
+              "description": "When set to `true`, the IBM Cloud Monitoring instance is configured to collect platform metrics from the specified region. You can configure only one instance of the IBM Cloud Monitoring service per region to collect platform metrics in that location. Check with the account or service administrator if another Monitoring instance is already configured. You might not have permissions to see all monitoring instances in the region. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_enabling).",
               "required": true,
               "virtual": true
             },

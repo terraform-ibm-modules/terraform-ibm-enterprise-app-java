@@ -4,7 +4,7 @@
 
 module "resource_group" {
   source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.4.7"
+  version = "1.4.8"
   # if an existing resource group is not set (null) create a new one using prefix
   resource_group_name          = var.resource_group == null ? "${var.prefix}-resource-group" : null
   existing_resource_group_name = var.resource_group
@@ -17,7 +17,7 @@ module "resource_group" {
 # parsing secret crn to collect the secrets manager ID, the region and the secret ID
 module "crn_parser_subid" {
   source  = "terraform-ibm-modules/common-utilities/ibm//modules/crn-parser"
-  version = "1.4.1"
+  version = "1.4.2"
   crn     = var.subscription_id_secret_crn
 }
 

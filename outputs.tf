@@ -3,6 +3,6 @@
 ########################################################################################################################
 
 output "ease_instance" {
-  description = "Enterprise Application Service instance details"
+  description = "Details of the Enterprise Application Service instance."
   value       = ibm_resource_instance.ease_instance
 }

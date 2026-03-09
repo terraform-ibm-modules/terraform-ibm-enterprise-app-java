@@ -1,6 +1,8 @@
 <!-- Update this title with a descriptive name. Use sentence case. -->
 # Enterprise Application Service for Java
 
+:warning: This module is no longer maintained and has been archived.
+
 <!--
 Update status and "latest release" badges:
   1. For the status options, see https://terraform-ibm-modules.github.io/documentation/#/badge-status
